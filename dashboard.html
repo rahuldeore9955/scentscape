@@ -5,66 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="User Dashboard - ScentScape Premium Fragrances">
     <title>My Dashboard - ScentScape</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     
-    <!-- Navigation Header -->
-    <header class="header scrolled">
-        <nav class="navbar">
-            <div class="container">
-                <div class="nav-wrapper">
-                    <!-- Logo -->
-                    <a href="index.html" class="logo">
-                        <i class="fas fa-spray-can"></i>
-                        <span>ScentScape</span>
-                    </a>
-                    
-                    <!-- Navigation Menu -->
-                    <ul class="nav-menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="#categories">Categories</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                    
-                    <!-- Right Side Icons -->
-                    <div class="nav-icons">
-                        <button class="icon-btn search-btn" aria-label="Search">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <button class="icon-btn theme-toggle" aria-label="Toggle Theme">
-                            <i class="fas fa-moon"></i>
-                        </button>
-                        <button class="icon-btn cart-btn" aria-label="Shopping Cart">
-                            <i class="fas fa-shopping-bag"></i>
-                            <span class="cart-count">3</span>
-                        </button>
-                        <button class="icon-btn menu-toggle" aria-label="Menu">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <div class="page-header-content">
-                <h1 class="page-title">My Dashboard</h1>
-                <nav class="breadcrumb">
-                    <a href="index.html">Home</a>
-                    <i class="fas fa-chevron-right"></i>
-                    <span>Dashboard</span>
-                </nav>
-            </div>
-        </div>
-    </section>
 
     <!-- Dashboard Section -->
     <section class="dashboard-section section">
@@ -97,6 +43,15 @@
                             <i class="fas fa-shopping-bag"></i>
                             <span>My Orders</span>
                             <span class="nav-badge">3</span>
+                        </a>
+                        <a href="#" class="dashboard-nav-item" data-tab="products">
+                            <i class="fas fa-box"></i>
+                            <span>My Products</span>
+                            <span class="nav-badge">12</span>
+                        </a>
+                        <a href="#" class="dashboard-nav-item" data-tab="add-product">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Add Product</span>
                         </a>
                         <a href="#" class="dashboard-nav-item" data-tab="wishlist">
                             <i class="fas fa-heart"></i>
@@ -347,6 +302,376 @@
                                 <div class="order-card-footer">
                                     <div class="order-total">
                                         <span>Total Amount:</span>
+
+                    <!-- Products Tab -->
+                    <div class="dashboard-tab" id="productsTab">
+                        <div class="dashboard-tab-header">
+                            <h2>My Products</h2>
+                            <div class="tab-header-actions">
+                                <div class="search-box-dashboard">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" placeholder="Search products..." class="search-input-dashboard">
+                                </div>
+                                <select class="filter-select-dashboard">
+                                    <option value="all">All Products</option>
+                                    <option value="active">Active</option>
+                                    <option value="draft">Draft</option>
+                                    <option value="out-of-stock">Out of Stock</option>
+                                </select>
+                                <button class="btn-primary-small" onclick="document.querySelector('[data-tab=add-product]').click()">
+                                    <i class="fas fa-plus"></i> Add New
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="products-table-wrapper">
+                            <table class="products-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="product-cell">
+                                                <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=80&h=80&fit=crop" alt="Product">
+                                                <div class="product-cell-info">
+                                                    <h4>Chanel No. 5 Eau de Parfum</h4>
+                                                    <span class="product-sku">SKU: CHN-005-100</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Women's Perfume</td>
+                                        <td><strong>₹11,250</strong></td>
+                                        <td><span class="stock-badge in-stock">45 units</span></td>
+                                        <td><span class="status-badge active">Active</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon-small" title="Edit"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon-small" title="View"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon-small" title="Delete"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-cell">
+                                                <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=80&h=80&fit=crop" alt="Product">
+                                                <div class="product-cell-info">
+                                                    <h4>Dior Sauvage</h4>
+                                                    <span class="product-sku">SKU: DIO-SAV-100</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Men's Perfume</td>
+                                        <td><strong>₹7,250</strong></td>
+                                        <td><span class="stock-badge in-stock">32 units</span></td>
+                                        <td><span class="status-badge active">Active</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon-small" title="Edit"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon-small" title="View"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon-small" title="Delete"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-cell">
+                                                <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=80&h=80&fit=crop" alt="Product">
+                                                <div class="product-cell-info">
+                                                    <h4>YSL Black Opium</h4>
+                                                    <span class="product-sku">SKU: YSL-BOP-100</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Women's Perfume</td>
+                                        <td><strong>₹11,250</strong></td>
+                                        <td><span class="stock-badge low-stock">8 units</span></td>
+                                        <td><span class="status-badge active">Active</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon-small" title="Edit"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon-small" title="View"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon-small" title="Delete"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-cell">
+                                                <img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=80&h=80&fit=crop" alt="Product">
+                                                <div class="product-cell-info">
+                                                    <h4>Tom Ford Black Orchid</h4>
+                                                    <span class="product-sku">SKU: TFO-BOR-100</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Unisex Perfume</td>
+                                        <td><strong>₹13,500</strong></td>
+                                        <td><span class="stock-badge out-of-stock">0 units</span></td>
+                                        <td><span class="status-badge out-of-stock">Out of Stock</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon-small" title="Edit"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon-small" title="View"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon-small" title="Delete"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="product-cell">
+                                                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=80&h=80&fit=crop" alt="Product">
+                                                <div class="product-cell-info">
+                                                    <h4>Gucci Bloom</h4>
+                                                    <span class="product-sku">SKU: GUC-BLM-100</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Women's Perfume</td>
+                                        <td><strong>₹9,500</strong></td>
+                                        <td><span class="stock-badge in-stock">28 units</span></td>
+                                        <td><span class="status-badge draft">Draft</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon-small" title="Edit"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon-small" title="View"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon-small" title="Delete"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="pagination-wrapper">
+                            <div class="pagination-info">
+                                Showing 1-5 of 12 products
+                            </div>
+                            <div class="pagination">
+                                <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                                <button class="pagination-btn active">1</button>
+                                <button class="pagination-btn">2</button>
+                                <button class="pagination-btn">3</button>
+                                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Product Tab -->
+                    <div class="dashboard-tab" id="add-productTab">
+                        <div class="dashboard-tab-header">
+                            <h2>Add New Product</h2>
+                            <button class="btn-outline-small" onclick="document.querySelector('[data-tab=products]').click()">
+                                <i class="fas fa-arrow-left"></i> Back to Products
+                            </button>
+                        </div>
+
+                        <div class="add-product-form-wrapper">
+                            <form class="add-product-form" id="addProductForm">
+                                
+                                <!-- Basic Information -->
+                                <div class="form-section">
+                                    <h3 class="form-section-title">
+                                        <i class="fas fa-info-circle"></i> Basic Information
+                                    </h3>
+                                    
+                                    <div class="form-group-dashboard">
+                                        <label for="productName">Product Name <span class="required">*</span></label>
+                                        <input type="text" id="productName" name="productName" class="form-input-dashboard" placeholder="e.g., Chanel No. 5 Eau de Parfum" required>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group-dashboard">
+                                            <label for="productBrand">Brand <span class="required">*</span></label>
+                                            <input type="text" id="productBrand" name="productBrand" class="form-input-dashboard" placeholder="e.g., Chanel" required>
+                                        </div>
+                                        <div class="form-group-dashboard">
+                                            <label for="productSKU">SKU <span class="required">*</span></label>
+                                            <input type="text" id="productSKU" name="productSKU" class="form-input-dashboard" placeholder="e.g., CHN-005-100" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-dashboard">
+                                        <label for="productCategory">Category <span class="required">*</span></label>
+                                        <select id="productCategory" name="productCategory" class="form-input-dashboard" required>
+                                            <option value="">Select Category</option>
+                                            <option value="mens-perfume">Men's Perfume</option>
+                                            <option value="womens-perfume">Women's Perfume</option>
+                                            <option value="unisex-perfume">Unisex Perfume</option>
+                                            <option value="body-spray">Body Spray</option>
+                                            <option value="gift-set">Gift Set</option>
+                                            <option value="travel-size">Travel Size</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group-dashboard">
+                                        <label for="productDescription">Description <span class="required">*</span></label>
+                                        <textarea id="productDescription" name="productDescription" rows="5" class="form-input-dashboard" placeholder="Describe your product in detail..." required></textarea>
+                                        <small class="form-help">Provide a detailed description including notes, longevity, and occasions.</small>
+                                    </div>
+                                </div>
+
+                                <!-- Pricing & Inventory -->
+                                <div class="form-section">
+                                    <h3 class="form-section-title">
+                                        <i class="fas fa-rupee-sign"></i> Pricing & Inventory
+                                    </h3>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group-dashboard">
+                                            <label for="productPrice">Regular Price (₹) <span class="required">*</span></label>
+                                            <input type="number" id="productPrice" name="productPrice" class="form-input-dashboard" placeholder="0.00" step="0.01" min="0" required>
+                                        </div>
+                                        <div class="form-group-dashboard">
+                                            <label for="productSalePrice">Sale Price (₹)</label>
+                                            <input type="number" id="productSalePrice" name="productSalePrice" class="form-input-dashboard" placeholder="0.00" step="0.01" min="0">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group-dashboard">
+                                            <label for="productStock">Stock Quantity <span class="required">*</span></label>
+                                            <input type="number" id="productStock" name="productStock" class="form-input-dashboard" placeholder="0" min="0" required>
+                                        </div>
+                                        <div class="form-group-dashboard">
+                                            <label for="productSize">Size/Volume</label>
+                                            <select id="productSize" name="productSize" class="form-input-dashboard">
+                                                <option value="">Select Size</option>
+                                                <option value="30ml">30ml</option>
+                                                <option value="50ml">50ml</option>
+                                                <option value="75ml">75ml</option>
+                                                <option value="100ml">100ml</option>
+                                                <option value="150ml">150ml</option>
+                                                <option value="200ml">200ml</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Product Details -->
+                                <div class="form-section">
+                                    <h3 class="form-section-title">
+                                        <i class="fas fa-list"></i> Product Details
+                                    </h3>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group-dashboard">
+                                            <label for="productFragranceFamily">Fragrance Family</label>
+                                            <select id="productFragranceFamily" name="productFragranceFamily" class="form-input-dashboard">
+                                                <option value="">Select Family</option>
+                                                <option value="floral">Floral</option>
+                                                <option value="oriental">Oriental</option>
+                                                <option value="woody">Woody</option>
+                                                <option value="fresh">Fresh</option>
+                                                <option value="citrus">Citrus</option>
+                                                <option value="spicy">Spicy</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group-dashboard">
+                                            <label for="productConcentration">Concentration</label>
+                                            <select id="productConcentration" name="productConcentration" class="form-input-dashboard">
+                                                <option value="">Select Concentration</option>
+                                                <option value="parfum">Parfum (20-30%)</option>
+                                                <option value="edp">Eau de Parfum (15-20%)</option>
+                                                <option value="edt">Eau de Toilette (5-15%)</option>
+                                                <option value="edc">Eau de Cologne (2-4%)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-dashboard">
+                                        <label for="productTopNotes">Top Notes</label>
+                                        <input type="text" id="productTopNotes" name="productTopNotes" class="form-input-dashboard" placeholder="e.g., Bergamot, Lemon, Orange">
+                                        <small class="form-help">Separate multiple notes with commas</small>
+                                    </div>
+
+                                    <div class="form-group-dashboard">
+                                        <label for="productMiddleNotes">Middle Notes</label>
+                                        <input type="text" id="productMiddleNotes" name="productMiddleNotes" class="form-input-dashboard" placeholder="e.g., Rose, Jasmine, Lily">
+                                    </div>
+
+                                    <div class="form-group-dashboard">
+                                        <label for="productBaseNotes">Base Notes</label>
+                                        <input type="text" id="productBaseNotes" name="productBaseNotes" class="form-input-dashboard" placeholder="e.g., Vanilla, Musk, Sandalwood">
+                                    </div>
+                                </div>
+
+                                <!-- Product Images -->
+                                <div class="form-section">
+                                    <h3 class="form-section-title">
+                                        <i class="fas fa-images"></i> Product Images
+                                    </h3>
+                                    
+                                    <div class="form-group-dashboard">
+                                        <label for="productImages">Upload Images</label>
+                                        <div class="file-upload-area">
+                                            <input type="file" id="productImages" name="productImages" accept="image/*" multiple hidden>
+                                            <label for="productImages" class="file-upload-label">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <span>Click to upload or drag and drop</span>
+                                                <small>PNG, JPG, WEBP up to 5MB each (Max 5 images)</small>
+                                            </label>
+                                        </div>
+                                        <div class="uploaded-images-preview" id="imagesPreview"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Options -->
+                                <div class="form-section">
+                                    <h3 class="form-section-title">
+                                        <i class="fas fa-cog"></i> Additional Options
+                                    </h3>
+                                    
+                                    <div class="form-group-dashboard">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="productFeatured" id="productFeatured">
+                                            <span>Featured Product</span>
+                                        </label>
+                                        <small class="form-help">Display this product in featured sections</small>
+                                    </div>
+
+                                    <div class="form-group-dashboard">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="productNewArrival" id="productNewArrival">
+                                            <span>New Arrival</span>
+                                        </label>
+                                        <small class="form-help">Mark as new arrival product</small>
+                                    </div>
+
+                                    <div class="form-group-dashboard">
+                                        <label for="productStatus">Product Status <span class="required">*</span></label>
+                                        <select id="productStatus" name="productStatus" class="form-input-dashboard" required>
+                                            <option value="draft">Draft</option>
+                                            <option value="active" selected>Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Form Actions -->
+                                <div class="form-actions" style="margin-top: 30px;">
+                                    <button type="button" class="btn-outline" onclick="document.getElementById('addProductForm').reset()">
+                                        <i class="fas fa-redo"></i> Reset Form
+                                    </button>
+                                    <button type="button" class="btn-outline">
+                                        <i class="fas fa-save"></i> Save as Draft
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-check"></i> Publish Product
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                                         <strong>₹13,500</strong>
                                     </div>
                                     <div class="order-actions">
@@ -752,6 +1077,6 @@
         </div>
     </section>
 
-    <script src="js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
