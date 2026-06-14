@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User Dashboard - ScentScape Premium Fragrances">
+    <title>My Dashboard - ScentScape</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- Navigation Header -->
+    <header class="header scrolled">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <!-- Logo -->
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-spray-can"></i>
+                        <span>ScentScape</span>
+                    </a>
+                    
+                    <!-- Navigation Menu -->
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    
+                    <!-- Right Side Icons -->
+                    <div class="nav-icons">
+                        <button class="icon-btn search-btn" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="icon-btn theme-toggle" aria-label="Toggle Theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button class="icon-btn cart-btn" aria-label="Shopping Cart">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count">3</span>
+                        </button>
+                        <button class="icon-btn menu-toggle" aria-label="Menu">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">My Dashboard</h1>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Dashboard</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-section section">
+        <div class="container">
+            <div class="dashboard-container">
+                
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="dashboard-user-card">
+                        <div class="user-avatar-wrapper">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="User Avatar" class="user-avatar-large">
+                            <button class="avatar-edit-btn" aria-label="Edit Profile Picture">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
+                        <h3 class="user-name">Priya Sharma</h3>
+                        <p class="user-email">priya.sharma@example.com</p>
+                        <div class="user-member-badge">
+                            <i class="fas fa-crown"></i>
+                            <span>Gold Member</span>
+                        </div>
+                    </div>
+
+                    <nav class="dashboard-nav">
+                        <a href="#" class="dashboard-nav-item active" data-tab="overview">
+                            <i class="fas fa-th-large"></i>
+                            <span>Overview</span>
+                        </a>
+                        <a href="#" class="dashboard-nav-item" data-tab="orders">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>My Orders</span>
+                            <span class="nav-badge">3</span>
+                        </a>
+                        <a href="#" class="dashboard-nav-item" data-tab="wishlist">
+                            <i class="fas fa-heart"></i>
+                            <span>Wishlist</span>
+                            <span class="nav-badge">8</span>
+                        </a>
+                        <a href="#" class="dashboard-nav-item" data-tab="addresses">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Addresses</span>
+                        </a>
+                        <a href="#" class="dashboard-nav-item" data-tab="profile">
+                            <i class="fas fa-user"></i>
+                            <span>Profile Settings</span>
+                        </a>
+                        <a href="#" class="dashboard-nav-item" data-tab="security">
+                            <i class="fas fa-lock"></i>
+                            <span>Security</span>
+                        </a>
+                        <a href="#" class="dashboard-nav-item" data-tab="notifications">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                        <a href="#" class="dashboard-nav-item logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    
+                    <!-- Overview Tab -->
+                    <div class="dashboard-tab active" id="overviewTab">
+                        <div class="dashboard-welcome">
+                            <h2>Welcome back, Priya! 👋</h2>
+                            <p>Here's what's happening with your account today.</p>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="dashboard-stats">
+                            <div class="stat-card-dashboard">
+                                <div class="stat-icon-dashboard">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 class="stat-value">24</h3>
+                                    <p class="stat-label">Total Orders</p>
+                                </div>
+                            </div>
+
+                            <div class="stat-card-dashboard">
+                                <div class="stat-icon-dashboard pending">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 class="stat-value">3</h3>
+                                    <p class="stat-label">Pending Orders</p>
+                                </div>
+                            </div>
+
+                            <div class="stat-card-dashboard">
+                                <div class="stat-icon-dashboard wishlist">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 class="stat-value">8</h3>
+                                    <p class="stat-label">Wishlist Items</p>
+                                </div>
+                            </div>
+
+                            <div class="stat-card-dashboard">
+                                <div class="stat-icon-dashboard wallet">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 class="stat-value">₹2,450</h3>
+                                    <p class="stat-label">Wallet Balance</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Orders -->
+                        <div class="dashboard-section-card">
+                            <div class="section-card-header">
+                                <h3>Recent Orders</h3>
+                                <a href="#" class="view-all-link" data-navigate="orders">View All <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                            <div class="orders-table-wrapper">
+                                <table class="orders-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Date</th>
+                                            <th>Items</th>
+                                            <th>Total</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="order-id">#ORD-2024-1247</span></td>
+                                            <td>Jan 12, 2024</td>
+                                            <td>2 items</td>
+                                            <td><strong>₹18,500</strong></td>
+                                            <td><span class="status-badge shipped">Shipped</span></td>
+                                            <td><button class="btn-icon-small" title="View Details"><i class="fas fa-eye"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="order-id">#ORD-2024-1246</span></td>
+                                            <td>Jan 10, 2024</td>
+                                            <td>1 item</td>
+                                            <td><strong>₹11,250</strong></td>
+                                            <td><span class="status-badge processing">Processing</span></td>
+                                            <td><button class="btn-icon-small" title="View Details"><i class="fas fa-eye"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="order-id">#ORD-2024-1245</span></td>
+                                            <td>Jan 8, 2024</td>
+                                            <td>3 items</td>
+                                            <td><strong>₹24,750</strong></td>
+                                            <td><span class="status-badge delivered">Delivered</span></td>
+                                            <td><button class="btn-icon-small" title="View Details"><i class="fas fa-eye"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Tab -->
+                    <div class="dashboard-tab" id="ordersTab">
+                        <div class="dashboard-tab-header">
+                            <h2>My Orders</h2>
+                            <div class="tab-header-actions">
+                                <div class="search-box-dashboard">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" placeholder="Search orders..." class="search-input-dashboard">
+                                </div>
+                                <select class="filter-select-dashboard">
+                                    <option value="all">All Orders</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="shipped">Shipped</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="orders-list">
+                            <!-- Order Item 1 -->
+                            <div class="order-card">
+                                <div class="order-card-header">
+                                    <div class="order-info-group">
+                                        <span class="order-id">#ORD-2024-1247</span>
+                                        <span class="order-date">Placed on Jan 12, 2024</span>
+                                    </div>
+                                    <span class="status-badge shipped">Shipped</span>
+                                </div>
+                                <div class="order-card-body">
+                                    <div class="order-products">
+                                        <div class="order-product-item">
+                                            <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=150&h=150&fit=crop" alt="Product">
+                                            <div class="order-product-info">
+                                                <h4>Chanel No. 5 Eau de Parfum</h4>
+                                                <p>Size: 100ml | Qty: 1</p>
+                                                <span class="order-product-price">₹11,250</span>
+                                            </div>
+                                        </div>
+                                        <div class="order-product-item">
+                                            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=150&h=150&fit=crop" alt="Product">
+                                            <div class="order-product-info">
+                                                <h4>Dior Sauvage</h4>
+                                                <p>Size: 100ml | Qty: 1</p>
+                                                <span class="order-product-price">₹7,250</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-card-footer">
+                                    <div class="order-total">
+                                        <span>Total Amount:</span>
+                                        <strong>₹18,500</strong>
+                                    </div>
+                                    <div class="order-actions">
+                                        <button class="btn-outline-small">Track Order</button>
+                                        <button class="btn-primary-small">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Order Item 2 -->
+                            <div class="order-card">
+                                <div class="order-card-header">
+                                    <div class="order-info-group">
+                                        <span class="order-id">#ORD-2024-1246</span>
+                                        <span class="order-date">Placed on Jan 10, 2024</span>
+                                    </div>
+                                    <span class="status-badge processing">Processing</span>
+                                </div>
+                                <div class="order-card-body">
+                                    <div class="order-products">
+                                        <div class="order-product-item">
+                                            <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=150&h=150&fit=crop" alt="Product">
+                                            <div class="order-product-info">
+                                                <h4>YSL Black Opium</h4>
+                                                <p>Size: 100ml | Qty: 1</p>
+                                                <span class="order-product-price">₹11,250</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-card-footer">
+                                    <div class="order-total">
+                                        <span>Total Amount:</span>
+                                        <strong>₹11,250</strong>
+                                    </div>
+                                    <div class="order-actions">
+                                        <button class="btn-outline-small">Cancel Order</button>
+                                        <button class="btn-primary-small">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Order Item 3 -->
+                            <div class="order-card">
+                                <div class="order-card-header">
+                                    <div class="order-info-group">
+                                        <span class="order-id">#ORD-2024-1245</span>
+                                        <span class="order-date">Placed on Jan 8, 2024</span>
+                                    </div>
+                                    <span class="status-badge delivered">Delivered</span>
+                                </div>
+                                <div class="order-card-body">
+                                    <div class="order-products">
+                                        <div class="order-product-item">
+                                            <img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=150&h=150&fit=crop" alt="Product">
+                                            <div class="order-product-info">
+                                                <h4>Tom Ford Black Orchid</h4>
+                                                <p>Size: 100ml | Qty: 1</p>
+                                                <span class="order-product-price">₹13,500</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-card-footer">
+                                    <div class="order-total">
+                                        <span>Total Amount:</span>
+                                        <strong>₹13,500</strong>
+                                    </div>
+                                    <div class="order-actions">
+                                        <button class="btn-outline-small">Write Review</button>
+                                        <button class="btn-primary-small">Buy Again</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Tab -->
+                    <div class="dashboard-tab" id="wishlistTab">
+                        <div class="dashboard-tab-header">
+                            <h2>My Wishlist</h2>
+                            <button class="btn-outline-small clear-wishlist-btn">
+                                <i class="fas fa-trash"></i> Clear All
+                            </button>
+                        </div>
+
+                        <div class="wishlist-grid">
+                            <!-- Wishlist Item 1 -->
+                            <div class="wishlist-card">
+                                <button class="wishlist-remove-btn" aria-label="Remove from wishlist">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <span class="product-badge">Best Seller</span>
+                                <div class="wishlist-image">
+                                    <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&h=500&fit=crop" alt="Product">
+                                </div>
+                                <div class="wishlist-info">
+                                    <span class="product-brand">CHANEL</span>
+                                    <h4 class="product-name">Chanel No. 5 Eau de Parfum</h4>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">₹11,250</span>
+                                        <span class="old-price">₹15,000</span>
+                                    </div>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Wishlist Item 2 -->
+                            <div class="wishlist-card">
+                                <button class="wishlist-remove-btn" aria-label="Remove from wishlist">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <span class="product-badge new">New</span>
+                                <div class="wishlist-image">
+                                    <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&h=500&fit=crop" alt="Product">
+                                </div>
+                                <div class="wishlist-info">
+                                    <span class="product-brand">DIOR</span>
+                                    <h4 class="product-name">Dior Sauvage</h4>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">₹7,250</span>
+                                        <span class="old-price">₹9,500</span>
+                                    </div>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- More wishlist items... -->
+                            <div class="wishlist-card">
+                                <button class="wishlist-remove-btn" aria-label="Remove from wishlist">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <div class="wishlist-image">
+                                    <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&h=500&fit=crop" alt="Product">
+                                </div>
+                                <div class="wishlist-info">
+                                    <span class="product-brand">YSL</span>
+                                    <h4 class="product-name">Black Opium</h4>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">₹11,250</span>
+                                    </div>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Addresses Tab -->
+                    <div class="dashboard-tab" id="addressesTab">
+                        <div class="dashboard-tab-header">
+                            <h2>Saved Addresses</h2>
+                            <button class="btn-primary-small add-address-btn">
+                                <i class="fas fa-plus"></i> Add New Address
+                            </button>
+                        </div>
+
+                        <div class="addresses-grid">
+                            <!-- Address Card 1 -->
+                            <div class="address-card default">
+                                <span class="default-badge"><i class="fas fa-check-circle"></i> Default</span>
+                                <div class="address-header">
+                                    <h4>Home</h4>
+                                    <div class="address-actions">
+                                        <button class="btn-icon-small" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon-small" title="Delete"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                <div class="address-body">
+                                    <p><strong>Priya Sharma</strong></p>
+                                    <p>Flat 304, Orchid Apartments</p>
+                                    <p>Bandra West, Mumbai - 400050</p>
+                                    <p>Maharashtra, India</p>
+                                    <p class="address-phone"><i class="fas fa-phone"></i> +91 98765 43210</p>
+                                </div>
+                                <div class="address-footer">
+                                    <button class="btn-link">Set as Default</button>
+                                </div>
+                            </div>
+
+                            <!-- Address Card 2 -->
+                            <div class="address-card">
+                                <div class="address-header">
+                                    <h4>Office</h4>
+                                    <div class="address-actions">
+                                        <button class="btn-icon-small" title="Edit"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon-small" title="Delete"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                <div class="address-body">
+                                    <p><strong>Priya Sharma</strong></p>
+                                    <p>Tech Park, 5th Floor</p>
+                                    <p>Andheri East, Mumbai - 400069</p>
+                                    <p>Maharashtra, India</p>
+                                    <p class="address-phone"><i class="fas fa-phone"></i> +91 98765 43210</p>
+                                </div>
+                                <div class="address-footer">
+                                    <button class="btn-link">Set as Default</button>
+                                </div>
+                            </div>
+
+                            <!-- Add New Address Card -->
+                            <div class="address-card add-new">
+                                <button class="add-new-btn">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Add New Address</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Settings Tab -->
+                    <div class="dashboard-tab" id="profileTab">
+                        <div class="dashboard-tab-header">
+                            <h2>Profile Settings</h2>
+                        </div>
+
+                        <div class="profile-form-wrapper">
+                            <form class="profile-form" id="profileForm">
+                                <div class="form-row">
+                                    <div class="form-group-dashboard">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" id="firstName" name="firstName" value="Priya" class="form-input-dashboard" required>
+                                    </div>
+                                    <div class="form-group-dashboard">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" id="lastName" name="lastName" value="Sharma" class="form-input-dashboard" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group-dashboard">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" name="email" value="priya.sharma@example.com" class="form-input-dashboard" required>
+                                    </div>
+                                    <div class="form-group-dashboard">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone" value="+91 98765 43210" class="form-input-dashboard" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-dashboard">
+                                    <label for="dateOfBirth">Date of Birth</label>
+                                    <input type="date" id="dateOfBirth" name="dateOfBirth" value="1995-03-15" class="form-input-dashboard">
+                                </div>
+
+                                <div class="form-group-dashboard">
+                                    <label for="gender">Gender</label>
+                                    <select id="gender" name="gender" class="form-input-dashboard">
+                                        <option value="">Select Gender</option>
+                                        <option value="female" selected>Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="other">Other</option>
+                                        <option value="prefer-not-to-say">Prefer not to say</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group-dashboard">
+                                    <label for="bio">Bio</label>
+                                    <textarea id="bio" name="bio" rows="4" class="form-input-dashboard" placeholder="Tell us about yourself...">Fragrance enthusiast and perfume collector. Love exploring new scents!</textarea>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn-outline">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i> Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Security Tab -->
+                    <div class="dashboard-tab" id="securityTab">
+                        <div class="dashboard-tab-header">
+                            <h2>Security Settings</h2>
+                        </div>
+
+                        <!-- Change Password -->
+                        <div class="security-section">
+                            <h3>Change Password</h3>
+                            <form class="security-form" id="changePasswordForm">
+                                <div class="form-group-dashboard">
+                                    <label for="currentPassword">Current Password</label>
+                                    <div class="password-input-wrapper">
+                                        <input type="password" id="currentPassword" name="currentPassword" class="form-input-dashboard" required>
+                                        <button type="button" class="password-toggle-btn" data-target="currentPassword">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-dashboard">
+                                    <label for="newPassword">New Password</label>
+                                    <div class="password-input-wrapper">
+                                        <input type="password" id="newPassword" name="newPassword" class="form-input-dashboard" required>
+                                        <button type="button" class="password-toggle-btn" data-target="newPassword">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-dashboard">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <div class="password-input-wrapper">
+                                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-input-dashboard" required>
+                                        <button type="button" class="password-toggle-btn" data-target="confirmPassword">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-lock"></i> Update Password
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Two-Factor Authentication -->
+                        <div class="security-section">
+                            <h3>Two-Factor Authentication</h3>
+                            <div class="security-option">
+                                <div class="security-option-info">
+                                    <h4>Enable 2FA</h4>
+                                    <p>Add an extra layer of security to your account</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Login Sessions -->
+                        <div class="security-section">
+                            <h3>Active Sessions</h3>
+                            <div class="session-list">
+                                <div class="session-item">
+                                    <div class="session-icon">
+                                        <i class="fas fa-desktop"></i>
+                                    </div>
+                                    <div class="session-info">
+                                        <h4>Windows PC - Chrome</h4>
+                                        <p>Mumbai, India • Current Session</p>
+                                        <span class="session-time">Active now</span>
+                                    </div>
+                                    <button class="btn-outline-small" disabled>Current</button>
+                                </div>
+                                <div class="session-item">
+                                    <div class="session-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="session-info">
+                                        <h4>iPhone - Safari</h4>
+                                        <p>Mumbai, India</p>
+                                        <span class="session-time">2 hours ago</span>
+                                    </div>
+                                    <button class="btn-outline-small logout-session-btn">Logout</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Tab -->
+                    <div class="dashboard-tab" id="notificationsTab">
+                        <div class="dashboard-tab-header">
+                            <h2>Notification Preferences</h2>
+                        </div>
+
+                        <div class="notifications-settings">
+                            <div class="notification-group">
+                                <h3>Order Updates</h3>
+                                <div class="notification-option">
+                                    <div class="notification-option-info">
+                                        <h4>Order Confirmation</h4>
+                                        <p>Receive notifications when your order is confirmed</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="notification-option">
+                                    <div class="notification-option-info">
+                                        <h4>Shipping Updates</h4>
+                                        <p>Get notified about shipping and delivery status</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="notification-group">
+                                <h3>Promotional</h3>
+                                <div class="notification-option">
+                                    <div class="notification-option-info">
+                                        <h4>Special Offers</h4>
+                                        <p>Receive emails about sales and special offers</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="notification-option">
+                                    <div class="notification-option-info">
+                                        <h4>New Arrivals</h4>
+                                        <p>Be the first to know about new products</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="notification-group">
+                                <h3>Account Activity</h3>
+                                <div class="notification-option">
+                                    <div class="notification-option-info">
+                                        <h4>Security Alerts</h4>
+                                        <p>Important notifications about your account security</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions" style="margin-top: 30px;">
+                            <button type="button" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Preferences
+                            </button>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

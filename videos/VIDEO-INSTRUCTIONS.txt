@@ -1,19 +1,36 @@
 ===============================================
-VIDEO BACKGROUND SETUP INSTRUCTIONS
+VIDEO SETUP INSTRUCTIONS - ScentScape Website
 ===============================================
 
-REQUIRED VIDEO FILE:
-- Filename: perfume-hero.mp4
-- Location: Place in this folder (videos/)
+REQUIRED VIDEO FILES:
+====================
 
-VIDEO SPECIFICATIONS:
-- Format: MP4 (H.264 codec recommended)
-- Resolution: 1920x1080 or higher
-- Aspect Ratio: 16:9
-- Duration: 10-30 seconds (will loop automatically)
-- File Size: Keep under 10MB for faster loading
+1. HERO SECTION BACKGROUND VIDEO:
+   - Filename: perfume-hero.mp4
+   - Location: Place in this folder (videos/)
+   - Format: MP4 (H.264 codec)
+   - Resolution: 1920x1080 or higher
+   - Aspect Ratio: 16:9 (landscape)
+   - Duration: 10-30 seconds (will loop)
+   - File Size: Keep under 10MB
 
-CONTENT SUGGESTIONS:
+2. VIDEO TESTIMONIALS (9:16 VERTICAL FORMAT):
+   - testimonial-1.mp4 (YouTube Shorts style)
+   - testimonial-2.mp4 (Instagram Reels style)
+   - testimonial-3.mp4 (Facebook Reels style)
+   - testimonial-4.mp4 (YouTube Shorts style)
+   - testimonial-5.mp4 (Instagram Reels style)
+   - testimonial-6.mp4 (Facebook Reels style)
+   
+   SPECIFICATIONS:
+   - Format: MP4 (H.264 codec)
+   - Aspect Ratio: 9:16 (vertical/portrait)
+   - Resolution: 1080x1920 or 720x1280
+   - Duration: 15-60 seconds recommended
+   - Content: Customer reviews, unboxing, testimonials
+
+HERO VIDEO CONTENT SUGGESTIONS:
+===============================
 ✓ Perfume bottle rotating elegantly
 ✓ Fragrance spray in slow motion
 ✓ Luxury perfume collection display
@@ -21,7 +38,16 @@ CONTENT SUGGESTIONS:
 ✓ Close-up of perfume droplets
 ✓ Elegant product photography
 
+TESTIMONIAL VIDEO CONTENT:
+==========================
+✓ Customer unboxing videos
+✓ Product reviews and experiences
+✓ Fragrance application demonstrations
+✓ Before/after testimonials
+✓ Customer satisfaction stories
+
 FREE VIDEO RESOURCES:
+====================
 
 1. PEXELS (Recommended)
    https://www.pexels.com/search/videos/perfume/
@@ -43,10 +69,23 @@ FREE VIDEO RESOURCES:
    - Free HD stock footage
    - Filter by "Free" license
 
-ALTERNATIVE IF NO VIDEO:
-If you don't have a video, the site will still work.
-The gradient overlay will be visible with a solid color background.
+5. MIXKIT
+   https://mixkit.co/
+   - Free videos for commercial use
 
-To use an image instead of video:
-1. Replace the <video> tag with <img>
-2. Or add a background-image to .hero-video-container in CSS
+ALTERNATIVE IF NO VIDEO:
+========================
+If you don't have videos, the site will still work with placeholder images.
+The gradient overlay will be visible with poster images showing.
+
+To use images instead:
+1. The poster images will show until videos are added
+2. Or replace <video> tags with <img> tags in HTML
+3. Or add background-images to video containers in CSS
+
+NOTES:
+======
+- All videos should be optimized for web (compressed)
+- Use tools like HandBrake or Adobe Media Encoder to compress
+- Test videos on mobile devices for performance
+- Vertical videos look best when shot in 9:16 format natively
