@@ -1,0 +1,52 @@
+===============================================
+VIDEO BACKGROUND SETUP INSTRUCTIONS
+===============================================
+
+REQUIRED VIDEO FILE:
+- Filename: perfume-hero.mp4
+- Location: Place in this folder (videos/)
+
+VIDEO SPECIFICATIONS:
+- Format: MP4 (H.264 codec recommended)
+- Resolution: 1920x1080 or higher
+- Aspect Ratio: 16:9
+- Duration: 10-30 seconds (will loop automatically)
+- File Size: Keep under 10MB for faster loading
+
+CONTENT SUGGESTIONS:
+✓ Perfume bottle rotating elegantly
+✓ Fragrance spray in slow motion
+✓ Luxury perfume collection display
+✓ Abstract smoke/mist movements
+✓ Close-up of perfume droplets
+✓ Elegant product photography
+
+FREE VIDEO RESOURCES:
+
+1. PEXELS (Recommended)
+   https://www.pexels.com/search/videos/perfume/
+   - High quality, royalty-free
+   - Search: "perfume", "fragrance", "luxury", "bottle"
+
+2. PIXABAY
+   https://pixabay.com/videos/search/perfume/
+   - Free for commercial use
+   - Good selection of luxury content
+
+3. COVERR
+   https://coverr.co/
+   - Beautiful free stock videos
+   - Search: "luxury", "abstract", "smoke"
+
+4. VIDEVO
+   https://www.videvo.net/
+   - Free HD stock footage
+   - Filter by "Free" license
+
+ALTERNATIVE IF NO VIDEO:
+If you don't have a video, the site will still work.
+The gradient overlay will be visible with a solid color background.
+
+To use an image instead of video:
+1. Replace the <video> tag with <img>
+2. Or add a background-image to .hero-video-container in CSS
