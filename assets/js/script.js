@@ -937,7 +937,6 @@ if (contactForm) {
             lastName: this.lastName.value,
             email: this.email.value,
             phone: this.phone.value,
-            subject: this.subject.value,
             message: this.message.value,
             newsletter: this.newsletter.checked
         };
