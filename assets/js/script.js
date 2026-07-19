@@ -6,37 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('ScentScape loaded successfully!');
     
     // ===================================
-    // THEME TOGGLE (Dark/Light Mode)
-    // ===================================
-    const themeToggle = document.querySelector('.theme-toggle');
-    const themeIcon = themeToggle.querySelector('i');
-    const html = document.documentElement;
-    
-    // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', currentTheme);
-    updateThemeIcon(currentTheme);
-    
-    themeToggle.addEventListener('click', function() {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-    });
-    
-    function updateThemeIcon(theme) {
-        if (theme === 'dark') {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        } else {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-        }
-    }
-    
-    // ===================================
     // NAVBAR SCROLL EFFECT
     // ===================================
     const header = document.querySelector('.header');
@@ -603,7 +572,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let videoAutoSlideInterval;
         let isVideoSliderPaused = false;
         let isVideoTransitioning = false;
-        let currentlyPlayingVideo = null;
         
         // Clone cards for infinite loop
         function cloneVideoCards() {
@@ -812,67 +780,9 @@ document.addEventListener('DOMContentLoaded', function() {
             startVideoAutoSlide();
         });
         
-        // Video Play Functionality
+        // Video Play Functionality — iframes handle their own playback natively
         function attachVideoPlayListeners() {
-            const allVideoPlayBtns = document.querySelectorAll('.video-play-btn');
-            
-            allVideoPlayBtns.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    
-                    const videoCard = this.closest('.video-card');
-                    const video = videoCard.querySelector('.testimonial-video');
-                    const overlay = videoCard.querySelector('.video-play-overlay');
-                    
-                    // Pause any currently playing video
-                    if (currentlyPlayingVideo && currentlyPlayingVideo !== video) {
-                        currentlyPlayingVideo.pause();
-                        currentlyPlayingVideo.currentTime = 0;
-                        const prevOverlay = currentlyPlayingVideo.closest('.video-card').querySelector('.video-play-overlay');
-                        prevOverlay.classList.remove('playing');
-                        const prevPlayBtn = prevOverlay.querySelector('.video-play-btn');
-                        prevPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    }
-                    
-                    if (video.paused) {
-                        video.play();
-                        overlay.classList.add('playing');
-                        this.innerHTML = '<i class="fas fa-pause"></i>';
-                        currentlyPlayingVideo = video;
-                        
-                        // Pause slider while video is playing
-                        isVideoSliderPaused = true;
-                        stopVideoAutoSlide();
-                    } else {
-                        video.pause();
-                        overlay.classList.remove('playing');
-                        this.innerHTML = '<i class="fas fa-play"></i>';
-                        currentlyPlayingVideo = null;
-                        
-                        // Resume slider
-                        isVideoSliderPaused = false;
-                        startVideoAutoSlide();
-                    }
-                });
-            });
-            
-            // Handle video ended event
-            const allVideos = document.querySelectorAll('.testimonial-video');
-            allVideos.forEach(video => {
-                video.addEventListener('ended', function() {
-                    const overlay = this.closest('.video-card').querySelector('.video-play-overlay');
-                    const playBtn = overlay.querySelector('.video-play-btn');
-                    
-                    overlay.classList.remove('playing');
-                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    this.currentTime = 0;
-                    currentlyPlayingVideo = null;
-                    
-                    // Resume slider
-                    isVideoSliderPaused = false;
-                    startVideoAutoSlide();
-                });
-            });
+            // No custom play logic needed for YouTube iframes
         }
         
         // Handle window resize
@@ -884,9 +794,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateVideoCardsToShow();
                 
                 if (oldCardsToShow !== videoCardsToShow) {
-                    // Remove clones
                     document.querySelectorAll('.video-card.clone').forEach(clone => clone.remove());
-                    // Recreate
                     videoCurrentIndex = 0;
                     cloneVideoCards();
                     createVideoDots();
@@ -902,11 +810,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (document.hidden) {
                 isVideoSliderPaused = true;
                 stopVideoAutoSlide();
-                
-                // Pause any playing video
-                if (currentlyPlayingVideo) {
-                    currentlyPlayingVideo.pause();
-                }
             } else {
                 isVideoSliderPaused = false;
                 startVideoAutoSlide();
