@@ -9391,7 +9391,7 @@ textarea.form-input-dashboard {
 
 .auth-clean-input {
     width: 100%;
-    padding: 13px 44px 13px 44px;
+    padding: 13px 44px 13px 18px;
     border: 1.5px solid rgba(212, 165, 116, 0.25);
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.9);
@@ -9524,20 +9524,11 @@ textarea.form-input-dashboard {
     filter: brightness(1.05);
 }
 
-.auth-action-btn i {
-    font-size: 0.85rem;
-    transition: transform 0.2s ease;
-}
-
-.auth-action-btn:hover i {
-    transform: translateX(3px);
-}
-
 /* Clean Divider */
 .auth-clean-divider {
     position: relative;
     text-align: center;
-    margin: 20px 0;
+    margin: 18px 0;
 }
 
 .auth-clean-divider::before {
@@ -9564,11 +9555,15 @@ textarea.form-input-dashboard {
     background: #181410;
 }
 
-/* Social Buttons Grid */
+/* Social Buttons */
 .auth-social-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+}
+
+.auth-clean-social-btn.full-width {
+    width: 100%;
 }
 
 .auth-clean-social-btn {

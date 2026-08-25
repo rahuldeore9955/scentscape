@@ -3,59 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sign In - ScentScape Luxury Fragrances">
-    <title>Sign In & Register - ScentScape</title>
+    <meta name="description" content="Sign In - ScentScape">
+    <title>Sign In - ScentScape</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="auth-page">
     
-    <!-- Ambient Background Glows -->
+    <!-- Ambient Glows -->
     <div class="auth-ambient-glow glow-1"></div>
     <div class="auth-ambient-glow glow-2"></div>
-    <div class="auth-ambient-glow glow-3"></div>
 
     <!-- Minimalist Top Navigation -->
     <header class="auth-minimal-nav">
         <a href="../index.html" class="auth-back-link">
             <i class="fas fa-arrow-left"></i>
-            <span>Back to Store</span>
+            <span>Home</span>
         </a>
         <a href="../index.html" class="auth-brand-logo">
-            <i class="fas fa-spray-can"></i>
             <span>ScentScape</span>
         </a>
         <div class="auth-nav-placeholder"></div>
     </header>
 
-    <!-- Full Page Minimalist Auth Container -->
+    <!-- Minimalist Auth Card -->
     <main class="auth-minimal-wrapper">
         <div class="auth-minimal-card">
             
-            <!-- Brand Badge & Header -->
+            <!-- Minimal Header -->
             <div class="auth-card-header">
-                <div class="auth-icon-badge">
-                    <i class="fas fa-gem"></i>
-                </div>
-                <h1 class="auth-card-title" id="authHeading">Welcome Back</h1>
-                <p class="auth-card-subtitle" id="authSubheading">Enter your credentials to access your luxury account</p>
+                <h1 class="auth-card-title" id="authHeading">Sign In</h1>
+                <p class="auth-card-subtitle" id="authSubheading">Welcome back to ScentScape</p>
             </div>
 
-            <!-- Minimalist Tab Switcher -->
+            <!-- Minimal Tab Switcher -->
             <div class="auth-pill-toggle">
                 <button type="button" class="auth-pill-btn active" data-form="login">Sign In</button>
                 <button type="button" class="auth-pill-btn" data-form="register">Register</button>
             </div>
 
-            <!-- Login Form -->
+            <!-- Sign In Form -->
             <div class="auth-form-container active" id="loginForm">
                 <form class="auth-minimal-form" id="loginFormElement">
                     <!-- Email -->
                     <div class="auth-input-group">
-                        <label for="loginEmail">Email Address</label>
+                        <label for="loginEmail">Email</label>
                         <div class="auth-input-field">
-                            <i class="fas fa-envelope input-icon"></i>
                             <input 
                                 type="email" 
                                 id="loginEmail" 
@@ -75,13 +69,12 @@
                             <a href="#" class="auth-forgot-link">Forgot?</a>
                         </div>
                         <div class="auth-input-field">
-                            <i class="fas fa-lock input-icon"></i>
                             <input 
                                 type="password" 
                                 id="loginPassword" 
                                 name="password" 
                                 class="auth-clean-input" 
-                                placeholder="••••••••••••"
+                                placeholder="••••••••"
                                 required
                                 autocomplete="current-password"
                             >
@@ -91,60 +84,52 @@
                         </div>
                     </div>
 
-                    <!-- Remember Me Checkbox -->
+                    <!-- Remember Me -->
                     <div class="auth-remember-row">
                         <label class="auth-minimal-checkbox">
                             <input type="checkbox" name="remember">
                             <span class="custom-check"></span>
-                            <span class="check-text">Keep me signed in</span>
+                            <span class="check-text">Remember me</span>
                         </label>
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Submit -->
                     <button type="submit" class="auth-action-btn">
-                        <span>Sign In</span>
-                        <i class="fas fa-arrow-right"></i>
+                        <span>Continue</span>
                     </button>
                 </form>
 
                 <!-- Divider -->
                 <div class="auth-clean-divider">
-                    <span>or continue with</span>
+                    <span>or</span>
                 </div>
 
-                <!-- Social Buttons -->
-                <div class="auth-social-grid">
-                    <button type="button" class="auth-clean-social-btn google">
-                        <i class="fab fa-google"></i>
-                        <span>Google</span>
-                    </button>
-                    <button type="button" class="auth-clean-social-btn facebook">
-                        <i class="fab fa-facebook-f"></i>
-                        <span>Facebook</span>
-                    </button>
-                </div>
+                <!-- Google Sign In -->
+                <button type="button" class="auth-clean-social-btn google full-width">
+                    <i class="fab fa-google"></i>
+                    <span>Continue with Google</span>
+                </button>
 
-                <!-- Footer Switch Link -->
+                <!-- Footer Switch -->
                 <div class="auth-card-footer">
-                    <span>Don't have an account?</span>
-                    <a href="#" class="auth-switch-link" data-switch="register">Create one</a>
+                    <span>New here?</span>
+                    <a href="#" class="auth-switch-link" data-switch="register">Create an account</a>
                 </div>
             </div>
 
             <!-- Register Form -->
             <div class="auth-form-container" id="registerForm">
                 <form class="auth-minimal-form" id="registerFormElement">
-                    <!-- Full Name -->
+                    <!-- Name -->
                     <div class="auth-input-group">
-                        <label for="registerName">Full Name</label>
+                        <label for="registerName">Name</label>
                         <div class="auth-input-field">
-                            <i class="fas fa-user input-icon"></i>
                             <input 
                                 type="text" 
                                 id="registerName" 
                                 name="name" 
                                 class="auth-clean-input" 
-                                placeholder="Your full name"
+                                placeholder="Your name"
                                 required
                                 autocomplete="name"
                             >
@@ -153,9 +138,8 @@
 
                     <!-- Email -->
                     <div class="auth-input-group">
-                        <label for="registerEmail">Email Address</label>
+                        <label for="registerEmail">Email</label>
                         <div class="auth-input-field">
-                            <i class="fas fa-envelope input-icon"></i>
                             <input 
                                 type="email" 
                                 id="registerEmail" 
@@ -168,34 +152,16 @@
                         </div>
                     </div>
 
-                    <!-- Phone Number -->
-                    <div class="auth-input-group">
-                        <label for="registerPhone">Phone Number</label>
-                        <div class="auth-input-field">
-                            <i class="fas fa-phone input-icon"></i>
-                            <input 
-                                type="tel" 
-                                id="registerPhone" 
-                                name="phone" 
-                                class="auth-clean-input" 
-                                placeholder="+91 98765 43210"
-                                required
-                                autocomplete="tel"
-                            >
-                        </div>
-                    </div>
-
                     <!-- Password -->
                     <div class="auth-input-group">
                         <label for="registerPassword">Password</label>
                         <div class="auth-input-field">
-                            <i class="fas fa-lock input-icon"></i>
                             <input 
                                 type="password" 
                                 id="registerPassword" 
                                 name="password" 
                                 class="auth-clean-input" 
-                                placeholder="Create a strong password"
+                                placeholder="At least 6 characters"
                                 required
                                 autocomplete="new-password"
                             >
@@ -203,49 +169,40 @@
                                 <i class="far fa-eye"></i>
                             </button>
                         </div>
-                        <!-- Password Strength -->
                         <div class="password-strength">
                             <div class="strength-bar">
                                 <div class="strength-bar-fill"></div>
                             </div>
-                            <span class="strength-text">Password strength</span>
                         </div>
                     </div>
 
-                    <!-- Terms Agreement -->
+                    <!-- Terms -->
                     <div class="auth-remember-row">
                         <label class="auth-minimal-checkbox">
                             <input type="checkbox" name="terms" required>
                             <span class="custom-check"></span>
-                            <span class="check-text">I agree to the <a href="#" class="terms-link">Terms</a> & <a href="#" class="terms-link">Privacy</a></span>
+                            <span class="check-text">I agree to the <a href="#" class="terms-link">Terms & Privacy</a></span>
                         </label>
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Submit -->
                     <button type="submit" class="auth-action-btn">
                         <span>Create Account</span>
-                        <i class="fas fa-arrow-right"></i>
                     </button>
                 </form>
 
                 <!-- Divider -->
                 <div class="auth-clean-divider">
-                    <span>or register with</span>
+                    <span>or</span>
                 </div>
 
-                <!-- Social Buttons -->
-                <div class="auth-social-grid">
-                    <button type="button" class="auth-clean-social-btn google">
-                        <i class="fab fa-google"></i>
-                        <span>Google</span>
-                    </button>
-                    <button type="button" class="auth-clean-social-btn facebook">
-                        <i class="fab fa-facebook-f"></i>
-                        <span>Facebook</span>
-                    </button>
-                </div>
+                <!-- Google Sign Up -->
+                <button type="button" class="auth-clean-social-btn google full-width">
+                    <i class="fab fa-google"></i>
+                    <span>Continue with Google</span>
+                </button>
 
-                <!-- Footer Switch Link -->
+                <!-- Footer Switch -->
                 <div class="auth-card-footer">
                     <span>Already have an account?</span>
                     <a href="#" class="auth-switch-link" data-switch="login">Sign In</a>
