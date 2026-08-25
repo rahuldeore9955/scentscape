@@ -2068,165 +2068,190 @@ if (filterSelect) {
 // ===================================
 // AUTHENTICATION (LOGIN / REGISTER) LOGIC
 // ===================================
-const authToggleBtns = document.querySelectorAll('.auth-pill-btn, .auth-toggle-btn');
-const authFormContainers = document.querySelectorAll('.auth-form-container');
-const authSwitchLinks = document.querySelectorAll('.auth-switch-link');
-const passwordToggleBtns = document.querySelectorAll('.auth-eye-btn, .password-toggle-btn');
-const registerPasswordInput = document.getElementById('registerPassword');
-const strengthBarFill = document.querySelector('.strength-bar-fill');
-const strengthText = document.querySelector('.strength-text');
-const loginFormElement = document.getElementById('loginFormElement');
-const registerFormElement = document.getElementById('registerFormElement');
-const authHeading = document.getElementById('authHeading');
-const authSubheading = document.getElementById('authSubheading');
+function initAuth() {
+    const authToggleBtns = document.querySelectorAll('.auth-pill-btn, .auth-toggle-btn');
+    const authFormContainers = document.querySelectorAll('.auth-form-container');
+    const authSwitchLinks = document.querySelectorAll('.auth-switch-link');
+    const passwordToggleBtns = document.querySelectorAll('.auth-eye-btn, .password-toggle-btn');
+    const registerPasswordInput = document.getElementById('registerPassword');
+    const strengthBarFill = document.querySelector('.strength-bar-fill');
+    const strengthText = document.querySelector('.strength-text');
+    const loginFormElement = document.getElementById('loginFormElement');
+    const registerFormElement = document.getElementById('registerFormElement');
+    const authHeading = document.getElementById('authHeading');
+    const authSubheading = document.getElementById('authSubheading');
 
-// Function to switch active form
-function switchAuthTab(formType) {
+    // Function to switch active form
+    function switchAuthTab(formType) {
+        authToggleBtns.forEach(btn => {
+            if (btn.getAttribute('data-form') === formType) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        authFormContainers.forEach(container => {
+            if (container.id === `${formType}Form`) {
+                container.classList.add('active');
+            } else {
+                container.classList.remove('active');
+            }
+        });
+
+        if (authHeading && authSubheading) {
+            if (formType === 'register') {
+                authHeading.textContent = 'Create Account';
+                authSubheading.textContent = 'Join ScentScape for exclusive fragrance rewards';
+            } else {
+                authHeading.textContent = 'Sign In';
+                authSubheading.textContent = 'Welcome back to ScentScape';
+            }
+        }
+    }
+
+    // Toggle tab click handlers
     authToggleBtns.forEach(btn => {
-        if (btn.getAttribute('data-form') === formType) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const formType = this.getAttribute('data-form');
+            switchAuthTab(formType);
+        });
     });
 
-    authFormContainers.forEach(container => {
-        if (container.id === `${formType}Form`) {
-            container.classList.add('active');
-        } else {
-            container.classList.remove('active');
-        }
+    // Switch links ("Create Account" / "Login")
+    authSwitchLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetForm = this.getAttribute('data-switch');
+            switchAuthTab(targetForm);
+        });
     });
 
-    if (authHeading && authSubheading) {
-        if (formType === 'register') {
-            authHeading.textContent = 'Create Account';
-            authSubheading.textContent = 'Join ScentScape for exclusive luxury fragrance rewards';
-        } else {
-            authHeading.textContent = 'Welcome Back';
-            authSubheading.textContent = 'Enter your credentials to access your luxury account';
-        }
+    // Check URL params or hash for initial tab (e.g. ?tab=register or #register)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tab') === 'register' || window.location.hash === '#register') {
+        switchAuthTab('register');
+    } else if (urlParams.get('tab') === 'login' || window.location.hash === '#login') {
+        switchAuthTab('login');
+    }
+
+    // Password Visibility Toggle
+    passwordToggleBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('data-target');
+            const targetInput = document.getElementById(targetId);
+            const icon = this.querySelector('i');
+
+            if (targetInput) {
+                if (targetInput.type === 'password') {
+                    targetInput.type = 'text';
+                    if (icon) {
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    }
+                } else {
+                    targetInput.type = 'password';
+                    if (icon) {
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                }
+            }
+        });
+    });
+
+    // Password Strength Meter
+    if (registerPasswordInput && strengthBarFill) {
+        registerPasswordInput.addEventListener('input', function() {
+            const val = this.value;
+            let strength = 0;
+
+            if (val.length >= 6) strength++;
+            if (val.match(/[A-Z]/)) strength++;
+            if (val.match(/[0-9]/)) strength++;
+            if (val.match(/[^A-Za-z0-9]/)) strength++;
+
+            strengthBarFill.className = 'strength-bar-fill';
+
+            if (val.length === 0) {
+                if (strengthText) strengthText.textContent = 'Password strength';
+                strengthBarFill.style.width = '0%';
+            } else if (strength <= 1) {
+                strengthBarFill.classList.add('weak');
+                if (strengthText) {
+                    strengthText.textContent = 'Weak password';
+                    strengthText.style.color = '#e53935';
+                }
+            } else if (strength === 2) {
+                strengthBarFill.classList.add('fair');
+                if (strengthText) {
+                    strengthText.textContent = 'Fair password';
+                    strengthText.style.color = '#fb8c00';
+                }
+            } else if (strength === 3) {
+                strengthBarFill.classList.add('good');
+                if (strengthText) {
+                    strengthText.textContent = 'Good password';
+                    strengthText.style.color = '#1e88e5';
+                }
+            } else {
+                strengthBarFill.classList.add('strong');
+                if (strengthText) {
+                    strengthText.textContent = 'Strong password';
+                    strengthText.style.color = '#43a047';
+                }
+            }
+        });
+    }
+
+    // Login Form Submit
+    if (loginFormElement) {
+        loginFormElement.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('.auth-action-btn, .auth-submit-btn');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<span>Signing In...</span> <i class="fas fa-spinner fa-spin"></i>';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<span>Success!</span> <i class="fas fa-check"></i>';
+                    submitBtn.style.background = '#43a047';
+
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 800);
+                }, 900);
+            }
+        });
+    }
+
+    // Register Form Submit
+    if (registerFormElement) {
+        registerFormElement.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('.auth-action-btn, .auth-submit-btn');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<span>Creating Account...</span> <i class="fas fa-spinner fa-spin"></i>';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<span>Account Created!</span> <i class="fas fa-check"></i>';
+                    submitBtn.style.background = '#43a047';
+
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 800);
+                }, 900);
+            }
+        });
     }
 }
 
-// Toggle tab click handlers
-authToggleBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-        const formType = this.getAttribute('data-form');
-        switchAuthTab(formType);
-    });
-});
-
-// Switch links ("Create Account" / "Login")
-authSwitchLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetForm = this.getAttribute('data-switch');
-        switchAuthTab(targetForm);
-    });
-});
-
-// Check URL params or hash for initial tab (e.g. ?tab=register or #register)
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('tab') === 'register' || window.location.hash === '#register') {
-    switchAuthTab('register');
-}
-
-// Password Visibility Toggle
-passwordToggleBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-        const targetId = this.getAttribute('data-target');
-        const targetInput = document.getElementById(targetId);
-        const icon = this.querySelector('i');
-
-        if (targetInput) {
-            if (targetInput.type === 'password') {
-                targetInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                targetInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-    });
-});
-
-// Password Strength Meter
-if (registerPasswordInput && strengthBarFill && strengthText) {
-    registerPasswordInput.addEventListener('input', function() {
-        const val = this.value;
-        let strength = 0;
-
-        if (val.length >= 6) strength++;
-        if (val.match(/[A-Z]/)) strength++;
-        if (val.match(/[0-9]/)) strength++;
-        if (val.match(/[^A-Za-z0-9]/)) strength++;
-
-        strengthBarFill.className = 'strength-bar-fill';
-
-        if (val.length === 0) {
-            strengthText.textContent = 'Password strength';
-            strengthBarFill.style.width = '0%';
-        } else if (strength <= 1) {
-            strengthBarFill.classList.add('weak');
-            strengthText.textContent = 'Weak password';
-            strengthText.style.color = '#e53935';
-        } else if (strength === 2) {
-            strengthBarFill.classList.add('fair');
-            strengthText.textContent = 'Fair password';
-            strengthText.style.color = '#fb8c00';
-        } else if (strength === 3) {
-            strengthBarFill.classList.add('good');
-            strengthText.textContent = 'Good password';
-            strengthText.style.color = '#1e88e5';
-        } else {
-            strengthBarFill.classList.add('strong');
-            strengthText.textContent = 'Strong password';
-            strengthText.style.color = '#43a047';
-        }
-    });
-}
-
-// Login Form Submit
-if (loginFormElement) {
-    loginFormElement.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const submitBtn = this.querySelector('.auth-action-btn, .auth-submit-btn');
-        const origContent = submitBtn.innerHTML;
-        
-        submitBtn.innerHTML = '<span>Signing In...</span> <i class="fas fa-spinner fa-spin"></i>';
-        submitBtn.disabled = true;
-
-        setTimeout(() => {
-            submitBtn.innerHTML = '<span>Success!</span> <i class="fas fa-check"></i>';
-            submitBtn.style.background = '#43a047';
-
-            setTimeout(() => {
-                window.location.href = 'dashboard.html';
-            }, 800);
-        }, 900);
-    });
-}
-
-// Register Form Submit
-if (registerFormElement) {
-    registerFormElement.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const submitBtn = this.querySelector('.auth-action-btn, .auth-submit-btn');
-        
-        submitBtn.innerHTML = '<span>Creating Account...</span> <i class="fas fa-spinner fa-spin"></i>';
-        submitBtn.disabled = true;
-
-        setTimeout(() => {
-            submitBtn.innerHTML = '<span>Account Created!</span> <i class="fas fa-check"></i>';
-            submitBtn.style.background = '#43a047';
-
-            setTimeout(() => {
-                window.location.href = 'dashboard.html';
-            }, 800);
-        }, 900);
-    });
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAuth);
+} else {
+    initAuth();
 }
 

@@ -9334,6 +9334,27 @@ textarea.form-input-dashboard {
     color: var(--text-primary);
 }
 
+/* Form Containers */
+.auth-form-container {
+    display: none;
+    animation: authFadeIn 0.3s ease forwards;
+}
+
+.auth-form-container.active {
+    display: block;
+}
+
+@keyframes authFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Forms & Inputs */
 .auth-minimal-form {
     display: flex;
