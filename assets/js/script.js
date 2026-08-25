@@ -2064,3 +2064,158 @@ if (filterSelect) {
         });
     });
 }
+
+// ===================================
+// AUTHENTICATION (LOGIN / REGISTER) LOGIC
+// ===================================
+const authToggleBtns = document.querySelectorAll('.auth-toggle-btn');
+const authFormContainers = document.querySelectorAll('.auth-form-container');
+const authSwitchLinks = document.querySelectorAll('.auth-switch-link');
+const passwordToggleBtns = document.querySelectorAll('.password-toggle-btn');
+const registerPasswordInput = document.getElementById('registerPassword');
+const strengthBarFill = document.querySelector('.strength-bar-fill');
+const strengthText = document.querySelector('.strength-text');
+const loginFormElement = document.getElementById('loginFormElement');
+const registerFormElement = document.getElementById('registerFormElement');
+
+// Function to switch active form
+function switchAuthTab(formType) {
+    authToggleBtns.forEach(btn => {
+        if (btn.getAttribute('data-form') === formType) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    authFormContainers.forEach(container => {
+        if (container.id === `${formType}Form`) {
+            container.classList.add('active');
+        } else {
+            container.classList.remove('active');
+        }
+    });
+}
+
+// Toggle tab click handlers
+authToggleBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        const formType = this.getAttribute('data-form');
+        switchAuthTab(formType);
+    });
+});
+
+// Switch links ("Create Account" / "Login")
+authSwitchLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetForm = this.getAttribute('data-switch');
+        switchAuthTab(targetForm);
+    });
+});
+
+// Check URL params or hash for initial tab (e.g. ?tab=register or #register)
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('tab') === 'register' || window.location.hash === '#register') {
+    switchAuthTab('register');
+}
+
+// Password Visibility Toggle
+passwordToggleBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-target');
+        const targetInput = document.getElementById(targetId);
+        const icon = this.querySelector('i');
+
+        if (targetInput) {
+            if (targetInput.type === 'password') {
+                targetInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                targetInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    });
+});
+
+// Password Strength Meter
+if (registerPasswordInput && strengthBarFill && strengthText) {
+    registerPasswordInput.addEventListener('input', function() {
+        const val = this.value;
+        let strength = 0;
+        let status = '';
+
+        if (val.length >= 6) strength++;
+        if (val.match(/[A-Z]/)) strength++;
+        if (val.match(/[0-9]/)) strength++;
+        if (val.match(/[^A-Za-z0-9]/)) strength++;
+
+        strengthBarFill.className = 'strength-bar-fill';
+
+        if (val.length === 0) {
+            strengthText.textContent = 'Password strength';
+            strengthBarFill.style.width = '0%';
+        } else if (strength <= 1) {
+            strengthBarFill.classList.add('weak');
+            strengthText.textContent = 'Weak password';
+            strengthText.style.color = '#e53935';
+        } else if (strength === 2) {
+            strengthBarFill.classList.add('fair');
+            strengthText.textContent = 'Fair password';
+            strengthText.style.color = '#fb8c00';
+        } else if (strength === 3) {
+            strengthBarFill.classList.add('good');
+            strengthText.textContent = 'Good password';
+            strengthText.style.color = '#1e88e5';
+        } else {
+            strengthBarFill.classList.add('strong');
+            strengthText.textContent = 'Strong password';
+            strengthText.style.color = '#43a047';
+        }
+    });
+}
+
+// Login Form Submit
+if (loginFormElement) {
+    loginFormElement.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const submitBtn = this.querySelector('.auth-submit-btn');
+        const origContent = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Success!';
+            submitBtn.style.background = '#43a047';
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 800);
+        }, 1000);
+    });
+}
+
+// Register Form Submit
+if (registerFormElement) {
+    registerFormElement.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const submitBtn = this.querySelector('.auth-submit-btn');
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Account Created!';
+            submitBtn.style.background = '#43a047';
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 800);
+        }, 1000);
+    });
+}
+
