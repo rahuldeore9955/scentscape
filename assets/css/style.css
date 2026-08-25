@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
 /* ===================================
    ScentScape - Premium Fragrance Store
    =================================== */
@@ -11,6 +13,8 @@
 
 /* Color Scheme - Elegant Perfume Theme */
 :root {
+    --font-heading: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', 'Poppins', system-ui, -apple-system, sans-serif;
     --primary-color: #d4a574;        /* Warm Gold */
     --secondary-color: #8b7355;      /* Rich Brown */
     --accent-color: #c9a87c;         /* Soft Gold */
@@ -42,7 +46,7 @@ html {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
     color: var(--text-primary);
     background-color: var(--bg-primary);
@@ -90,7 +94,7 @@ body {
     font-size: 3rem;
     margin-bottom: 20px;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
 }
 
@@ -155,7 +159,7 @@ body {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     cursor: pointer;
     transition: var(--transition);
 }
@@ -251,7 +255,7 @@ body {
     font-weight: 600;
     text-decoration: none;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     white-space: nowrap;
 }
 
@@ -452,7 +456,7 @@ body {
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 4.5rem;
     font-weight: 600;
     line-height: 1.2;
@@ -815,7 +819,7 @@ body {
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     margin-bottom: 20px;
 }
 
@@ -870,7 +874,7 @@ body {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 20px;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .footer-links {
@@ -940,7 +944,7 @@ body {
     color: var(--text-primary);
     font-size: 0.95rem;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 [data-theme="dark"] .newsletter-input {
@@ -963,7 +967,7 @@ body {
     font-size: 0.95rem;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .newsletter-btn:hover {
@@ -1276,7 +1280,7 @@ body {
 
 .story-content h3 {
     font-size: 2.2rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     color: var(--text-primary);
     margin-bottom: 25px;
     font-weight: 600;
@@ -1316,7 +1320,7 @@ body {
     font-size: 1.2rem;
     margin-bottom: 0;
     font-weight: 600;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .story-signature span {
@@ -1421,7 +1425,7 @@ body {
 .stat-number {
     font-size: 3rem;
     font-weight: 700;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     line-height: 1;
 }
 
@@ -1476,7 +1480,7 @@ body {
 
 .mission-card h3 {
     font-size: 1.8rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     color: var(--text-primary);
     margin-bottom: 20px;
     font-weight: 600;
@@ -1773,7 +1777,7 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .old-price {
@@ -1802,7 +1806,7 @@ body {
     text-decoration: none;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1824,7 +1828,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .btn-buy:hover {
@@ -2124,7 +2128,7 @@ body {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 0;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     line-height: 1.2;
 }
 
@@ -2176,7 +2180,7 @@ body {
 
 .testimonial-text::before {
     content: '\201C';
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.8rem;
     font-weight: 700;
     color: var(--primary-color);
@@ -2188,7 +2192,7 @@ body {
 
 .testimonial-text::after {
     content: '\201D';
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.8rem;
     font-weight: 700;
     color: var(--primary-color);
@@ -2581,7 +2585,7 @@ body {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 8px;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .video-description {
@@ -2880,7 +2884,7 @@ body {
 
 .owner-name {
     font-size: 1.5rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: white;
     margin-bottom: 3px;
@@ -3002,7 +3006,7 @@ body {
 
 .owner-name-overlay {
     font-size: 1.8rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     margin-bottom: 8px;
     color: white;
@@ -3340,7 +3344,7 @@ body {
 /* Blog Title */
 .blog-title {
     font-size: 1.4rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 15px;
@@ -3516,7 +3520,7 @@ body {
 
 .page-title {
     font-size: 3.5rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     margin-bottom: 15px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
@@ -3640,7 +3644,7 @@ body {
 
 .contact-info-card h3 {
     font-size: 1.2rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     color: var(--text-primary);
     margin-bottom: 8px;
     font-weight: 600;
@@ -3688,7 +3692,7 @@ body {
 
 .contact-form-title {
     font-size: 2rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     color: var(--text-primary);
     margin: 12px 0 15px;
     font-weight: 600;
@@ -3740,7 +3744,7 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     font-size: 0.95rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     transition: var(--transition);
 }
 
@@ -4240,7 +4244,7 @@ body {
 
 .product-title-large {
     font-size: 2.5rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.3;
@@ -4315,7 +4319,7 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .old-price-large {
@@ -4452,7 +4456,7 @@ body {
     font-weight: 600;
     color: var(--text-primary);
     background: var(--bg-primary);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 /* Product Actions */
@@ -4598,7 +4602,7 @@ body {
     transition: var(--transition);
     position: relative;
     white-space: nowrap;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .tab-btn:hover {
@@ -4637,7 +4641,7 @@ body {
 
 .tab-content h3 {
     font-size: 2rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     color: var(--text-primary);
     margin-bottom: 20px;
     font-weight: 600;
@@ -4645,7 +4649,7 @@ body {
 
 .tab-content h4 {
     font-size: 1.5rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     color: var(--text-primary);
     margin: 30px 0 20px;
     font-weight: 600;
@@ -4917,7 +4921,7 @@ body {
     font-size: 4rem;
     font-weight: 700;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     line-height: 1;
     margin-bottom: 15px;
 }
@@ -5504,7 +5508,7 @@ body {
 
 .article-title {
     font-size: 3rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.3;
@@ -5602,7 +5606,7 @@ body {
 
 .article-content h2 {
     font-size: 2rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: var(--text-primary);
     margin: 50px 0 25px;
@@ -5610,7 +5614,7 @@ body {
 
 .article-content h3 {
     font-size: 1.5rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: var(--text-primary);
     margin: 35px 0 20px;
@@ -5946,7 +5950,7 @@ body {
 
 .author-bio-content h3 {
     font-size: 1.5rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     color: var(--text-primary);
     margin-bottom: 5px;
 }
@@ -5997,7 +6001,7 @@ body {
 
 .comments-title {
     font-size: 2rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 30px;
@@ -6080,7 +6084,7 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .comment-reply-btn:hover {
@@ -6107,7 +6111,7 @@ body {
 
 .comment-form-title {
     font-size: 1.7rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 25px;
@@ -6131,7 +6135,7 @@ body {
 
 .widget-title {
     font-size: 1.4rem;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 20px;
@@ -6151,7 +6155,7 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     font-size: 0.95rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     transition: var(--transition);
 }
 
@@ -6725,7 +6729,7 @@ body {
 }
 
 .auth-image-content h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 600;
     margin-bottom: 15px;
@@ -6806,7 +6810,7 @@ body {
     border-radius: 50px;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .auth-toggle-btn.active {
@@ -6841,7 +6845,7 @@ body {
 }
 
 .auth-form-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--text-primary);
@@ -6889,7 +6893,7 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     font-size: 0.9rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     transition: var(--transition);
     width: 100%;
 }
@@ -7101,7 +7105,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 [data-theme="dark"] .auth-social-btn {
@@ -7488,7 +7492,7 @@ body {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 5px;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .user-email {
@@ -7603,7 +7607,7 @@ body {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 8px;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .dashboard-welcome p {
@@ -7668,7 +7672,7 @@ body {
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     line-height: 1;
     margin-bottom: 5px;
 }
@@ -7697,7 +7701,7 @@ body {
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .view-all-link {
@@ -8039,7 +8043,7 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     transition: var(--transition-fast);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .form-input-dashboard:focus {
@@ -8218,7 +8222,7 @@ textarea.form-input-dashboard {
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .tab-header-actions {
@@ -8249,7 +8253,7 @@ textarea.form-input-dashboard {
     background: var(--bg-secondary);
     color: var(--text-primary);
     font-size: 0.9rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     transition: var(--transition);
 }
 
@@ -8265,7 +8269,7 @@ textarea.form-input-dashboard {
     background: var(--bg-secondary);
     color: var(--text-primary);
     font-size: 0.9rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     cursor: pointer;
     transition: var(--transition);
 }
@@ -8359,7 +8363,7 @@ textarea.form-input-dashboard {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--primary-color);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .order-card-footer {
@@ -8385,7 +8389,7 @@ textarea.form-input-dashboard {
 .order-total strong {
     font-size: 1.3rem;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .order-actions {
@@ -8403,7 +8407,7 @@ textarea.form-input-dashboard {
     border-radius: 10px;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .btn-outline-small:hover {
@@ -8426,7 +8430,7 @@ textarea.form-input-dashboard {
     border-radius: 10px;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .btn-primary-small:hover {
@@ -8553,7 +8557,7 @@ textarea.form-input-dashboard {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .address-actions {
@@ -8600,7 +8604,7 @@ textarea.form-input-dashboard {
     font-size: 0.9rem;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .btn-link:hover {
@@ -8627,7 +8631,7 @@ textarea.form-input-dashboard {
     color: var(--text-secondary);
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .add-new-btn i {
@@ -8683,7 +8687,7 @@ textarea.form-input-dashboard {
     background: var(--bg-card);
     color: var(--text-primary);
     font-size: 0.95rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     transition: var(--transition);
 }
 
@@ -8719,7 +8723,7 @@ textarea.form-input-dashboard {
     border-radius: 12px;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
 }
 
 .btn-outline:hover {
@@ -8741,7 +8745,7 @@ textarea.form-input-dashboard {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 20px;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .security-form {
@@ -8889,7 +8893,7 @@ textarea.form-input-dashboard {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 20px;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
 }
 
 .notification-option {
@@ -9206,7 +9210,7 @@ textarea.form-input-dashboard {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.45rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -9275,7 +9279,7 @@ textarea.form-input-dashboard {
 }
 
 .auth-card-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.85rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -9311,7 +9315,7 @@ textarea.form-input-dashboard {
     border: none;
     background: transparent;
     border-radius: 50px;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-secondary);
@@ -9417,7 +9421,7 @@ textarea.form-input-dashboard {
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.9);
     color: var(--text-primary);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.92rem;
     transition: var(--transition);
     outline: none;
@@ -9526,7 +9530,7 @@ textarea.form-input-dashboard {
     color: #ffffff;
     border: none;
     border-radius: 50px;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
@@ -9597,7 +9601,7 @@ textarea.form-input-dashboard {
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.8);
     color: var(--text-primary);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.88rem;
     font-weight: 500;
     cursor: pointer;
