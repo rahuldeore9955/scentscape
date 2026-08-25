@@ -2068,15 +2068,17 @@ if (filterSelect) {
 // ===================================
 // AUTHENTICATION (LOGIN / REGISTER) LOGIC
 // ===================================
-const authToggleBtns = document.querySelectorAll('.auth-toggle-btn');
+const authToggleBtns = document.querySelectorAll('.auth-pill-btn, .auth-toggle-btn');
 const authFormContainers = document.querySelectorAll('.auth-form-container');
 const authSwitchLinks = document.querySelectorAll('.auth-switch-link');
-const passwordToggleBtns = document.querySelectorAll('.password-toggle-btn');
+const passwordToggleBtns = document.querySelectorAll('.auth-eye-btn, .password-toggle-btn');
 const registerPasswordInput = document.getElementById('registerPassword');
 const strengthBarFill = document.querySelector('.strength-bar-fill');
 const strengthText = document.querySelector('.strength-text');
 const loginFormElement = document.getElementById('loginFormElement');
 const registerFormElement = document.getElementById('registerFormElement');
+const authHeading = document.getElementById('authHeading');
+const authSubheading = document.getElementById('authSubheading');
 
 // Function to switch active form
 function switchAuthTab(formType) {
@@ -2095,6 +2097,16 @@ function switchAuthTab(formType) {
             container.classList.remove('active');
         }
     });
+
+    if (authHeading && authSubheading) {
+        if (formType === 'register') {
+            authHeading.textContent = 'Create Account';
+            authSubheading.textContent = 'Join ScentScape for exclusive luxury fragrance rewards';
+        } else {
+            authHeading.textContent = 'Welcome Back';
+            authSubheading.textContent = 'Enter your credentials to access your luxury account';
+        }
+    }
 }
 
 // Toggle tab click handlers
@@ -2146,7 +2158,6 @@ if (registerPasswordInput && strengthBarFill && strengthText) {
     registerPasswordInput.addEventListener('input', function() {
         const val = this.value;
         let strength = 0;
-        let status = '';
 
         if (val.length >= 6) strength++;
         if (val.match(/[A-Z]/)) strength++;
@@ -2182,20 +2193,20 @@ if (registerPasswordInput && strengthBarFill && strengthText) {
 if (loginFormElement) {
     loginFormElement.addEventListener('submit', function(e) {
         e.preventDefault();
-        const submitBtn = this.querySelector('.auth-submit-btn');
+        const submitBtn = this.querySelector('.auth-action-btn, .auth-submit-btn');
         const origContent = submitBtn.innerHTML;
         
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+        submitBtn.innerHTML = '<span>Signing In...</span> <i class="fas fa-spinner fa-spin"></i>';
         submitBtn.disabled = true;
 
         setTimeout(() => {
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Success!';
+            submitBtn.innerHTML = '<span>Success!</span> <i class="fas fa-check"></i>';
             submitBtn.style.background = '#43a047';
 
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
             }, 800);
-        }, 1000);
+        }, 900);
     });
 }
 
@@ -2203,19 +2214,19 @@ if (loginFormElement) {
 if (registerFormElement) {
     registerFormElement.addEventListener('submit', function(e) {
         e.preventDefault();
-        const submitBtn = this.querySelector('.auth-submit-btn');
+        const submitBtn = this.querySelector('.auth-action-btn, .auth-submit-btn');
         
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+        submitBtn.innerHTML = '<span>Creating Account...</span> <i class="fas fa-spinner fa-spin"></i>';
         submitBtn.disabled = true;
 
         setTimeout(() => {
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Account Created!';
+            submitBtn.innerHTML = '<span>Account Created!</span> <i class="fas fa-check"></i>';
             submitBtn.style.background = '#43a047';
 
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
             }, 800);
-        }, 1000);
+        }, 900);
     });
 }
 
