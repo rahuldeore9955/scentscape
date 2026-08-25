@@ -836,8 +836,7 @@ if (contactForm) {
         
         // Get form data
         const formData = {
-            firstName: this.firstName.value,
-            lastName: this.lastName.value,
+            name: this.name.value,
             email: this.email.value,
             phone: this.phone.value,
             message: this.message.value,

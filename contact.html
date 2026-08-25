@@ -25,18 +25,16 @@
                     <!-- Navigation Menu -->
                     <ul class="nav-menu">
                         <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                     
                     <!-- Right Side Icons -->
                     <div class="nav-icons">
-                        <button class="icon-btn search-btn" aria-label="Search">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <button class="icon-btn cart-btn" aria-label="Shopping Cart">
-                            <i class="fas fa-shopping-bag"></i>
-                            <span class="cart-count">0</span>
-                        </button>
+                        <a href="auth.html" class="nav-login-btn">
+                            <i class="fas fa-user"></i>
+                            Login
+                        </a>
                         <button class="icon-btn menu-toggle" aria-label="Menu">
                             <i class="fas fa-bars"></i>
                         </button>
@@ -105,36 +103,19 @@
                 <form class="contact-form" id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="firstName">
+                            <label for="name">
                                 <i class="fas fa-user"></i>
-                                First Name *
+                                Name *
                             </label>
                             <input 
                                 type="text" 
-                                id="firstName" 
-                                name="firstName" 
+                                id="name" 
+                                name="name" 
                                 class="form-input" 
-                                placeholder="John" 
+                                placeholder="Your full name" 
                                 required
                             >
                         </div>
-                        <div class="form-group">
-                            <label for="lastName">
-                                <i class="fas fa-user"></i>
-                                Last Name *
-                            </label>
-                            <input 
-                                type="text" 
-                                id="lastName" 
-                                name="lastName" 
-                                class="form-input" 
-                                placeholder="Doe" 
-                                required
-                            >
-                        </div>
-                    </div>
-
-                    <div class="form-row">
                         <div class="form-group">
                             <label for="email">
                                 <i class="fas fa-envelope"></i>
@@ -149,6 +130,9 @@
                                 required
                             >
                         </div>
+                    </div>
+
+                    <div class="form-row">
                         <div class="form-group">
                             <label for="phone">
                                 <i class="fas fa-phone"></i>
@@ -162,21 +146,20 @@
                                 placeholder="+91 98765 43210"
                             >
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">
-                            <i class="fas fa-comment-dots"></i>
-                            Your Message *
-                        </label>
-                        <textarea 
-                            id="message" 
-                            name="message" 
-                            class="form-input form-textarea" 
-                            rows="6" 
-                            placeholder="Tell us how we can help you..."
-                            required
-                        ></textarea>
+                        <div class="form-group">
+                            <label for="message">
+                                <i class="fas fa-comment-dots"></i>
+                                Your Message *
+                            </label>
+                            <input
+                                type="text"
+                                id="message"
+                                name="message"
+                                class="form-input"
+                                placeholder="Tell us how we can help you..."
+                                required
+                            >
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -269,36 +252,6 @@
                     </ul>
                 </div>
 
-                <!-- Contact & Newsletter -->
-                <div class="footer-column">
-                    <h3>Get In Touch</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Fragrance Street, Mumbai, Maharashtra 400001</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <a href="tel:+912234567890">+91 22 3456 7890</a>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:info@scentscape.com">info@scentscape.com</a>
-                        </li>
-                    </ul>
-                    
-                    <form class="newsletter-form" onsubmit="return false;">
-                        <input 
-                            type="email" 
-                            class="newsletter-input" 
-                            placeholder="Enter your email" 
-                            required
-                            aria-label="Email for newsletter"
-                        >
-                        <button type="submit" class="newsletter-btn">Subscribe</button>
-                    </form>
-                    <p class="newsletter-text">Get exclusive offers and new arrivals first!</p>
-                </div>
             </div>
 
             <!-- Footer Bottom -->

@@ -25,18 +25,16 @@
                     <!-- Navigation Menu -->
                     <ul class="nav-menu">
                         <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                     
                     <!-- Right Side Icons -->
                     <div class="nav-icons">
-                        <button class="icon-btn search-btn" aria-label="Search">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <button class="icon-btn cart-btn" aria-label="Shopping Cart">
-                            <i class="fas fa-shopping-bag"></i>
-                            <span class="cart-count">0</span>
-                        </button>
+                        <a href="auth.html" class="nav-login-btn">
+                            <i class="fas fa-user"></i>
+                            Login
+                        </a>
                         <button class="icon-btn menu-toggle" aria-label="Menu">
                             <i class="fas fa-bars"></i>
                         </button>
@@ -62,7 +60,6 @@
         <div class="hero-content">
             <div class="container">
                 <div class="hero-text">
-                    <span class="hero-subtitle" data-aos="fade-up">Discover Your Signature Scent</span>
                     <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
                         Luxury Fragrances<br>
                         <span class="gradient-text">Crafted for You</span>
@@ -185,9 +182,10 @@
                         <div class="product-price">
                             <span class="current-price">₹11,250</span>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart
-                        </button>
+                        <div class="product-card-btns">
+                            <a href="product-details.html" class="btn-details">Details</a>
+                            <button class="btn-buy">Buy</button>
+                        </div>
                     </div>
                 </div>
 
@@ -219,9 +217,10 @@
                         <div class="product-price">
                             <span class="current-price">₹10,000</span>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart
-                        </button>
+                        <div class="product-card-btns">
+                            <a href="product-details.html" class="btn-details">Details</a>
+                            <button class="btn-buy">Buy</button>
+                        </div>
                     </div>
                 </div>
 
@@ -254,9 +253,10 @@
                             <span class="current-price">₹8,650</span>
                             <span class="old-price">₹10,800</span>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart
-                        </button>
+                        <div class="product-card-btns">
+                            <a href="product-details.html" class="btn-details">Details</a>
+                            <button class="btn-buy">Buy</button>
+                        </div>
                     </div>
                 </div>
 
@@ -287,9 +287,10 @@
                         <div class="product-price">
                             <span class="current-price">₹24,500</span>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart
-                        </button>
+                        <div class="product-card-btns">
+                            <a href="product-details.html" class="btn-details">Details</a>
+                            <button class="btn-buy">Buy</button>
+                        </div>
                     </div>
                 </div>
 
@@ -321,9 +322,10 @@
                         <div class="product-price">
                             <span class="current-price">₹20,400</span>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart
-                        </button>
+                        <div class="product-card-btns">
+                            <a href="product-details.html" class="btn-details">Details</a>
+                            <button class="btn-buy">Buy</button>
+                        </div>
                     </div>
                 </div>
 
@@ -354,9 +356,10 @@
                         <div class="product-price">
                             <span class="current-price">₹10,650</span>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart
-                        </button>
+                        <div class="product-card-btns">
+                            <a href="product-details.html" class="btn-details">Details</a>
+                            <button class="btn-buy">Buy</button>
+                        </div>
                     </div>
                 </div>
 
@@ -388,9 +391,10 @@
                         <div class="product-price">
                             <span class="current-price">₹12,500</span>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart
-                        </button>
+                        <div class="product-card-btns">
+                            <a href="product-details.html" class="btn-details">Details</a>
+                            <button class="btn-buy">Buy</button>
+                        </div>
                     </div>
                 </div>
 
@@ -421,9 +425,10 @@
                         <div class="product-price">
                             <span class="current-price">₹18,300</span>
                         </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart
-                        </button>
+                        <div class="product-card-btns">
+                            <a href="product-details.html" class="btn-details">Details</a>
+                            <button class="btn-buy">Buy</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -993,37 +998,6 @@
                         <li><a href="#blog">Blog</a></li>
                         <li><a href="#careers">Careers</a></li>
                     </ul>
-                </div>
-
-                <!-- Contact & Newsletter -->
-                <div class="footer-column">
-                    <h3>Get In Touch</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Fragrance Street, New York, NY 10001</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <a href="tel:+1234567890">+1 (234) 567-890</a>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:info@scentscape.com">info@scentscape.com</a>
-                        </li>
-                    </ul>
-                    
-                    <form class="newsletter-form" onsubmit="return false;">
-                        <input 
-                            type="email" 
-                            class="newsletter-input" 
-                            placeholder="Enter your email" 
-                            required
-                            aria-label="Email for newsletter"
-                        >
-                        <button type="submit" class="newsletter-btn">Subscribe</button>
-                    </form>
-                    <p class="newsletter-text">Get exclusive offers and new arrivals first!</p>
                 </div>
             </div>
 
