@@ -5,4 +5,7 @@
     RewriteRule ^login/?$ login.html [NC,L]
     RewriteRule ^register/?$ register.html [NC,L]
     RewriteRule ^product-details/?$ product-details.html [NC,L]
+    RewriteRule ^contact/?$ contact.html [NC,L]
+    RewriteRule ^products/?$ products.html [NC,L]
+    RewriteRule ^dashboard/?$ dashboard.html [NC,L]
 </IfModule>
