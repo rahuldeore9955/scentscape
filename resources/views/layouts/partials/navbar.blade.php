@@ -13,6 +13,7 @@
                 <ul class="nav-menu">
                     <li><a href="{{ route('home') }}" class="{{ request()->is('/') ? 'active' : '' }}">Home</a></li>
                     <li><a href="{{ route('products.index') }}" class="{{ request()->is('products*') ? 'active' : '' }}">Products</a></li>
+                    <li><a href="{{ route('blogs.index') }}" class="{{ request()->is('blogs*') ? 'active' : '' }}">Blogs</a></li>
                     <li><a href="{{ route('contact.index') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a></li>
                 </ul>
 

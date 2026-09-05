@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield('meta_description', 'ScentScape - Premium Fragrances & Perfumes')">
     <title>@yield('title', 'ScentScape - Premium Fragrances')</title>
 
@@ -15,8 +16,10 @@
 </head>
 <body class="@yield('body_class')">
 
-    {{-- Navigation --}}
-    @include('layouts.partials.navbar')
+    {{-- Storefront navigation is hidden on the dedicated auth pages. --}}
+    @if(!request()->routeIs('login', 'register'))
+        @include('layouts.partials.navbar')
+    @endif
 
     {{-- Flash Messages --}}
     @if(session('success'))
@@ -31,8 +34,13 @@
         @yield('content')
     </main>
 
-    {{-- Footer --}}
-    @include('layouts.partials.footer')
+    @if(!request()->routeIs('login', 'register') && !request()->routeIs('checkout.pay', 'checkout.thankyou'))
+        @include('checkout.guest-modal')
+    @endif
+
+    @if(!request()->routeIs('login', 'register'))
+        @include('layouts.partials.footer')
+    @endif
 
     {{-- JS --}}
     <script src="{{ asset('assets/js/script.js') }}"></script>

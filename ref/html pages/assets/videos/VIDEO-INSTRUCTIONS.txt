@@ -1,0 +1,91 @@
+===============================================
+VIDEO SETUP INSTRUCTIONS - ScentScape Website
+===============================================
+
+REQUIRED VIDEO FILES:
+====================
+
+1. HERO SECTION BACKGROUND VIDEO:
+   - Filename: perfume-hero.mp4
+   - Location: Place in this folder (videos/)
+   - Format: MP4 (H.264 codec)
+   - Resolution: 1920x1080 or higher
+   - Aspect Ratio: 16:9 (landscape)
+   - Duration: 10-30 seconds (will loop)
+   - File Size: Keep under 10MB
+
+2. VIDEO TESTIMONIALS (9:16 VERTICAL FORMAT):
+   - testimonial-1.mp4 (YouTube Shorts style)
+   - testimonial-2.mp4 (Instagram Reels style)
+   - testimonial-3.mp4 (Facebook Reels style)
+   - testimonial-4.mp4 (YouTube Shorts style)
+   - testimonial-5.mp4 (Instagram Reels style)
+   - testimonial-6.mp4 (Facebook Reels style)
+   
+   SPECIFICATIONS:
+   - Format: MP4 (H.264 codec)
+   - Aspect Ratio: 9:16 (vertical/portrait)
+   - Resolution: 1080x1920 or 720x1280
+   - Duration: 15-60 seconds recommended
+   - Content: Customer reviews, unboxing, testimonials
+
+HERO VIDEO CONTENT SUGGESTIONS:
+===============================
+✓ Perfume bottle rotating elegantly
+✓ Fragrance spray in slow motion
+✓ Luxury perfume collection display
+✓ Abstract smoke/mist movements
+✓ Close-up of perfume droplets
+✓ Elegant product photography
+
+TESTIMONIAL VIDEO CONTENT:
+==========================
+✓ Customer unboxing videos
+✓ Product reviews and experiences
+✓ Fragrance application demonstrations
+✓ Before/after testimonials
+✓ Customer satisfaction stories
+
+FREE VIDEO RESOURCES:
+====================
+
+1. PEXELS (Recommended)
+   https://www.pexels.com/search/videos/perfume/
+   - High quality, royalty-free
+   - Search: "perfume", "fragrance", "luxury", "bottle"
+
+2. PIXABAY
+   https://pixabay.com/videos/search/perfume/
+   - Free for commercial use
+   - Good selection of luxury content
+
+3. COVERR
+   https://coverr.co/
+   - Beautiful free stock videos
+   - Search: "luxury", "abstract", "smoke"
+
+4. VIDEVO
+   https://www.videvo.net/
+   - Free HD stock footage
+   - Filter by "Free" license
+
+5. MIXKIT
+   https://mixkit.co/
+   - Free videos for commercial use
+
+ALTERNATIVE IF NO VIDEO:
+========================
+If you don't have videos, the site will still work with placeholder images.
+The gradient overlay will be visible with poster images showing.
+
+To use images instead:
+1. The poster images will show until videos are added
+2. Or replace <video> tags with <img> tags in HTML
+3. Or add background-images to video containers in CSS
+
+NOTES:
+======
+- All videos should be optimized for web (compressed)
+- Use tools like HandBrake or Adobe Media Encoder to compress
+- Test videos on mobile devices for performance
+- Vertical videos look best when shot in 9:16 format natively

@@ -12,9 +12,14 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'order_number',
+        'razorpay_order_id',
+        'razorpay_payment_id',
+        'razorpay_signature',
         'status',        // pending, processing, shipped, delivered, cancelled
         'total_amount',
         'shipping_address',
+        'courier_name',
+        'tracking_number',
         'payment_method',
         'payment_status', // pending, paid, failed
         'notes',
