@@ -16,8 +16,7 @@
                 <label>Confirm Password<input type="password" name="password_confirmation" required minlength="6" autocomplete="new-password"></label>
                 <label>Phone<input type="tel" name="phone" required autocomplete="tel"></label>
                 <label>Address<input type="text" name="address_line1" required autocomplete="street-address"></label>
-                <label>City<input type="text" name="city" required autocomplete="address-level2"></label>
-                <label>State<input type="text" name="state" required autocomplete="address-level1"></label>
+                @include('partials.location-selects', ['selectedState' => old('state'), 'selectedCity' => old('city')])
                 <label>Pincode<input type="text" name="pincode" required autocomplete="postal-code"></label>
             </div>
             <button type="submit" class="checkout-modal-submit">Continue to Payment <i class="fas fa-arrow-right"></i></button>

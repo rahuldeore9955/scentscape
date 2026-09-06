@@ -65,6 +65,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 // Authenticated routes
 Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/products', [DashboardController::class, 'products'])->name('products');
     Route::get('/orders', [DashboardController::class, 'orders'])->name('orders');
     Route::get('/wishlist', [DashboardController::class, 'wishlist'])->name('wishlist');
     Route::get('/addresses', [DashboardController::class, 'addresses'])->name('addresses');

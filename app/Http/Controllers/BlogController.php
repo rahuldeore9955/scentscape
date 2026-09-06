@@ -6,7 +6,9 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = $this->articles();
+        $blogs = collect($this->articles())
+            ->flatMap(fn (array $article) => array_fill(0, 3, $article))
+            ->values();
 
         return view('blogs.index', compact('blogs'));
     }

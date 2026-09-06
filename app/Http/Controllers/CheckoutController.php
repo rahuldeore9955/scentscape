@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
@@ -28,7 +29,7 @@ class CheckoutController extends Controller
         $data = $request->validate([
             'product_id' => ['required', 'integer', 'exists:products,id'], 'quantity' => ['nullable', 'integer', 'min:1', 'max:10'],
             'name' => ['required', 'string', 'max:255'], 'email' => ['required', 'email', 'max:255', 'unique:users,email'], 'password' => ['required', 'confirmed', 'min:6'],
-            'phone' => ['required', 'string', 'max:20'], 'address_line1' => ['required', 'string', 'max:255'], 'city' => ['required', 'string', 'max:100'], 'state' => ['required', 'string', 'max:100'], 'pincode' => ['required', 'string', 'max:20'],
+            'phone' => ['required', 'string', 'max:20'], 'address_line1' => ['required', 'string', 'max:255'], 'state' => ['required', 'string', 'max:100', Rule::in($this->states())], 'city' => ['required', 'string', 'max:100', Rule::in($this->citiesFor($request->input('state')))], 'pincode' => ['required', 'string', 'max:20'],
         ]);
 
         $user = User::create(['name' => $data['name'], 'email' => $data['email'], 'password' => Hash::make($data['password']), 'phone' => $data['phone']]);
@@ -84,5 +85,15 @@ class CheckoutController extends Controller
         $order->update(['razorpay_order_id' => $response->json('id')]);
         OrderItem::create(['order_id' => $order->id, 'product_id' => $product->id, 'quantity' => $quantity, 'unit_price' => $product->price, 'subtotal' => $total]);
         return $order;
+    }
+
+    private function states(): array
+    {
+        return array_keys(config('locations.india'));
+    }
+
+    private function citiesFor(?string $state): array
+    {
+        return config('locations.india.'.$state, []);
     }
 }

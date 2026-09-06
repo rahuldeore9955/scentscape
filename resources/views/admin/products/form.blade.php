@@ -1,6 +1,6 @@
 @php
     $panelType = 'admin'; $editing = $product->exists;
-    $panelLinks = [['label' => 'Overview', 'icon' => 'fas fa-grid-2', 'url' => route('admin.index')], ['label' => 'Products', 'icon' => 'fas fa-box', 'url' => route('admin.products.index')], ['label' => 'Customers', 'icon' => 'fas fa-users', 'url' => route('admin.users.index')], ['label' => 'Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('admin.orders.index')], ['label' => 'Payments', 'icon' => 'fas fa-credit-card', 'url' => route('admin.payments.index')]];
+    $panelLinks = [['label' => 'Dashboard', 'icon' => 'fas fa-gauge-high', 'url' => route('admin.index')], ['label' => 'Products', 'icon' => 'fas fa-box', 'url' => route('admin.products.index')], ['label' => 'Customers', 'icon' => 'fas fa-users', 'url' => route('admin.users.index')], ['label' => 'Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('admin.orders.index')], ['label' => 'Payments', 'icon' => 'fas fa-credit-card', 'url' => route('admin.payments.index')]];
 @endphp
 @extends('layouts.panel')
 @section('title', ($editing ? 'Edit' : 'Add').' Product - ScentScape Admin')
@@ -24,3 +24,4 @@
         <div class="admin-form-actions"><a class="panel-link-btn" href="{{ route('admin.products.index') }}">Cancel</a><button type="submit" class="panel-primary-btn">{{ $editing ? 'Save Changes' : 'Create Product' }}</button></div>
     </form></section>
 @endsection
+

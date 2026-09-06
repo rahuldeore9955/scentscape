@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class DashboardController extends Controller
 {
@@ -32,16 +34,42 @@ class DashboardController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        $address = $user->addresses()->where('is_default', true)->first()
-            ?: $user->addresses()->latest()->first();
+        $address = $this->singleAddress($user);
 
         return view('dashboard.profile', compact('user', 'address'));
     }
 
+    public function products(Request $request)
+    {
+        $query = Product::query()
+            ->where('status', 'active')
+            ->withCount('reviews');
+
+        if ($request->filled('category')) {
+            $query->where('category', $request->string('category'));
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->string('search');
+            $query->where(function ($products) use ($search) {
+                $products->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('brand', 'like', '%'.$search.'%');
+            });
+        }
+
+        $products = $query->latest()->paginate(12)->withQueryString();
+        $categories = Product::where('status', 'active')
+            ->whereNotNull('category')
+            ->distinct()
+            ->orderBy('category')
+            ->pluck('category');
+
+        return view('dashboard.products', compact('products', 'categories'));
+    }
+
     public function addresses()
     {
-        $addresses = Auth::user()->addresses()->latest()->get();
-        return view('dashboard.addresses', compact('addresses'));
+        return redirect()->route('dashboard.profile');
     }
 
     public function storeAddress(Request $request)
@@ -49,11 +77,9 @@ class DashboardController extends Controller
         $data = $this->validateAddress($request);
         $user = Auth::user();
 
-        if ($user->addresses()->doesntExist()) {
-            $data['is_default'] = true;
-        }
-
-        $user->addresses()->create($data);
+        $data['label'] = 'home';
+        $data['is_default'] = true;
+        $this->saveSingleAddress($user, $data);
 
         return back()->with('success', 'Address saved successfully.');
     }
@@ -62,7 +88,7 @@ class DashboardController extends Controller
     {
         abort_unless($address->user_id === Auth::id(), 403);
 
-        Auth::user()->addresses()->update(['is_default' => false]);
+        Auth::user()->addresses()->where('id', '!=', $address->id)->delete();
         $address->update(['is_default' => true]);
 
         return back()->with('success', 'Default address updated.');
@@ -72,15 +98,7 @@ class DashboardController extends Controller
     {
         abort_unless($address->user_id === Auth::id(), 403);
 
-        $wasDefault = $address->is_default;
         $address->delete();
-
-        if ($wasDefault) {
-            $replacement = Auth::user()->addresses()->latest()->first();
-            if ($replacement) {
-                $replacement->update(['is_default' => true]);
-            }
-        }
 
         return back()->with('success', 'Address removed.');
     }
@@ -97,8 +115,8 @@ class DashboardController extends Controller
             'address_phone' => ['nullable', 'required_with:address_line1', 'string', 'max:20'],
             'address_line1' => ['nullable', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
-            'city' => ['nullable', 'required_with:address_line1', 'string', 'max:100'],
-            'state' => ['nullable', 'required_with:address_line1', 'string', 'max:100'],
+            'state' => ['nullable', 'required_with:address_line1', 'string', 'max:100', Rule::in($this->states())],
+            'city' => ['nullable', 'required_with:address_line1', 'string', 'max:100', Rule::in($this->citiesFor($request->input('state')))],
             'pincode' => ['nullable', 'required_with:address_line1', 'string', 'max:20'],
             'country' => ['nullable', 'string', 'max:100'],
         ]);
@@ -124,36 +142,18 @@ class DashboardController extends Controller
         $user->update($accountData);
 
         if ($request->filled('address_line1')) {
-            $address = $user->addresses()->where('label', 'home')->first();
-            $user->addresses()->update(['is_default' => false]);
-
-            if ($address) {
-                $address->update([
-                    'full_name' => $request->input('address_full_name', $user->name),
-                    'phone' => $request->input('address_phone', $user->phone),
-                    'address_line1' => $request->address_line1,
-                    'address_line2' => $request->address_line2,
-                    'city' => $request->city,
-                    'state' => $request->state,
-                    'pincode' => $request->pincode,
-                    'country' => $request->input('country', 'India'),
-                    'is_default' => true,
-                ]);
-            } else {
-                Address::create([
-                    'user_id' => $user->id,
-                    'label' => 'home',
-                    'full_name' => $request->input('address_full_name', $user->name),
-                    'phone' => $request->input('address_phone', $user->phone),
-                    'address_line1' => $request->address_line1,
-                    'address_line2' => $request->address_line2,
-                    'city' => $request->city,
-                    'state' => $request->state,
-                    'pincode' => $request->pincode,
-                    'country' => $request->input('country', 'India'),
-                    'is_default' => true,
-                ]);
-            }
+            $this->saveSingleAddress($user, [
+                'label' => 'home',
+                'full_name' => $request->input('address_full_name', $user->name),
+                'phone' => $request->input('address_phone', $user->phone),
+                'address_line1' => $request->address_line1,
+                'address_line2' => $request->address_line2,
+                'city' => $request->city,
+                'state' => $request->state,
+                'pincode' => $request->pincode,
+                'country' => $request->input('country', 'India'),
+                'is_default' => true,
+            ]);
         }
 
         return back()->with('success', 'Profile updated successfully.');
@@ -162,15 +162,52 @@ class DashboardController extends Controller
     private function validateAddress(Request $request): array
     {
         return $request->validate([
-            'label' => ['required', 'string', 'max:50'],
+            'label' => ['nullable', 'string', 'max:50'],
             'full_name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20'],
             'address_line1' => ['required', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:100'],
-            'state' => ['required', 'string', 'max:100'],
+            'state' => ['required', 'string', 'max:100', Rule::in($this->states())],
+            'city' => ['required', 'string', 'max:100', Rule::in($this->citiesFor($request->input('state')))],
             'pincode' => ['required', 'string', 'max:20'],
             'country' => ['required', 'string', 'max:100'],
         ]);
+    }
+
+    private function states(): array
+    {
+        return array_keys(config('locations.india'));
+    }
+
+    private function citiesFor(?string $state): array
+    {
+        return config('locations.india.'.$state, []);
+    }
+
+    private function singleAddress($user): ?Address
+    {
+        $address = $user->addresses()
+            ->orderByDesc('is_default')
+            ->latest()
+            ->first();
+
+        if ($address) {
+            $user->addresses()->where('id', '!=', $address->id)->delete();
+            $address->update(['is_default' => true]);
+        }
+
+        return $address;
+    }
+
+    private function saveSingleAddress($user, array $data): Address
+    {
+        $address = $this->singleAddress($user);
+
+        if ($address) {
+            $address->update($data);
+            return $address;
+        }
+
+        return $user->addresses()->create($data);
     }
 }

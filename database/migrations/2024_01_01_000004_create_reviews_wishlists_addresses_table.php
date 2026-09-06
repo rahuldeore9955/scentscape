@@ -43,6 +43,7 @@ return new class extends Migration
             $table->string('country')->default('India');
             $table->boolean('is_default')->default(false);
             $table->timestamps();
+            $table->unique('user_id');
         });
     }
 

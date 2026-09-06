@@ -576,6 +576,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let videoAutoSlideInterval;
         let isVideoSliderPaused = false;
         let isVideoTransitioning = false;
+
+        function getVideoSlideStep() {
+            const cardWidth = videoSlider.querySelector('.video-card').offsetWidth;
+            const gap = parseFloat(window.getComputedStyle(videoSlider).gap) || 0;
+            return cardWidth + gap;
+        }
         
         // Clone cards for infinite loop
         function cloneVideoCards() {
@@ -654,10 +660,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (isVideoTransitioning) return;
             isVideoTransitioning = true;
             
-            const allCards = document.querySelectorAll('.video-card');
-            const cardWidth = allCards[0].offsetWidth;
-            const gap = 25;
-            const offset = -(videoCurrentIndex * (cardWidth + gap));
+            const offset = -(videoCurrentIndex * getVideoSlideStep());
             
             videoSlider.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
             videoSlider.style.transform = `translateX(${offset}px)`;
@@ -673,10 +676,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update slider instantly (no animation)
         function updateVideoSliderInstant() {
-            const allCards = document.querySelectorAll('.video-card');
-            const cardWidth = allCards[0].offsetWidth;
-            const gap = 25;
-            const offset = -(videoCurrentIndex * (cardWidth + gap));
+            const offset = -(videoCurrentIndex * getVideoSlideStep());
             
             videoSlider.style.transition = 'none';
             videoSlider.style.transform = `translateX(${offset}px)`;

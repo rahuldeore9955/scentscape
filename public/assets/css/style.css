@@ -2739,7 +2739,7 @@ body {
 .testimonials-section {
     background: var(--bg-secondary);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     padding: 80px 0 100px 0;
 }
 
@@ -2749,12 +2749,14 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 60px;
-    overflow: visible;
+    width: 100%;
+    overflow: hidden;
 }
 
 /* Testimonials Slider */
 .testimonials-slider {
     display: flex;
+    width: 100%;
     gap: 30px;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
@@ -2763,7 +2765,8 @@ body {
 
 /* Testimonial Card */
 .testimonial-card {
-    min-width: calc(33.333% - 20px);
+    flex: 0 0 calc((100% - 60px) / 3);
+    min-width: 0;
     background: var(--bg-card);
     border-radius: 20px;
     padding: 35px;
@@ -3071,7 +3074,7 @@ body {
 /* Testimonials Responsive */
 @media (max-width: 1200px) {
     .testimonial-card {
-        min-width: calc(50% - 15px);
+        flex-basis: calc((100% - 30px) / 2);
     }
     
     .testimonials-slider-wrapper {
@@ -3081,11 +3084,11 @@ body {
 
 @media (max-width: 768px) {
     .testimonial-card {
-        min-width: 100%;
+        flex-basis: 100%;
     }
     
     .testimonials-slider-wrapper {
-        padding: 0 50px;
+        padding: 0;
     }
     
     .testimonials-slider {
@@ -3127,7 +3130,7 @@ body {
 
 @media (max-width: 576px) {
     .testimonials-slider-wrapper {
-        padding: 0 40px;
+        padding: 0;
     }
     
     .testimonial-card {
@@ -3163,7 +3166,7 @@ body {
 
 @media (max-width: 480px) {
     .testimonials-slider-wrapper {
-        padding: 0 35px;
+        padding: 0;
     }
     
     .testimonial-card {
@@ -3203,7 +3206,7 @@ body {
 .video-testimonials-section {
     background: var(--bg-primary);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     padding: 80px 0 100px 0;
 }
 
@@ -3213,12 +3216,14 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 60px;
-    overflow: visible;
+    width: 100%;
+    overflow: hidden;
 }
 
 /* Video Slider */
 .video-slider {
     display: flex;
+    width: 100%;
     gap: 25px;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
@@ -3227,14 +3232,15 @@ body {
 
 /* Video Card */
 .video-card {
-    min-width: calc(25% - 19px);
+    flex: 0 0 calc((100% - 75px) / 4);
+    min-width: 0;
     background: var(--bg-card);
     border-radius: 20px;
     overflow: hidden;
     position: relative;
     transition: var(--transition);
     border: 1px solid var(--border-color);
-    margin: 5px;
+    margin: 0;
     cursor: pointer;
 }
 
@@ -3273,6 +3279,14 @@ body {
 }
 
 /* Remove old play overlay — iframe handles playback */
+.testimonial-video-iframe.youtube-video-iframe {
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    transform: none;
+    background: #000000;
+}
+
 .video-play-overlay,
 .video-play-btn {
     display: none;
@@ -3298,10 +3312,6 @@ body {
 
 .video-platform-badge.youtube {
     background: rgba(255, 0, 0, 0.9);
-}
-
-.video-platform-badge.instagram {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 
 .video-platform-badge.facebook {
@@ -3405,7 +3415,7 @@ body {
 /* Video Testimonials Responsive */
 @media (max-width: 1200px) {
     .video-card {
-        min-width: calc(33.333% - 17px);
+        flex-basis: calc((100% - 50px) / 3);
     }
     
     .video-slider-wrapper {
@@ -3415,7 +3425,7 @@ body {
 
 @media (max-width: 992px) {
     .video-card {
-        min-width: calc(50% - 12.5px);
+        flex-basis: calc((100% - 20px) / 2);
     }
     
     .video-slider {
@@ -3425,11 +3435,11 @@ body {
 
 @media (max-width: 768px) {
     .video-card {
-        min-width: calc(50% - 10px);
+        flex-basis: calc((100% - 15px) / 2);
     }
     
     .video-slider-wrapper {
-        padding: 0 50px;
+        padding: 0;
     }
     
     .video-slider {
@@ -3474,11 +3484,11 @@ body {
 
 @media (max-width: 576px) {
     .video-card {
-        min-width: 100%;
+        flex-basis: 100%;
     }
     
     .video-slider-wrapper {
-        padding: 0 40px;
+        padding: 0;
     }
     
     .video-slider {
@@ -3503,7 +3513,7 @@ body {
 
 @media (max-width: 480px) {
     .video-slider-wrapper {
-        padding: 0 35px;
+        padding: 0;
     }
     
     .video-info {

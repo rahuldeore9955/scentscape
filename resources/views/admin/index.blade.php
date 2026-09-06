@@ -1,7 +1,7 @@
 @php
     $panelType = 'admin';
     $panelLinks = [
-        ['label' => 'Overview', 'icon' => 'fas fa-grid-2', 'url' => route('admin.index')],
+        ['label' => 'Dashboard', 'icon' => 'fas fa-gauge-high', 'url' => route('admin.index')],
         ['label' => 'Products', 'icon' => 'fas fa-box', 'url' => route('admin.products.index')],
         ['label' => 'Customers', 'icon' => 'fas fa-users', 'url' => route('admin.users.index')],
         ['label' => 'Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('admin.orders.index')],
@@ -36,3 +36,4 @@
         @endif
     </section>
 @endsection
+

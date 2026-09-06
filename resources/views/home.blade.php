@@ -107,20 +107,19 @@
         ];
 
         $videoReviews = [
-            ['name' => 'Meera Joshi', 'title' => 'Unboxing Chanel No.5 - Premium Packaging!'],
-            ['name' => 'Rahul Kapoor', 'title' => 'Dior Sauvage Review - My New Favorite!'],
-            ['name' => 'Sanya Malhotra', 'title' => 'Fast Delivery & Authentic Products'],
-            ['name' => 'Karan Singh', 'title' => 'Tom Ford Collection Haul 2026'],
-            ['name' => 'Divya Reddy', 'title' => 'YSL Black Opium - Worth Every Rupee!'],
-            ['name' => 'Aditya Sharma', 'title' => 'Le Labo Santal 33 - Luxury Unboxing'],
+            ['platform' => 'youtube', 'embed_url' => 'https://www.youtube.com/embed/LMWoK4jvFTM?rel=0&modestbranding=1&playsinline=1', 'name' => 'TheCherysTv', 'title' => 'Fragrances You Should Never Wear Around a Man'],
+            ['platform' => 'youtube', 'embed_url' => 'https://www.youtube.com/embed/G9fk8bgFv8k?rel=0&modestbranding=1&playsinline=1', 'name' => 'Jus de Rose', 'title' => 'Best and Worst New Fragrances'],
+            ['platform' => 'youtube', 'embed_url' => 'https://www.youtube.com/embed/LMWoK4jvFTM?rel=0&modestbranding=1&playsinline=1', 'name' => 'TheCherysTv', 'title' => 'Perfume and Fragrance Review'],
+            ['platform' => 'youtube', 'embed_url' => 'https://www.youtube.com/embed/G9fk8bgFv8k?rel=0&modestbranding=1&playsinline=1', 'name' => 'Jus de Rose', 'title' => 'New Perfume Review'],
         ];
 
         $blogs = [
             ['slug' => 'choose-perfect-fragrance', 'category' => 'Guide', 'image' => 'photo-1523293182086-7651a899d37f', 'date' => 'June 10, 2026', 'time' => '5 min read', 'title' => 'How to Choose the Perfect Fragrance for Every Occasion', 'excerpt' => 'Discover the art of selecting the right perfume for different moments in your life.'],
         ];
+        $blogs = array_merge($blogs, $blogs, $blogs);
     @endphp
 
-    <section class="testimonials-section section">
+    <section class="testimonials-section section" id="testimonials">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Testimonials</span>
@@ -158,7 +157,7 @@
         </div>
     </section>
 
-    <section class="video-testimonials-section section">
+    <section class="video-testimonials-section section" id="video-reviews">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Video Reviews</span>
@@ -169,10 +168,12 @@
             <div class="video-slider-wrapper">
                 <div class="video-slider">
                     @foreach($videoReviews as $review)
-                        <div class="video-card" data-youtube-id="Ux2zKPR6RD0">
-                            <div class="video-platform-badge youtube"><i class="fab fa-youtube"></i></div>
+                        <div class="video-card" data-platform="{{ $review['platform'] }}">
+                            <div class="video-platform-badge {{ $review['platform'] }}">
+                                <i class="fab fa-{{ $review['platform'] }}"></i>
+                            </div>
                             <div class="video-container">
-                                <iframe class="testimonial-video-iframe" src="https://www.youtube.com/embed/Ux2zKPR6RD0?rel=0&modestbranding=1&playsinline=1" title="{{ $review['title'] }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                                <iframe class="testimonial-video-iframe youtube-video-iframe" src="{{ $review['embed_url'] }}" title="{{ $review['title'] }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="eager"></iframe>
                             </div>
                             <div class="video-info">
                                 <h4 class="video-author">{{ $review['name'] }}</h4>
