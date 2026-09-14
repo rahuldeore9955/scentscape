@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\AuditLog;
+use App\Services\AuditLogger;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -46,7 +49,8 @@ class AdminController extends Controller
     public function storeProduct(Request $request)
     {
         $this->ensureAdmin();
-        Product::create($this->productData($request));
+        $product = Product::create($this->productData($request));
+        app(AuditLogger::class)->record('product.created', $product, $product->name);
 
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
     }
@@ -62,6 +66,7 @@ class AdminController extends Controller
     {
         $this->ensureAdmin();
         $product->update($this->productData($request, $product));
+        app(AuditLogger::class)->record('product.updated', $product, $product->name, ['changes' => $this->changesFor($product, $product->getChanges())]);
 
         return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
@@ -69,6 +74,7 @@ class AdminController extends Controller
     public function destroyProduct(Product $product)
     {
         $this->ensureAdmin();
+        app(AuditLogger::class)->record('product.deleted', $product, $product->name, ['snapshot' => $product->only(['sku', 'price', 'stock', 'status'])]);
         $product->delete();
 
         return redirect()->route('admin.products.index')->with('success', 'Product removed from the catalog.');
@@ -117,6 +123,7 @@ class AdminController extends Controller
             'notes' => ['nullable', 'string', 'max:2000'],
         ]);
         $order->update($data);
+        app(AuditLogger::class)->record('order.updated', $order, $order->order_number, ['changes' => $this->changesFor($order, $order->getChanges())]);
 
         return redirect()->route('admin.orders.show', $order)->with('success', 'Order status updated.');
     }
@@ -126,6 +133,18 @@ class AdminController extends Controller
         $this->ensureAdmin();
 
         return view('admin.payments.index', ['payments' => Order::with('user')->whereNotNull('payment_method')->latest()->get()]);
+    }
+
+    public function auditLogs(Request $request)
+    {
+        $this->ensureAdmin();
+        $logs = AuditLog::with('user')
+            ->when($request->filled('event'), fn ($query) => $query->where('event', $request->string('event')))
+            ->latest()
+            ->paginate(25)
+            ->withQueryString();
+
+        return view('admin.audit.index', compact('logs'));
     }
 
     private function ensureAdmin(): void
@@ -177,5 +196,17 @@ class AdminController extends Controller
         }
 
         return $candidate;
+    }
+
+    private function changesFor(Model $model, array $fields): array
+    {
+        $changes = [];
+        foreach (array_keys($fields) as $field) {
+            if (in_array($field, ['updated_at', 'created_at', 'deleted_at'], true) || ! $model->wasChanged($field)) {
+                continue;
+            }
+            $changes[$field] = ['from' => $model->getOriginal($field), 'to' => $model->getAttribute($field)];
+        }
+        return $changes;
     }
 }

@@ -25,7 +25,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
-Route::post('/checkout/guest', [CheckoutController::class, 'guest'])->name('checkout.guest')->middleware('guest');
+Route::post('/checkout/guest', fn () => redirect()->route('register'))->name('checkout.guest')->middleware('guest');
 Route::middleware('auth')->group(function () {
     Route::post('/checkout/start', [CheckoutController::class, 'start'])->name('checkout.start');
     Route::get('/checkout/{order}/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
@@ -38,7 +38,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:3,1');
     Route::get('/verify-email', [EmailOtpController::class, 'showRegistrationVerification'])->name('verification.notice');
     Route::post('/verify-email', [EmailOtpController::class, 'verifyRegistration'])->middleware('throttle:6,1')->name('verification.verify');
     Route::post('/verify-email/resend', [EmailOtpController::class, 'resendRegistrationOtp'])->middleware('throttle:3,1')->name('verification.resend');
@@ -68,6 +68,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::put('/orders/{order}', [AdminController::class, 'updateOrder'])->name('orders.update');
 
     Route::get('/payments', [AdminController::class, 'payments'])->name('payments.index');
+    Route::get('/audit-logs', [AdminController::class, 'auditLogs'])->name('audit.index');
 });
 
 // Authenticated routes
@@ -75,7 +76,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('/products', [DashboardController::class, 'products'])->name('products');
     Route::get('/orders', [DashboardController::class, 'orders'])->name('orders');
-    Route::get('/wishlist', [DashboardController::class, 'wishlist'])->name('wishlist');
+    Route::post('/email/change', [EmailOtpController::class, 'requestEmailChange'])->middleware('throttle:3,1')->name('email.change');
+    Route::post('/email/verify', [EmailOtpController::class, 'verifyEmailChange'])->middleware('throttle:6,1')->name('email.verify');
     Route::get('/addresses', [DashboardController::class, 'addresses'])->name('addresses');
     Route::post('/addresses', [DashboardController::class, 'storeAddress'])->name('addresses.store');
     Route::patch('/addresses/{address}/default', [DashboardController::class, 'makeDefaultAddress'])->name('addresses.default');

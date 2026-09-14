@@ -4,7 +4,7 @@
         ['label' => 'Dashboard', 'icon' => 'fas fa-gauge-high', 'url' => route('dashboard.index')],
         ['label' => 'Products', 'icon' => 'fas fa-box-open', 'url' => route('dashboard.products')],
         ['label' => 'My Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('dashboard.orders')],
-        ['label' => 'Wishlist', 'icon' => 'fas fa-heart', 'url' => route('dashboard.wishlist')],
+        ['label' => 'Delivery Address', 'icon' => 'fas fa-location-dot', 'url' => route('dashboard.addresses')],
         ['label' => 'Profile', 'icon' => 'fas fa-user', 'url' => route('dashboard.profile')],
     ];
 @endphp
@@ -23,7 +23,6 @@
 
     <div class="panel-stat-grid">
         <div class="panel-stat-card"><i class="fas fa-bag-shopping"></i><div><strong>{{ $user->orders()->count() }}</strong><span>Total Orders</span></div></div>
-        <div class="panel-stat-card"><i class="fas fa-heart"></i><div><strong>{{ $user->wishlist()->count() }}</strong><span>Wishlist Items</span></div></div>
         <div class="panel-stat-card"><i class="fas fa-crown"></i><div><strong>{{ ucfirst($user->membership_tier) }}</strong><span>Membership</span></div></div>
     </div>
 

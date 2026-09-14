@@ -1329,6 +1329,37 @@ body {
     cursor: pointer;
 }
 
+.audit-filter-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.audit-filter-form select {
+    padding: 8px 10px;
+    border: 1px solid #ded5cc;
+    border-radius: 6px;
+    background: #ffffff;
+    color: var(--text-primary);
+    font: 500 0.82rem var(--font-body);
+}
+
+.audit-change-list {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+}
+
+.panel-pagination {
+    margin-top: 20px;
+}
+
 /* Checkout guest details modal */
 .modal-open {
     overflow: hidden;

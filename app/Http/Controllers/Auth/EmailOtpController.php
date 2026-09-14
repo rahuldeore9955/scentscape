@@ -52,7 +52,7 @@ class EmailOtpController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard.index')->with('success', 'Your email has been verified. Welcome to ScentScape!');
+        return redirect()->route('dashboard.addresses')->with('success', 'Email verified. Please add your delivery address.');
     }
 
     public function resendRegistrationOtp(Request $request): RedirectResponse
@@ -69,6 +69,29 @@ class EmailOtpController extends Controller
     public function showForgotPassword(): View
     {
         return view('auth.forgot-password');
+    }
+
+    public function requestEmailChange(Request $request): RedirectResponse
+    {
+        $data = $request->validate(['email' => ['required', 'email', 'max:255', 'unique:users,email']]);
+        $request->session()->forget('email_change_otp');
+        return $this->sendOtp($request, 'email_change_otp', $data['email'], 'email change');
+    }
+
+    public function verifyEmailChange(Request $request): RedirectResponse
+    {
+        $request->validate(['otp' => ['required', 'digits:6']]);
+        $pending = $request->session()->get('email_change_otp');
+        if (! $this->validOtp($pending, $request->otp) || ($pending['user_id'] ?? null) !== Auth::id()) {
+            return back()->withErrors(['otp' => 'The code is invalid or expired. Request a new code.']);
+        }
+        if (User::where('email', $pending['email'])->exists()) {
+            $request->session()->forget('email_change_otp');
+            return back()->withErrors(['email' => 'That email is already registered.']);
+        }
+        Auth::user()->forceFill(['email' => $pending['email'], 'email_verified_at' => now()])->save();
+        $request->session()->forget('email_change_otp');
+        return redirect()->route('dashboard.profile')->with('success', 'Your new email has been verified and saved.');
     }
 
     public function sendPasswordResetOtp(Request $request): RedirectResponse
@@ -136,10 +159,15 @@ class EmailOtpController extends Controller
             $request->session()->get($sessionKey, []),
             [
                 'email' => $email,
+                'user_id' => Auth::id(),
                 'code' => Hash::make($otp),
                 'expires_at' => now()->addMinutes(self::OTP_LIFETIME_MINUTES)->timestamp,
             ]
         ));
+
+        if ($sessionKey === 'email_change_otp') {
+            return redirect()->route('dashboard.profile')->with('success', 'Verification code sent to your new email.');
+        }
 
         return $sessionKey === 'registration_otp'
             ? redirect()->route('verification.notice')->with('success', 'A six-digit verification code was sent to your email.')
@@ -149,6 +177,7 @@ class EmailOtpController extends Controller
     private function validOtp(?array $pending, string $otp): bool
     {
         return $pending
+            && isset($pending['expires_at'], $pending['code'])
             && now()->timestamp <= $pending['expires_at']
             && Hash::check($otp, $pending['code']);
     }

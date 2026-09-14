@@ -1,5 +1,5 @@
 @php($panelType = 'user')
-@php($panelLinks = [['label' => 'Dashboard', 'icon' => 'fas fa-gauge-high', 'url' => route('dashboard.index')], ['label' => 'Products', 'icon' => 'fas fa-box-open', 'url' => route('dashboard.products')], ['label' => 'My Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('dashboard.orders')], ['label' => 'Wishlist', 'icon' => 'fas fa-heart', 'url' => route('dashboard.wishlist')], ['label' => 'Profile', 'icon' => 'fas fa-user', 'url' => route('dashboard.profile')]])
+@php($panelLinks = [['label' => 'Dashboard', 'icon' => 'fas fa-gauge-high', 'url' => route('dashboard.index')], ['label' => 'Products', 'icon' => 'fas fa-box-open', 'url' => route('dashboard.products')], ['label' => 'My Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('dashboard.orders')], ['label' => 'Delivery Address', 'icon' => 'fas fa-location-dot', 'url' => route('dashboard.addresses')], ['label' => 'Profile', 'icon' => 'fas fa-user', 'url' => route('dashboard.profile')]])
 @extends('layouts.panel')
 @section('title', 'Addresses - ScentScape')
 @section('page_heading', 'Addresses')
@@ -29,8 +29,8 @@
             @csrf
             <div class="panel-form-grid">
                 <input type="hidden" name="label" value="home">
-                <label>Full Name<input type="text" name="full_name" value="{{ old('full_name', $address?->full_name) }}" required></label>
-                <label>Phone<input type="tel" name="phone" value="{{ old('phone', $address?->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required></label>
+                <label>Full Name<input type="text" name="full_name" value="{{ old('full_name', $address?->full_name ?: auth()->user()->name) }}" required></label>
+                <label>Phone<input type="tel" name="phone" value="{{ old('phone', $address?->phone ?: auth()->user()->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required></label>
                 <label>Address Line 1<input type="text" name="address_line1" value="{{ old('address_line1', $address?->address_line1) }}" required></label>
                 <label>Address Line 2<input type="text" name="address_line2" value="{{ old('address_line2', $address?->address_line2) }}"></label>
                 @include('partials.location-selects', ['selectedState' => old('state', $address?->state), 'selectedCity' => old('city', $address?->city)])

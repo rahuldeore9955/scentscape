@@ -26,9 +26,6 @@
                 <i class="fas fa-eye"></i> Quick View
             </a>
         </div>
-        <button class="wishlist-btn" aria-label="Add to wishlist">
-            <i class="far fa-heart"></i>
-        </button>
     </div>
 
     <div class="product-info">

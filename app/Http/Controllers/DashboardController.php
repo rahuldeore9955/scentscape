@@ -25,12 +25,6 @@ class DashboardController extends Controller
         return view('dashboard.orders', compact('orders'));
     }
 
-    public function wishlist()
-    {
-        $wishlist = Auth::user()->wishlist()->paginate(12);
-        return view('dashboard.wishlist', compact('wishlist'));
-    }
-
     public function profile()
     {
         $user = Auth::user();
@@ -57,7 +51,7 @@ class DashboardController extends Controller
             });
         }
 
-        $products = $query->latest()->take(4)->get();
+        $products = $query->latest()->get();
         $categories = Product::where('status', 'active')
             ->whereNotNull('category')
             ->distinct()
@@ -69,7 +63,8 @@ class DashboardController extends Controller
 
     public function addresses()
     {
-        return redirect()->route('dashboard.profile');
+        $address = Auth::user()->addresses()->orderByDesc('is_default')->latest()->first();
+        return view('dashboard.addresses', compact('address'));
     }
 
     public function storeAddress(Request $request)
@@ -109,7 +104,7 @@ class DashboardController extends Controller
 
         $validated = $request->validate([
             'name'  => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email,'.$user->id],
+            'email' => ['required', 'email', \Illuminate\Validation\Rule::in([$user->email])],
             'phone' => ['nullable', 'digits:10'],
             'address_full_name' => ['nullable', 'required_with:address_line1', 'string', 'max:255'],
             'address_phone' => ['nullable', 'required_with:address_line1', 'digits:10'],
@@ -129,6 +124,7 @@ class DashboardController extends Controller
         }
 
         $accountData = collect($validated)->except([
+            'email',
             'address_full_name',
             'address_phone',
             'address_line1',

@@ -25,6 +25,12 @@
                         <span>{{ $link['label'] }}</span>
                     </a>
                 @endforeach
+                @if($panelType === 'admin')
+                    <a href="{{ route('admin.audit.index') }}" class="panel-nav-link {{ request()->routeIs('admin.audit.*') ? 'active' : '' }}">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Audit Log</span>
+                    </a>
+                @endif
             </nav>
 
             <form method="POST" action="{{ route('logout') }}" class="panel-logout-form">

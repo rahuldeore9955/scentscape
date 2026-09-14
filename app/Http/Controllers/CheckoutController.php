@@ -19,25 +19,12 @@ class CheckoutController extends Controller
     public function start(Request $request)
     {
         abort_unless(Auth::check(), 401);
+        if (! Auth::user()->addresses()->exists()) {
+            return response()->json(['redirect' => route('dashboard.addresses')]);
+        }
         $data = $request->validate(['product_id' => ['required', 'integer', 'exists:products,id'], 'quantity' => ['nullable', 'integer', 'min:1', 'max:10']]);
         $order = $this->createOrder(Auth::user(), Product::where('status', 'active')->findOrFail($data['product_id']), $data['quantity'] ?? 1);
         return response()->json(['redirect' => route('checkout.pay', $order)]);
-    }
-
-    public function guest(Request $request)
-    {
-        $data = $request->validate([
-            'product_id' => ['required', 'integer', 'exists:products,id'], 'quantity' => ['nullable', 'integer', 'min:1', 'max:10'],
-            'name' => ['required', 'string', 'max:255'], 'email' => ['required', 'email', 'max:255', 'unique:users,email'], 'password' => ['required', 'confirmed', 'min:6'],
-            'phone' => ['required', 'digits:10'], 'address_line1' => ['required', 'string', 'max:255'], 'state' => ['required', 'string', 'max:100', Rule::in($this->states())], 'city' => ['required', 'string', 'max:100', Rule::in($this->citiesFor($request->input('state')))], 'pincode' => ['required', 'string', 'max:20'],
-        ]);
-
-        $user = User::create(['name' => $data['name'], 'email' => $data['email'], 'password' => Hash::make($data['password']), 'phone' => $data['phone']]);
-        Address::create(['user_id' => $user->id, 'label' => 'home', 'full_name' => $data['name'], 'phone' => $data['phone'], 'address_line1' => $data['address_line1'], 'city' => $data['city'], 'state' => $data['state'], 'pincode' => $data['pincode'], 'country' => 'India', 'is_default' => true]);
-        Auth::login($user);
-
-        $order = $this->createOrder($user, Product::where('status', 'active')->findOrFail($data['product_id']), $data['quantity'] ?? 1);
-        return redirect()->route('checkout.pay', $order);
     }
 
     public function pay(Order $order)

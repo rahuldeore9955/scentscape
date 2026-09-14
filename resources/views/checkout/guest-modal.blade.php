@@ -2,24 +2,11 @@
     <div class="checkout-modal-backdrop" data-close-checkout></div>
     <div class="checkout-modal-card" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
         <button type="button" class="checkout-modal-close" aria-label="Close" data-close-checkout><i class="fas fa-times"></i></button>
-        <span class="section-tag">Before You Buy</span>
-        <h2 id="checkoutModalTitle">Create your account</h2>
-        <p class="checkout-modal-note">We need these details for delivery and order history.</p>
-        <form method="POST" action="{{ route('checkout.guest') }}" id="guestCheckoutForm">
-            @csrf
-            <input type="hidden" name="product_id" id="checkoutProductId">
-            <input type="hidden" name="quantity" id="checkoutQuantity" value="1">
-            <div class="checkout-form-grid">
-                <label>Name<input type="text" name="name" required autocomplete="name"></label>
-                <label>Email<input type="email" name="email" required autocomplete="email"></label>
-                <label>Password<input type="password" name="password" required minlength="6" autocomplete="new-password"></label>
-                <label>Confirm Password<input type="password" name="password_confirmation" required minlength="6" autocomplete="new-password"></label>
-                <label>Phone<input type="tel" name="phone" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required autocomplete="tel"></label>
-                <label>Address<input type="text" name="address_line1" required autocomplete="street-address"></label>
-                @include('partials.location-selects', ['selectedState' => old('state'), 'selectedCity' => old('city')])
-                <label>Pincode<input type="text" name="pincode" required autocomplete="postal-code"></label>
-            </div>
-            <button type="submit" class="checkout-modal-submit">Continue to Payment <i class="fas fa-arrow-right"></i></button>
-        </form>
+        <h2 id="checkoutModalTitle">Sign in to buy</h2>
+        <p class="checkout-modal-note">Create an account, verify your email, and add your delivery address before buying.</p>
+        <input type="hidden" id="checkoutProductId">
+        <input type="hidden" id="checkoutQuantity" value="1">
+        <a class="btn btn-primary" href="{{ route('register') }}">Create Account</a>
+        <a class="btn btn-secondary" href="{{ route('login') }}">Sign In</a>
     </div>
 </div>
