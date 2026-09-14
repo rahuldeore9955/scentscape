@@ -103,15 +103,16 @@ class DashboardController extends Controller
 
         $validated = $request->validate([
             'name'  => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', \Illuminate\Validation\Rule::in([$user->email])],
+            'email' => ['required', 'email', Rule::in([$user->email])],
             'phone' => ['required', 'digits:10'],
             'address_full_name' => ['nullable', 'required_with:address_line1', 'string', 'max:255'],
             'address_phone' => ['nullable', 'required_with:address_line1', 'digits:10'],
             'address_line1' => ['nullable', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
-            'state' => ['nullable', 'required_with:address_line1', 'string', 'max:100', Rule::in($this->states())],
-            'city' => ['nullable', 'required_with:address_line1', 'string', 'max:100', Rule::in($this->citiesFor($request->input('state')))],
-            'pincode' => ['nullable', 'required_with:address_line1', 'string', 'max:20'],
+            'state' => ['nullable', 'required_with:address_line1', 'string', 'max:100'],
+            'district' => ['nullable', 'required_with:address_line1', 'string', 'max:100'],
+            'city' => ['nullable', 'required_with:address_line1', 'string', 'max:100'],
+            'pincode' => ['nullable', 'required_with:address_line1', 'digits:6'],
             'country' => ['nullable', 'string', 'max:100'],
         ]);
 
@@ -130,6 +131,7 @@ class DashboardController extends Controller
             'address_line2',
             'city',
             'state',
+            'district',
             'pincode',
             'country',
         ])->all();
@@ -145,6 +147,7 @@ class DashboardController extends Controller
                 'address_line2' => $request->address_line2,
                 'city' => $request->city,
                 'state' => $request->state,
+                'district' => $request->district,
                 'pincode' => $request->pincode,
                 'country' => $request->input('country', 'India'),
                 'is_default' => true,
@@ -162,21 +165,12 @@ class DashboardController extends Controller
             'phone' => ['required', 'digits:10'],
             'address_line1' => ['required', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
-            'state' => ['required', 'string', 'max:100', Rule::in($this->states())],
-            'city' => ['required', 'string', 'max:100', Rule::in($this->citiesFor($request->input('state')))],
-            'pincode' => ['required', 'string', 'max:20'],
+            'state' => ['required', 'string', 'max:100'],
+            'district' => ['required', 'string', 'max:100'],
+            'city' => ['required', 'string', 'max:100'],
+            'pincode' => ['required', 'digits:6'],
             'country' => ['required', 'string', 'max:100'],
         ]);
-    }
-
-    private function states(): array
-    {
-        return array_keys(config('locations.india'));
-    }
-
-    private function citiesFor(?string $state): array
-    {
-        return config('locations.india.'.$state, []);
     }
 
     private function singleAddress($user): ?Address

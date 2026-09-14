@@ -14,12 +14,14 @@
                     <label>Name<input type="text" name="name" required autocomplete="name"></label>
                     <label>Email<input type="email" name="email" required autocomplete="email"></label>
                     <label>Mobile Number<input type="tel" name="phone" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required autocomplete="tel"></label>
-                    <label>Pincode<input type="text" name="pincode" required autocomplete="postal-code"></label>
                     <label>Password<input type="password" name="password" minlength="6" required autocomplete="new-password"></label>
                     <label>Confirm Password<input type="password" name="password_confirmation" minlength="6" required autocomplete="new-password"></label>
                     <label class="checkout-full-field">Address Line 1<input type="text" name="address_line1" required autocomplete="street-address"></label>
                     <label class="checkout-full-field">Address Line 2<input type="text" name="address_line2" autocomplete="address-line2"></label>
-                    @include('partials.location-selects', ['selectedState' => '', 'selectedCity' => ''])
+                    <label>State<input type="text" name="state" required autocomplete="address-level1"></label>
+                    <label>District<input type="text" name="district" required autocomplete="address-level2"></label>
+                    <label>City<input type="text" name="city" required autocomplete="address-level2"></label>
+                    <label>PIN Code<input type="text" name="pincode" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="postal-code"></label>
                 </div>
                 <label class="checkout-terms"><input type="checkbox" name="terms" value="1" required> I agree to create an account for this purchase.</label>
                 <button type="submit" class="checkout-modal-submit">Send Verification Code <i class="fas fa-arrow-right"></i></button>

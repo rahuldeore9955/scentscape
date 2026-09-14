@@ -18,6 +18,7 @@ class Address extends Model
         'address_line2',
         'city',
         'state',
+        'district',
         'pincode',
         'country',
         'is_default',

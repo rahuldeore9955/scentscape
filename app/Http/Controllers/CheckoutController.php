@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
@@ -37,9 +36,10 @@ class CheckoutController extends Controller
             'terms' => ['accepted'],
             'address_line1' => ['required', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
-            'state' => ['required', 'string', Rule::in($this->states())],
-            'city' => ['required', 'string', Rule::in($this->citiesFor($request->input('state')))],
-            'pincode' => ['required', 'string', 'max:20'],
+            'state' => ['required', 'string', 'max:100'],
+            'district' => ['required', 'string', 'max:100'],
+            'city' => ['required', 'string', 'max:100'],
+            'pincode' => ['required', 'digits:6'],
         ]);
 
         Product::where('status', 'active')->findOrFail($data['product_id']);
@@ -59,6 +59,7 @@ class CheckoutController extends Controller
                     'address_line1' => $data['address_line1'],
                     'address_line2' => $data['address_line2'] ?? null,
                     'state' => $data['state'],
+                    'district' => $data['district'],
                     'city' => $data['city'],
                     'pincode' => $data['pincode'],
                     'country' => 'India',
@@ -179,7 +180,7 @@ class CheckoutController extends Controller
             $address['full_name'] ?? null,
             $address['address_line1'] ?? null,
             $address['address_line2'] ?? null,
-            trim(implode(', ', array_filter([$address['city'] ?? null, $address['state'] ?? null, $address['pincode'] ?? null]))),
+            trim(implode(', ', array_filter([$address['city'] ?? null, $address['district'] ?? null, $address['state'] ?? null, $address['pincode'] ?? null]))),
             $address['country'] ?? null,
         ]) as $addressLine) {
             $lines[] = [$addressLine, 10, null];
@@ -281,6 +282,7 @@ class CheckoutController extends Controller
             'address_line2' => $address->address_line2,
             'city' => $address->city,
             'state' => $address->state,
+            'district' => $address->district,
             'pincode' => $address->pincode,
             'country' => $address->country,
         ] : null;
@@ -296,13 +298,4 @@ class CheckoutController extends Controller
         return $order;
     }
 
-    private function states(): array
-    {
-        return array_keys(config('locations.india'));
-    }
-
-    private function citiesFor(?string $state): array
-    {
-        return config('locations.india.'.$state, []);
-    }
 }

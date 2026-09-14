@@ -14,7 +14,7 @@
             <div class="address-manage-grid">
                 <article class="address-manage-card default">
                     <div class="address-manage-heading"><h3>Delivery</h3><span>Saved</span></div>
-                    <p><strong>{{ $address->full_name }}</strong><br>{{ $address->address_line1 }}@if($address->address_line2), {{ $address->address_line2 }}@endif<br>{{ $address->city }}, {{ $address->state }} {{ $address->pincode }}<br>{{ $address->country }}<br>{{ $address->phone }}</p>
+                    <p><strong>{{ $address->full_name }}</strong><br>{{ $address->address_line1 }}@if($address->address_line2), {{ $address->address_line2 }}@endif<br>{{ $address->city }}@if($address->district), {{ $address->district }}@endif, {{ $address->state }} {{ $address->pincode }}<br>{{ $address->country }}<br>{{ $address->phone }}</p>
                     <div class="address-manage-actions">
                         <form method="POST" action="{{ route('dashboard.addresses.destroy', $address) }}">@csrf @method('DELETE')<button type="submit" class="panel-delete-btn">Remove</button></form>
                     </div>
@@ -33,8 +33,10 @@
                 <label>Phone<input type="tel" name="phone" value="{{ old('phone', $address?->phone ?: auth()->user()->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required></label>
                 <label>Address Line 1<input type="text" name="address_line1" value="{{ old('address_line1', $address?->address_line1) }}" required></label>
                 <label>Address Line 2<input type="text" name="address_line2" value="{{ old('address_line2', $address?->address_line2) }}"></label>
-                @include('partials.location-selects', ['selectedState' => old('state', $address?->state), 'selectedCity' => old('city', $address?->city)])
-                <label>Pincode<input type="text" name="pincode" value="{{ old('pincode', $address?->pincode) }}" required></label>
+                <label>State<input type="text" name="state" value="{{ old('state', $address?->state) }}" required></label>
+                <label>District<input type="text" name="district" value="{{ old('district', $address?->district) }}" required></label>
+                <label>City<input type="text" name="city" value="{{ old('city', $address?->city) }}" required></label>
+                <label>PIN Code<input type="text" name="pincode" value="{{ old('pincode', $address?->pincode) }}" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required></label>
                 <label>Country<input type="text" name="country" value="{{ old('country', $address?->country ?: 'India') }}" required></label>
             </div>
             <button type="submit" class="panel-primary-btn">Save Address</button>
