@@ -20,9 +20,6 @@ class CheckoutController extends Controller
     public function start(Request $request)
     {
         abort_unless(Auth::check(), 401);
-        if (! Auth::user()->addresses()->exists()) {
-            return response()->json(['redirect' => route('dashboard.profile')]);
-        }
         $data = $request->validate(['product_id' => ['required', 'integer', 'exists:products,id'], 'quantity' => ['nullable', 'integer', 'min:1', 'max:10']]);
         $order = $this->createOrder(Auth::user(), Product::where('status', 'active')->findOrFail($data['product_id']), $data['quantity'] ?? 1);
         return response()->json(['redirect' => route('checkout.pay', $order)]);
@@ -288,7 +285,11 @@ class CheckoutController extends Controller
             'country' => $address->country,
         ] : null;
         $order = Order::create(['user_id' => $user->id, 'order_number' => 'SCN-'.strtoupper(Str::random(10)), 'status' => 'pending', 'total_amount' => $total, 'shipping_address' => $shippingAddress, 'payment_method' => 'razorpay', 'payment_status' => 'pending']);
-        $response = Http::timeout(20)->withBasicAuth(config('services.razorpay.key_id'), config('services.razorpay.secret'))->post('https://api.razorpay.com/v1/orders', ['amount' => (int) round($total * 100), 'currency' => 'INR', 'receipt' => $order->order_number]);
+        $http = Http::timeout(20);
+        if (app()->environment('local')) {
+            $http = $http->withoutVerifying();
+        }
+        $response = $http->withBasicAuth(config('services.razorpay.key_id'), config('services.razorpay.secret'))->post('https://api.razorpay.com/v1/orders', ['amount' => (int) round($total * 100), 'currency' => 'INR', 'receipt' => $order->order_number]);
         if ($response->failed()) { $order->delete(); abort(502, 'Unable to create the Razorpay order.'); }
         $order->update(['razorpay_order_id' => $response->json('id')]);
         OrderItem::create(['order_id' => $order->id, 'product_id' => $product->id, 'quantity' => $quantity, 'unit_price' => $product->price, 'subtotal' => $total]);

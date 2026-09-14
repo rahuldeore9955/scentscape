@@ -1035,17 +1035,6 @@ if (addToCartLarge) {
     });
 }
 
-// Buy Now Button
-const buyNowBtn = document.querySelector('.buy-now-btn');
-
-if (buyNowBtn) {
-    buyNowBtn.addEventListener('click', function() {
-        alert('Proceeding to checkout...');
-        // In a real application, this would redirect to checkout
-        console.log('Buy now clicked');
-    });
-}
-
 // Product Tabs
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
