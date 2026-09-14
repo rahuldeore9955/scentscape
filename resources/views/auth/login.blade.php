@@ -65,6 +65,7 @@
                             <span class="custom-check"></span>
                             <span class="check-text">Remember me</span>
                         </label>
+                        <a href="{{ route('password.request') }}" class="auth-switch-link">Forgot password?</a>
                     </div>
 
                     <button type="submit" class="auth-action-btn">

@@ -17,7 +17,7 @@
 <body class="@yield('body_class')">
 
     {{-- Storefront navigation is hidden on the dedicated auth pages. --}}
-    @if(!request()->routeIs('login', 'register'))
+    @if(!request()->routeIs('login', 'register', 'password.*', 'verification.*'))
         @include('layouts.partials.navbar')
     @endif
 
@@ -34,11 +34,11 @@
         @yield('content')
     </main>
 
-    @if(!request()->routeIs('login', 'register') && !request()->routeIs('checkout.pay', 'checkout.thankyou'))
+    @if(!request()->routeIs('login', 'register', 'password.*', 'verification.*') && !request()->routeIs('checkout.pay', 'checkout.thankyou'))
         @include('checkout.guest-modal')
     @endif
 
-    @if(!request()->routeIs('login', 'register'))
+    @if(!request()->routeIs('login', 'register', 'password.*', 'verification.*'))
         @include('layouts.partials.footer')
     @endif
 

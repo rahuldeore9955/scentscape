@@ -60,6 +60,23 @@
                     </div>
 
                     <div class="auth-input-group">
+                        <label for="phone">Phone Number</label>
+                        <div class="auth-input-field">
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                value="{{ old('phone') }}"
+                                class="auth-clean-input"
+                                placeholder="+91 98765 43210"
+                                required
+                                autocomplete="tel"
+                            >
+                        </div>
+                        @error('phone')<span class="form-error">{{ $message }}</span>@enderror
+                    </div>
+
+                    <div class="auth-input-group">
                         <label for="password">Password</label>
                         <div class="auth-input-field">
                             <input

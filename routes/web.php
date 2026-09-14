@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\EmailOtpController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CheckoutController;
@@ -38,6 +39,13 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/verify-email', [EmailOtpController::class, 'showRegistrationVerification'])->name('verification.notice');
+    Route::post('/verify-email', [EmailOtpController::class, 'verifyRegistration'])->middleware('throttle:6,1')->name('verification.verify');
+    Route::post('/verify-email/resend', [EmailOtpController::class, 'resendRegistrationOtp'])->middleware('throttle:3,1')->name('verification.resend');
+    Route::get('/forgot-password', [EmailOtpController::class, 'showForgotPassword'])->name('password.request');
+    Route::post('/forgot-password', [EmailOtpController::class, 'sendPasswordResetOtp'])->middleware('throttle:3,1')->name('password.email');
+    Route::get('/reset-password', [EmailOtpController::class, 'showResetPassword'])->name('password.reset');
+    Route::post('/reset-password', [EmailOtpController::class, 'resetPassword'])->middleware('throttle:6,1')->name('password.update');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

@@ -48,19 +48,19 @@ class AuthController extends Controller
         $validated = $request->validate([
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone'    => ['required', 'string', 'max:20'],
             'password' => ['required', 'confirmed', Password::min(6)],
             'terms'    => ['accepted'],
         ]);
 
-        $user = User::create([
-            'name'     => $validated['name'],
-            'email'    => $validated['email'],
+        $request->session()->put('registration_otp', [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        Auth::login($user);
-
-        return redirect()->route('dashboard.index');
+        return app(EmailOtpController::class)->resendRegistrationOtp($request);
     }
 
     public function logout(Request $request)
