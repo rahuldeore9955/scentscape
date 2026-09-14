@@ -9,7 +9,7 @@
         <form method="POST" action="{{ route('dashboard.profile.update') }}" class="panel-form">
             @csrf @method('PUT')
             <h2 class="panel-form-section-title">Account Information</h2>
-            <div class="panel-form-grid"><label>Name<input type="text" name="name" value="{{ old('name', $user->name) }}" required></label><label>Email<input type="email" name="email" value="{{ $user->email }}" readonly required></label><label>Mobile Number<input type="tel" name="phone" value="{{ old('phone', $user->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required autocomplete="tel"></label></div>
+            <div class="panel-form-grid"><label>Name<input type="text" name="name" value="{{ old('name', $user->name) }}" required></label><label>Email<input type="email" name="email" value="{{ $user->email }}" readonly required><button type="button" class="profile-email-change-trigger" id="openEmailChange">Change email</button></label><label>Mobile Number<input type="tel" name="phone" value="{{ old('phone', $user->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required autocomplete="tel"></label></div>
 
             <h2 class="panel-form-section-title">Delivery Address</h2>
             <div class="panel-form-grid">
@@ -24,22 +24,40 @@
             <button type="submit" class="panel-primary-btn">Save Profile</button>
         </form>
     </section>
-    <section class="panel-card">
-        <h2>Change Email</h2>
-        <p>Your current email stays active until you verify the new address.</p>
-        <form method="POST" action="{{ route('dashboard.email.change') }}" class="panel-form">
-            @csrf
-            <label>New Email<input type="email" name="email" required maxlength="255"></label>
-            <button type="submit" class="panel-primary-btn">Send Verification Code</button>
-        </form>
-        @if(session('email_change_otp'))
-            <p>Enter the code sent to {{ session('email_change_otp.email') }}.</p>
-            <form method="POST" action="{{ route('dashboard.email.verify') }}" class="panel-form">
-                @csrf
-                <label>Verification Code<input name="otp" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code"></label>
-                <button type="submit" class="panel-primary-btn">Verify &amp; Update Email</button>
-            </form>
-        @endif
-    </section>
+    @php($emailChangeOpen = session('email_change_otp') || $errors->has('email') || $errors->has('otp'))
+    <div class="checkout-modal profile-email-modal" id="emailChangeModal" @unless($emailChangeOpen) hidden @endunless role="dialog" aria-modal="true" aria-labelledby="emailChangeTitle">
+        <div class="checkout-modal-backdrop" data-email-modal-close></div>
+        <div class="checkout-modal-card">
+            <button type="button" class="checkout-modal-close" data-email-modal-close aria-label="Close"><i class="fas fa-times"></i></button>
+            @if(session('email_change_otp'))
+                <h2 id="emailChangeTitle">Verify your new email</h2>
+                <p class="checkout-modal-note">Enter the six-digit code sent to {{ session('email_change_otp.email') }}.</p>
+                <form method="POST" action="{{ route('dashboard.email.verify') }}" class="panel-form">
+                    @csrf
+                    <label>Verification Code<input name="otp" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code"></label>
+                    <button type="submit" class="panel-primary-btn">Verify &amp; Update Email</button>
+                </form>
+            @else
+                <h2 id="emailChangeTitle">Change email</h2>
+                <p class="checkout-modal-note">Your current email remains active until the new address is verified.</p>
+                <form method="POST" action="{{ route('dashboard.email.change') }}" class="panel-form">
+                    @csrf
+                    <label>New Email<input type="email" name="email" value="{{ old('email') }}" required maxlength="255" autocomplete="email"></label>
+                    <button type="submit" class="panel-primary-btn">Send Verification Code</button>
+                </form>
+            @endif
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+<script>
+    const emailChangeModal = document.getElementById('emailChangeModal');
+    const openEmailChange = document.getElementById('openEmailChange');
+    const closeEmailChange = () => { emailChangeModal.hidden = true; document.body.classList.remove('modal-open'); };
+    if (emailChangeModal && !emailChangeModal.hidden) document.body.classList.add('modal-open');
+    openEmailChange?.addEventListener('click', () => { emailChangeModal.hidden = false; document.body.classList.add('modal-open'); });
+    emailChangeModal?.querySelectorAll('[data-email-modal-close]').forEach((button) => button.addEventListener('click', closeEmailChange));
+</script>
+@endpush
 

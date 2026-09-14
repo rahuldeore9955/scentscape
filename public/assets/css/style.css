@@ -10777,6 +10777,20 @@ textarea.form-input-dashboard {
     min-height: 0;
 }
 
+.profile-email-change-trigger {
+    display: inline-block;
+    width: fit-content;
+    margin-top: 7px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--primary-color);
+    cursor: pointer;
+    font: 600 0.78rem var(--font-body);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
 @media (max-width: 768px) {
     .faq-question {
         padding: 18px 20px;
