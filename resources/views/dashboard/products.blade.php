@@ -13,7 +13,7 @@
     </div>
 
     <div class="dashboard-tab-header">
-        <h2>{{ $products->total() }} {{ Str::plural('product', $products->total()) }}</h2>
+        <h2>{{ $products->count() }} {{ Str::plural('product', $products->count()) }}</h2>
         <form method="GET" action="{{ route('dashboard.products') }}" class="tab-header-actions">
             <div class="search-box-dashboard">
                 <i class="fas fa-search"></i>
@@ -39,10 +39,6 @@
             <p class="panel-empty">No products match your search.</p>
         @endforelse
     </div>
-
-    @if($products->hasPages())
-        {{ $products->links() }}
-    @endif
 @endsection
 
 @push('scripts')

@@ -57,7 +57,7 @@ class DashboardController extends Controller
             });
         }
 
-        $products = $query->latest()->paginate(12)->withQueryString();
+        $products = $query->latest()->take(4)->get();
         $categories = Product::where('status', 'active')
             ->whereNotNull('category')
             ->distinct()

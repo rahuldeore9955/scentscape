@@ -27,12 +27,6 @@
                     <p>No products found.</p>
                 @endforelse
             </div>
-
-            @if($products->hasPages())
-                <div style="margin-top: 40px;">
-                    {{ $products->links() }}
-                </div>
-            @endif
         </div>
     </section>
 @endsection
