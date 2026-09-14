@@ -9,7 +9,7 @@
         @if($orders->isEmpty())
             <p class="panel-empty">You have not placed any orders yet.</p>
         @else
-            <div class="panel-table-wrap"><table class="panel-table"><thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th><th>Tracking</th></tr></thead><tbody>@foreach($orders as $order)<tr><td>{{ $order->order_number }}</td><td>{{ $order->created_at->format('M d, Y') }}</td><td>Rs. {{ number_format((float) $order->total_amount, 2) }}</td><td><span class="panel-status">{{ ucfirst($order->status) }}</span></td><td>@if($order->tracking_number)<strong>{{ $order->courier_name ?: 'Courier' }}</strong><br><small>{{ $order->tracking_number }}</small>@else - @endif</td></tr>@endforeach</tbody></table></div>
+            <div class="panel-table-wrap"><table class="panel-table"><thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Payment</th><th>Order Status</th><th>Tracking</th></tr></thead><tbody>@foreach($orders as $order)<tr><td>{{ $order->order_number }}</td><td>{{ $order->created_at->format('M d, Y') }}</td><td>Rs. {{ number_format((float) $order->total_amount, 2) }}</td><td><span class="panel-status {{ $order->payment_status }}">{{ ucfirst($order->payment_status) }}</span></td><td><span class="panel-status {{ $order->status }}">{{ ucfirst($order->status) }}</span></td><td>@if($order->tracking_number)<strong>{{ $order->courier_name ?: 'Courier' }}</strong><br><small>{{ $order->tracking_number }}</small>@else - @endif</td></tr>@endforeach</tbody></table></div>
         @endif
     </section>
 @endsection

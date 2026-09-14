@@ -1080,6 +1080,15 @@ body {
     font-weight: 700;
 }
 
+.panel-status.pending {
+    color: #b17639;
+}
+
+.panel-status.failed,
+.panel-status.cancelled {
+    color: #b54b35;
+}
+
 .panel-form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
