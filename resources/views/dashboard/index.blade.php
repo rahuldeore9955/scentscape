@@ -18,6 +18,7 @@
         <span class="panel-eyebrow">My Account</span>
         <h1>Welcome back, {{ $user->name }}</h1>
         <p>Keep track of your orders and fragrance collection.</p>
+        <p><strong>Phone:</strong> {{ $user->phone ?: 'Not added yet' }}</p>
     </div>
 
     <div class="panel-stat-grid">

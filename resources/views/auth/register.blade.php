@@ -68,7 +68,10 @@
                                 name="phone"
                                 value="{{ old('phone') }}"
                                 class="auth-clean-input"
-                                placeholder="+91 98765 43210"
+                                inputmode="numeric"
+                                pattern="[0-9]{10}"
+                                maxlength="10"
+                                placeholder="9876543210"
                                 required
                                 autocomplete="tel"
                             >

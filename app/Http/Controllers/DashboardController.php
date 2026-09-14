@@ -110,9 +110,9 @@ class DashboardController extends Controller
         $validated = $request->validate([
             'name'  => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email,'.$user->id],
-            'phone' => ['nullable', 'string', 'max:20'],
+            'phone' => ['nullable', 'digits:10'],
             'address_full_name' => ['nullable', 'required_with:address_line1', 'string', 'max:255'],
-            'address_phone' => ['nullable', 'required_with:address_line1', 'string', 'max:20'],
+            'address_phone' => ['nullable', 'required_with:address_line1', 'digits:10'],
             'address_line1' => ['nullable', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
             'state' => ['nullable', 'required_with:address_line1', 'string', 'max:100', Rule::in($this->states())],
@@ -164,7 +164,7 @@ class DashboardController extends Controller
         return $request->validate([
             'label' => ['nullable', 'string', 'max:50'],
             'full_name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:20'],
+            'phone' => ['required', 'digits:10'],
             'address_line1' => ['required', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
             'state' => ['required', 'string', 'max:100', Rule::in($this->states())],

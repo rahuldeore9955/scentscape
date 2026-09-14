@@ -29,7 +29,7 @@ class CheckoutController extends Controller
         $data = $request->validate([
             'product_id' => ['required', 'integer', 'exists:products,id'], 'quantity' => ['nullable', 'integer', 'min:1', 'max:10'],
             'name' => ['required', 'string', 'max:255'], 'email' => ['required', 'email', 'max:255', 'unique:users,email'], 'password' => ['required', 'confirmed', 'min:6'],
-            'phone' => ['required', 'string', 'max:20'], 'address_line1' => ['required', 'string', 'max:255'], 'state' => ['required', 'string', 'max:100', Rule::in($this->states())], 'city' => ['required', 'string', 'max:100', Rule::in($this->citiesFor($request->input('state')))], 'pincode' => ['required', 'string', 'max:20'],
+            'phone' => ['required', 'digits:10'], 'address_line1' => ['required', 'string', 'max:255'], 'state' => ['required', 'string', 'max:100', Rule::in($this->states())], 'city' => ['required', 'string', 'max:100', Rule::in($this->citiesFor($request->input('state')))], 'pincode' => ['required', 'string', 'max:20'],
         ]);
 
         $user = User::create(['name' => $data['name'], 'email' => $data['email'], 'password' => Hash::make($data['password']), 'phone' => $data['phone']]);

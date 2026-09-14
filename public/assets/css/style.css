@@ -1169,6 +1169,11 @@ body {
     margin: 0;
 }
 
+.admin-actions {
+    flex-wrap: wrap;
+    white-space: nowrap;
+}
+
 .admin-form-actions {
     justify-content: flex-end;
 }
@@ -1529,6 +1534,25 @@ body {
 
     .admin-form-actions {
         justify-content: space-between;
+    }
+
+    .panel-card-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .panel-card-heading .panel-primary-link {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .panel-table th,
+    .panel-table td {
+        padding: 12px 8px;
+    }
+
+    .panel-table td {
+        overflow-wrap: anywhere;
     }
 }
 
@@ -9754,6 +9778,7 @@ textarea.form-input-dashboard {
     .dashboard-tab-header {
         flex-direction: column;
         align-items: flex-start;
+    }
     
     .products-table-wrapper {
         overflow-x: scroll;
@@ -9775,7 +9800,6 @@ textarea.form-input-dashboard {
     
     .form-section-title {
         font-size: 1.1rem;
-    }
     }
 }
 

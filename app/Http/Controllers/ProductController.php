@@ -24,7 +24,7 @@ class ProductController extends Controller
             });
         }
 
-        $products = $query->orderByDesc('created_at')->take(4)->get();
+        $products = $query->orderByDesc('created_at')->get();
 
         return view('products.index', compact('products'));
     }

@@ -30,7 +30,7 @@
             <div class="panel-form-grid">
                 <input type="hidden" name="label" value="home">
                 <label>Full Name<input type="text" name="full_name" value="{{ old('full_name', $address?->full_name) }}" required></label>
-                <label>Phone<input type="tel" name="phone" value="{{ old('phone', $address?->phone) }}" required></label>
+                <label>Phone<input type="tel" name="phone" value="{{ old('phone', $address?->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required></label>
                 <label>Address Line 1<input type="text" name="address_line1" value="{{ old('address_line1', $address?->address_line1) }}" required></label>
                 <label>Address Line 2<input type="text" name="address_line2" value="{{ old('address_line2', $address?->address_line2) }}"></label>
                 @include('partials.location-selects', ['selectedState' => old('state', $address?->state), 'selectedCity' => old('city', $address?->city)])

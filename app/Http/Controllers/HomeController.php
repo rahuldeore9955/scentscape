@@ -10,7 +10,6 @@ class HomeController extends Controller
     {
         $featuredProducts = Product::where('status', 'active')
             ->orderByDesc('created_at')
-            ->take(4)
             ->get();
 
         return view('home', compact('featuredProducts'));

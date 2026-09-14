@@ -14,7 +14,7 @@
                 <label>Email<input type="email" name="email" required autocomplete="email"></label>
                 <label>Password<input type="password" name="password" required minlength="6" autocomplete="new-password"></label>
                 <label>Confirm Password<input type="password" name="password_confirmation" required minlength="6" autocomplete="new-password"></label>
-                <label>Phone<input type="tel" name="phone" required autocomplete="tel"></label>
+                <label>Phone<input type="tel" name="phone" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required autocomplete="tel"></label>
                 <label>Address<input type="text" name="address_line1" required autocomplete="street-address"></label>
                 @include('partials.location-selects', ['selectedState' => old('state'), 'selectedCity' => old('city')])
                 <label>Pincode<input type="text" name="pincode" required autocomplete="postal-code"></label>

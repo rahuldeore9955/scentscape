@@ -9,12 +9,12 @@
         <form method="POST" action="{{ route('dashboard.profile.update') }}" class="panel-form">
             @csrf @method('PUT')
             <h2 class="panel-form-section-title">Account Information</h2>
-            <div class="panel-form-grid"><label>Name<input type="text" name="name" value="{{ old('name', $user->name) }}" required></label><label>Email<input type="email" name="email" value="{{ old('email', $user->email) }}" required></label><label>Phone<input type="tel" name="phone" value="{{ old('phone', $user->phone) }}"></label></div>
+            <div class="panel-form-grid"><label>Name<input type="text" name="name" value="{{ old('name', $user->name) }}" required></label><label>Email<input type="email" name="email" value="{{ old('email', $user->email) }}" required></label><label>Phone<input type="tel" name="phone" value="{{ old('phone', $user->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210"></label></div>
 
             <h2 class="panel-form-section-title">Delivery Address</h2>
             <div class="panel-form-grid">
                 <label>Full Name<input type="text" name="address_full_name" value="{{ old('address_full_name', $address?->full_name ?: $user->name) }}"></label>
-                <label>Address Phone<input type="tel" name="address_phone" value="{{ old('address_phone', $address?->phone ?: $user->phone) }}"></label>
+                <label>Address Phone<input type="tel" name="address_phone" value="{{ old('address_phone', $address?->phone ?: $user->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210"></label>
                 <label>Address Line 1<input type="text" name="address_line1" value="{{ old('address_line1', $address?->address_line1) }}" placeholder="House number and street"></label>
                 <label>Address Line 2<input type="text" name="address_line2" value="{{ old('address_line2', $address?->address_line2) }}" placeholder="Apartment, landmark (optional)"></label>
                 @include('partials.location-selects', ['selectedState' => old('state', $address?->state), 'selectedCity' => old('city', $address?->city), 'required' => false])
