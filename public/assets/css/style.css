@@ -1509,6 +1509,13 @@ body {
     font-size: 3rem;
 }
 
+.checkout-success-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 @media (max-width: 640px) {
     .checkout-modal-card {
         padding: 28px 20px;
@@ -1618,6 +1625,44 @@ body {
     .panel-table td {
         overflow-wrap: anywhere;
     }
+}
+
+.checkout-full-field {
+    grid-column: 1 / -1;
+}
+
+.checkout-product-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 18px 0;
+    padding: 14px;
+    border-radius: 8px;
+    background: #f8f3ee;
+    color: var(--text-primary);
+}
+
+.checkout-product-summary span {
+    color: var(--primary-color);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.checkout-terms,
+.checkout-modal-login {
+    display: block;
+    margin-top: 18px;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+}
+
+.checkout-modal-login {
+    text-align: center;
+}
+
+.checkout-modal-login a {
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 /* Footer Brand Section */

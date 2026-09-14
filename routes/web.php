@@ -25,12 +25,14 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
-Route::post('/checkout/guest', fn () => redirect()->route('register'))->name('checkout.guest')->middleware('guest');
+Route::post('/checkout/guest', [CheckoutController::class, 'guest'])->name('checkout.guest')->middleware('guest', 'throttle:3,1');
+Route::post('/checkout/guest/verify', [CheckoutController::class, 'verifyGuest'])->name('checkout.guest.verify')->middleware('guest', 'throttle:6,1');
 Route::middleware('auth')->group(function () {
     Route::post('/checkout/start', [CheckoutController::class, 'start'])->name('checkout.start');
     Route::get('/checkout/{order}/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
     Route::post('/checkout/{order}/verify', [CheckoutController::class, 'verify'])->name('checkout.verify');
     Route::get('/checkout/{order}/thank-you', [CheckoutController::class, 'thankyou'])->name('checkout.thankyou');
+    Route::get('/checkout/{order}/invoice', [CheckoutController::class, 'invoice'])->name('checkout.invoice');
 });
 
 // Auth routes

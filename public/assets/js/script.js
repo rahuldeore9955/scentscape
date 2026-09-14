@@ -2267,18 +2267,48 @@ document.addEventListener('DOMContentLoaded', function () {
     const checkoutModal = document.getElementById('checkoutModal');
     const productIdInput = document.getElementById('checkoutProductId');
     const quantityInput = document.getElementById('checkoutQuantity');
+    const accountStep = document.getElementById('guestCheckoutAccountStep');
+    const verifyStep = document.getElementById('guestCheckoutVerifyStep');
+    const guestForm = document.getElementById('guestCheckoutForm');
+    const verifyForm = document.getElementById('guestCheckoutVerifyForm');
+    const checkoutError = document.getElementById('guestCheckoutError');
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+    const showError = (message = '') => {
+        if (!checkoutError) return;
+        checkoutError.textContent = message;
+        checkoutError.hidden = !message;
+    };
+
+    const requestJson = async (url, formData) => {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {'Accept': 'application/json', 'X-CSRF-TOKEN': csrfToken, 'X-Requested-With': 'XMLHttpRequest'},
+            body: formData
+        });
+        const result = await response.json();
+        if (!response.ok) {
+            const validationMessage = result.errors ? Object.values(result.errors).flat()[0] : null;
+            throw new Error(validationMessage || result.message || 'Unable to continue checkout.');
+        }
+        return result;
+    };
 
     document.querySelectorAll('.purchase-trigger').forEach(trigger => {
         trigger.addEventListener('click', async function (event) {
             event.preventDefault();
             const productId = this.getAttribute('data-product-id');
-            const quantity = this.getAttribute('data-quantity') || '1';
+            const quantity = this.closest('.product-info-wrapper')?.querySelector('.qty-input')?.value || this.getAttribute('data-quantity') || '1';
 
             if (this.getAttribute('data-authenticated') !== '1') {
                 if (checkoutModal && productIdInput) {
                     productIdInput.value = productId;
                     quantityInput.value = quantity;
+                    document.getElementById('checkoutProductName').textContent = this.getAttribute('data-product-name') || 'Selected fragrance';
+                    document.getElementById('checkoutProductPrice').textContent = this.getAttribute('data-product-price') || '';
+                    accountStep.hidden = false;
+                    verifyStep.hidden = true;
+                    showError();
                     checkoutModal.hidden = false;
                     document.body.classList.add('modal-open');
                     checkoutModal.querySelector('input[name="name"]')?.focus();
@@ -2303,10 +2333,43 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    guestForm?.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        showError();
+        const submitButton = guestForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        try {
+            await requestJson('/checkout/guest', new FormData(guestForm));
+            document.getElementById('checkoutVerificationEmail').textContent = guestForm.elements.email.value;
+            accountStep.hidden = true;
+            verifyStep.hidden = false;
+            verifyForm.querySelector('input[name="otp"]')?.focus();
+        } catch (error) {
+            showError(error.message);
+        } finally {
+            submitButton.disabled = false;
+        }
+    });
+
+    verifyForm?.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        showError();
+        const submitButton = verifyForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        try {
+            const result = await requestJson('/checkout/guest/verify', new FormData(verifyForm));
+            window.location.href = result.redirect;
+        } catch (error) {
+            showError(error.message);
+            submitButton.disabled = false;
+        }
+    });
+
     document.querySelectorAll('[data-close-checkout]').forEach(button => {
         button.addEventListener('click', function () {
             checkoutModal.hidden = true;
             document.body.classList.remove('modal-open');
+            showError();
         });
     });
 });

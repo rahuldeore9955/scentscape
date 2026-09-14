@@ -50,7 +50,7 @@
 
         <div class="product-card-btns">
             <a href="{{ route('products.show', $product) }}" class="btn-details">Details</a>
-            <a href="#" class="btn-buy purchase-trigger" data-product-id="{{ $product->id }}" data-authenticated="{{ auth()->check() ? '1' : '0' }}">Buy</a>
+            <a href="#" class="btn-buy purchase-trigger" data-product-id="{{ $product->id }}" data-product-name="{{ $product->name }}" data-product-price="Rs. {{ number_format((float) $product->price, 2) }}" data-authenticated="{{ auth()->check() ? '1' : '0' }}">Buy</a>
         </div>
     </div>
 </div>

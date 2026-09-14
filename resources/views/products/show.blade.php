@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="product-actions">
-                        <a href="#" class="btn btn-primary buy-now-btn purchase-trigger" data-product-id="{{ $product->id }}" data-quantity="1" data-authenticated="{{ auth()->check() ? '1' : '0' }}" style="width: 100%;">
+                        <a href="#" class="btn btn-primary buy-now-btn purchase-trigger" data-product-id="{{ $product->id }}" data-product-name="{{ $product->name }}" data-product-price="Rs. {{ number_format((float) $product->price, 2) }}" data-quantity="1" data-authenticated="{{ auth()->check() ? '1' : '0' }}" style="width: 100%;">
                             <i class="fas fa-bolt"></i>
                             Buy Now
                         </a>

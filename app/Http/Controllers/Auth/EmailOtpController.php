@@ -63,7 +63,25 @@ class EmailOtpController extends Controller
             return redirect()->route('register')->with('error', 'Start registration to receive a verification code.');
         }
 
-        return $this->sendOtp($request, 'registration_otp', $pending['email'], 'account verification');
+        try {
+            $this->sendRegistrationOtp($request);
+        } catch (\Throwable $exception) {
+            report($exception);
+            return back()->with('error', 'We could not send the verification email. Please try again shortly.');
+        }
+
+        return redirect()->route('verification.notice')->with('success', 'A six-digit verification code was sent to your email.');
+    }
+
+    public function sendRegistrationOtp(Request $request): void
+    {
+        $pending = $request->session()->get('registration_otp');
+
+        if (! $pending) {
+            throw new \RuntimeException('Registration data is missing.');
+        }
+
+        $this->deliverOtp($request, 'registration_otp', $pending['email'], 'account verification');
     }
 
     public function showForgotPassword(): View
@@ -143,17 +161,30 @@ class EmailOtpController extends Controller
 
     private function sendOtp(Request $request, string $sessionKey, string $email, string $purpose): RedirectResponse
     {
-        $otp = (string) random_int(100000, 999999);
-
         try {
-            Mail::raw(
-                "Your ScentScape {$purpose} code is: {$otp}\n\nThis code expires in ".self::OTP_LIFETIME_MINUTES.' minutes. If you did not request it, you can safely ignore this email.',
-                fn ($message) => $message->to($email)->subject('Your ScentScape verification code')
-            );
+            $this->deliverOtp($request, $sessionKey, $email, $purpose);
         } catch (\Throwable $exception) {
             report($exception);
             return back()->with('error', 'We could not send the verification email. Please try again shortly.');
         }
+
+        if ($sessionKey === 'email_change_otp') {
+            return redirect()->route('dashboard.profile')->with('success', 'Verification code sent to your new email.');
+        }
+
+        return $sessionKey === 'registration_otp'
+            ? redirect()->route('verification.notice')->with('success', 'A six-digit verification code was sent to your email.')
+            : redirect()->route('password.reset')->with('success', 'A six-digit reset code was sent to your email.');
+    }
+
+    private function deliverOtp(Request $request, string $sessionKey, string $email, string $purpose): void
+    {
+        $otp = (string) random_int(100000, 999999);
+
+        Mail::raw(
+            "Your ScentScape {$purpose} code is: {$otp}\n\nThis code expires in ".self::OTP_LIFETIME_MINUTES.' minutes. If you did not request it, you can safely ignore this email.',
+            fn ($message) => $message->to($email)->subject('Your ScentScape verification code')
+        );
 
         $request->session()->put($sessionKey, array_merge(
             $request->session()->get($sessionKey, []),
@@ -164,14 +195,6 @@ class EmailOtpController extends Controller
                 'expires_at' => now()->addMinutes(self::OTP_LIFETIME_MINUTES)->timestamp,
             ]
         ));
-
-        if ($sessionKey === 'email_change_otp') {
-            return redirect()->route('dashboard.profile')->with('success', 'Verification code sent to your new email.');
-        }
-
-        return $sessionKey === 'registration_otp'
-            ? redirect()->route('verification.notice')->with('success', 'A six-digit verification code was sent to your email.')
-            : redirect()->route('password.reset')->with('success', 'A six-digit reset code was sent to your email.');
     }
 
     private function validOtp(?array $pending, string $otp): bool
