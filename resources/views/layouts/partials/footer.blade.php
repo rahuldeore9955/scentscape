@@ -3,10 +3,10 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-brand">
-                <div class="footer-logo">
+                <a href="{{ route('home') }}" class="footer-logo" aria-label="ScentScape home">
                     <i class="fas fa-spray-can"></i>
                     <span>ScentScape</span>
-                </div>
+                </a>
                 <p class="footer-description">
                     Discover luxury fragrances from world-renowned brands. We curate the finest collection
                     of premium perfumes to help you find your signature scent.

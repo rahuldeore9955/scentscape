@@ -83,20 +83,4 @@
         </div>
     </section>
 
-    @if($relatedProducts->isNotEmpty())
-        <section class="products-section section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">More to Explore</span>
-                    <h2 class="section-title">Related Fragrances</h2>
-                </div>
-
-                <div class="products-grid">
-                    @foreach($relatedProducts as $relatedProduct)
-                        @include('partials.product-card', ['product' => $relatedProduct, 'loopIndex' => $loop->index + 1])
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
 @endsection

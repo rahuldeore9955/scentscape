@@ -4,7 +4,6 @@
         ['label' => 'Dashboard', 'icon' => 'fas fa-gauge-high', 'url' => route('dashboard.index')],
         ['label' => 'Products', 'icon' => 'fas fa-box-open', 'url' => route('dashboard.products')],
         ['label' => 'My Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('dashboard.orders')],
-        ['label' => 'Delivery Address', 'icon' => 'fas fa-location-dot', 'url' => route('dashboard.addresses')],
         ['label' => 'Profile', 'icon' => 'fas fa-user', 'url' => route('dashboard.profile')],
     ];
 @endphp

@@ -48,9 +48,15 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="panel-topbar-title">@yield('page_heading')</div>
-                <div class="panel-user-summary">
-                    <span>{{ auth()->user()->name }}</span>
-                    <i class="fas fa-user-circle"></i>
+                <div class="panel-topbar-actions">
+                    <a href="{{ route('home') }}" class="panel-website-link">
+                        <i class="fas fa-arrow-up-right-from-square"></i>
+                        <span>Go to Website</span>
+                    </a>
+                    <div class="panel-user-summary">
+                        <span>{{ auth()->user()->name }}</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
                 </div>
             </header>
 

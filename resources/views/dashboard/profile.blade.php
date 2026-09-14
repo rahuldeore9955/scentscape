@@ -1,5 +1,5 @@
 @php($panelType = 'user')
-@php($panelLinks = [['label' => 'Dashboard', 'icon' => 'fas fa-gauge-high', 'url' => route('dashboard.index')], ['label' => 'Products', 'icon' => 'fas fa-box-open', 'url' => route('dashboard.products')], ['label' => 'My Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('dashboard.orders')], ['label' => 'Delivery Address', 'icon' => 'fas fa-location-dot', 'url' => route('dashboard.addresses')], ['label' => 'Profile', 'icon' => 'fas fa-user', 'url' => route('dashboard.profile')]])
+@php($panelLinks = [['label' => 'Dashboard', 'icon' => 'fas fa-gauge-high', 'url' => route('dashboard.index')], ['label' => 'Products', 'icon' => 'fas fa-box-open', 'url' => route('dashboard.products')], ['label' => 'My Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('dashboard.orders')], ['label' => 'Profile', 'icon' => 'fas fa-user', 'url' => route('dashboard.profile')]])
 @extends('layouts.panel')
 @section('title', 'Profile - ScentScape')
 @section('page_heading', 'Profile')
@@ -9,7 +9,7 @@
         <form method="POST" action="{{ route('dashboard.profile.update') }}" class="panel-form">
             @csrf @method('PUT')
             <h2 class="panel-form-section-title">Account Information</h2>
-            <div class="panel-form-grid"><label>Name<input type="text" name="name" value="{{ old('name', $user->name) }}" required></label><label>Email<input type="email" name="email" value="{{ $user->email }}" readonly required></label><label>Phone<input type="tel" name="phone" value="{{ old('phone', $user->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210"></label></div>
+            <div class="panel-form-grid"><label>Name<input type="text" name="name" value="{{ old('name', $user->name) }}" required></label><label>Email<input type="email" name="email" value="{{ $user->email }}" readonly required></label><label>Mobile Number<input type="tel" name="phone" value="{{ old('phone', $user->phone) }}" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required autocomplete="tel"></label></div>
 
             <h2 class="panel-form-section-title">Delivery Address</h2>
             <div class="panel-form-grid">
@@ -37,7 +37,7 @@
             <form method="POST" action="{{ route('dashboard.email.verify') }}" class="panel-form">
                 @csrf
                 <label>Verification Code<input name="otp" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code"></label>
-                <button type="submit" class="panel-primary-btn">Verify New Email</button>
+                <button type="submit" class="panel-primary-btn">Verify &amp; Update Email</button>
             </form>
         @endif
     </section>

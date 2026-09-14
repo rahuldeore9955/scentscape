@@ -20,7 +20,7 @@ class CheckoutController extends Controller
     {
         abort_unless(Auth::check(), 401);
         if (! Auth::user()->addresses()->exists()) {
-            return response()->json(['redirect' => route('dashboard.addresses')]);
+            return response()->json(['redirect' => route('dashboard.profile')]);
         }
         $data = $request->validate(['product_id' => ['required', 'integer', 'exists:products,id'], 'quantity' => ['nullable', 'integer', 'min:1', 'max:10']]);
         $order = $this->createOrder(Auth::user(), Product::where('status', 'active')->findOrFail($data['product_id']), $data['quantity'] ?? 1);

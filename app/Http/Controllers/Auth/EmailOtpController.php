@@ -52,7 +52,7 @@ class EmailOtpController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard.addresses')->with('success', 'Email verified. Please add your delivery address.');
+        return redirect()->route('dashboard.profile')->with('success', 'Email verified. Please add your delivery address.');
     }
 
     public function resendRegistrationOtp(Request $request): RedirectResponse

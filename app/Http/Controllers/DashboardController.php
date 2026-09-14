@@ -63,8 +63,7 @@ class DashboardController extends Controller
 
     public function addresses()
     {
-        $address = Auth::user()->addresses()->orderByDesc('is_default')->latest()->first();
-        return view('dashboard.addresses', compact('address'));
+        return redirect()->route('dashboard.profile');
     }
 
     public function storeAddress(Request $request)
@@ -105,7 +104,7 @@ class DashboardController extends Controller
         $validated = $request->validate([
             'name'  => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', \Illuminate\Validation\Rule::in([$user->email])],
-            'phone' => ['nullable', 'digits:10'],
+            'phone' => ['required', 'digits:10'],
             'address_full_name' => ['nullable', 'required_with:address_line1', 'string', 'max:255'],
             'address_phone' => ['nullable', 'required_with:address_line1', 'digits:10'],
             'address_line1' => ['nullable', 'string', 'max:255'],

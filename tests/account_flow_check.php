@@ -21,7 +21,7 @@ try {
     ]);
     $response = $controller->verifyRegistration($request);
     $user = Illuminate\Support\Facades\Auth::user();
-    if ($response->getTargetUrl() !== route('dashboard.addresses') || !$user->email_verified_at || $session->has('registration_otp')) {
+    if ($response->getTargetUrl() !== route('dashboard.profile') || !$user->email_verified_at || $session->has('registration_otp')) {
         throw new RuntimeException('Signup verification or address redirect failed');
     }
     $newEmail = 'new-'.$email;
@@ -39,7 +39,7 @@ try {
         throw new RuntimeException('Valid email change or OTP consumption failed');
     }
     $response = app(App\Http\Controllers\CheckoutController::class)->start($request);
-    if ($response->getData(true)['redirect'] !== route('dashboard.addresses')) {
+    if ($response->getData(true)['redirect'] !== route('dashboard.profile')) {
         throw new RuntimeException('Checkout without address did not redirect');
     }
     echo "PASS: verified signup -> address; invalid email OTP rejected; valid OTP consumed; checkout -> address.\n";

@@ -1169,6 +1169,25 @@ body {
     margin: 0;
 }
 
+.panel-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.panel-website-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--primary-color);
+    font: 600 0.82rem var(--font-body);
+    text-decoration: none;
+}
+
+.panel-website-link:hover {
+    color: var(--text-primary);
+}
+
 .admin-actions {
     flex-wrap: wrap;
     white-space: nowrap;
@@ -1545,6 +1564,20 @@ body {
         display: none;
     }
 
+    .panel-topbar-actions {
+        gap: 12px;
+    }
+
+    .panel-website-link span {
+        display: none;
+    }
+
+    .panel-website-link {
+        padding: 8px;
+        border-radius: 6px;
+        background: #f6eadf;
+    }
+
     .panel-main {
         padding: 28px 16px 45px;
     }
@@ -1601,6 +1634,7 @@ body {
     color: var(--text-primary);
     font-family: var(--font-heading);
     margin-bottom: 20px;
+    text-decoration: none;
 }
 
 .footer-logo i {
