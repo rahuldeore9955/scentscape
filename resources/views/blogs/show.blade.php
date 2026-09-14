@@ -50,10 +50,30 @@
                 <p class="section-subtitle">Quick answers about fragrance selection, care, and shopping.</p>
             </div>
             <div class="faq-grid">
-                <div class="faq-item active"><button type="button" class="faq-question"><h3>How do I choose the right fragrance?</h3><i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Start with fragrance families you already enjoy, then test a small selection on your skin and allow time for the scent to develop.</p></div></div>
-                <div class="faq-item"><button type="button" class="faq-question"><h3>How long does perfume usually last?</h3><i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Longevity depends on concentration, skin chemistry, weather, and application. Eau de parfum generally lasts longer than eau de toilette.</p></div></div>
-                <div class="faq-item"><button type="button" class="faq-question"><h3>Where should I store my perfume?</h3><i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Store bottles upright in a cool, dry, shaded place away from direct sunlight, heat, and sudden temperature changes.</p></div></div>
-                <div class="faq-item"><button type="button" class="faq-question"><h3>Can I buy a fragrance before creating an account?</h3><i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>An account is required at checkout so your delivery details, order history, and tracking updates can be managed securely.</p></div></div>
+                <div class="faq-item active">
+                    <button type="button" class="faq-question" aria-expanded="true" aria-controls="faq-answer-1">
+                        <h3>How do I choose the right fragrance?</h3><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1"><p>Start with fragrance families you already enjoy, then test a small selection on your skin and allow time for the scent to develop.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+                        <h3>How long does perfume usually last?</h3><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2"><p>Longevity depends on concentration, skin chemistry, weather, and application. Eau de parfum generally lasts longer than eau de toilette.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+                        <h3>Where should I store my perfume?</h3><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3"><p>Store bottles upright in a cool, dry, shaded place away from direct sunlight, heat, and sudden temperature changes.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+                        <h3>Can I buy a fragrance before creating an account?</h3><i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-4"><p>An account is required at checkout so your delivery details, order history, and tracking updates can be managed securely.</p></div>
+                </div>
             </div>
         </div>
     </section>

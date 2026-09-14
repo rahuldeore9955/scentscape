@@ -1516,6 +1516,84 @@ body {
     gap: 12px;
 }
 
+/* Blog FAQ */
+.faq-section {
+    background: var(--bg-secondary);
+}
+
+.faq-grid {
+    display: grid;
+    gap: 14px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-card);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-item.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    padding: 22px 26px;
+    border: 0;
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+}
+
+.faq-question h3 {
+    margin: 0;
+    font: 600 1.12rem var(--font-body);
+    line-height: 1.45;
+}
+
+.faq-question i {
+    flex: 0 0 auto;
+    color: var(--primary-color);
+    transition: transform 0.2s ease;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease;
+}
+
+.faq-answer p {
+    overflow: hidden;
+    margin: 0;
+    padding: 0 26px;
+    color: var(--text-muted);
+    line-height: 1.75;
+}
+
+.faq-item.active .faq-answer {
+    grid-template-rows: 1fr;
+}
+
+.faq-item.active .faq-answer p {
+    padding-bottom: 24px;
+}
+
 @media (max-width: 640px) {
     .checkout-modal-card {
         padding: 28px 20px;
@@ -1531,6 +1609,15 @@ body {
 
     .checkout-summary h1 {
         font-size: 2rem;
+    }
+
+    .faq-question {
+        padding: 18px 20px;
+    }
+
+    .faq-answer p {
+        padding-right: 20px;
+        padding-left: 20px;
     }
 }
 
@@ -10683,6 +10770,25 @@ textarea.form-input-dashboard {
 .size-single-value {
     color: var(--primary-color);
     font-weight: 600;
+}
+
+/* Keep FAQ answers fully collapsed until their question is selected. */
+.faq-answer p {
+    min-height: 0;
+}
+
+@media (max-width: 768px) {
+    .faq-question {
+        padding: 18px 20px;
+    }
+
+    .faq-answer p {
+        padding: 0 20px;
+    }
+
+    .faq-item.active .faq-answer p {
+        padding-bottom: 20px;
+    }
 }
 
 

@@ -902,25 +902,27 @@ const faqItems = document.querySelectorAll('.faq-item');
 
 faqItems.forEach(item => {
     const question = item.querySelector('.faq-question');
-    
+
+    if (!question) return;
+
     question.addEventListener('click', () => {
-        // Close other items
         const isActive = item.classList.contains('active');
-        
+
         faqItems.forEach(otherItem => {
             otherItem.classList.remove('active');
+            otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
         });
-        
-        // Toggle current item
+
         if (!isActive) {
             item.classList.add('active');
+            question.setAttribute('aria-expanded', 'true');
         }
     });
 });
 
-// Open first FAQ by default
 if (faqItems.length > 0) {
     faqItems[0].classList.add('active');
+    faqItems[0].querySelector('.faq-question')?.setAttribute('aria-expanded', 'true');
 }
 
 
