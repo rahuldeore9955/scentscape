@@ -12,17 +12,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('brand');
             $table->text('description')->nullable();
             $table->string('short_description')->nullable();
             $table->decimal('price', 10, 2);
-            $table->decimal('original_price', 10, 2)->nullable();
             $table->string('size')->nullable();
             $table->enum('category', ['women', 'men', 'unisex'])->default('unisex');
             $table->string('badge')->nullable(); // bestseller, new, sale
             $table->unsignedTinyInteger('discount')->default(0);
             $table->unsignedInteger('stock')->default(0);
-            $table->enum('status', ['active', 'draft', 'out_of_stock'])->default('active');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('image')->nullable();
             $table->json('images')->nullable();
             $table->string('sku')->unique()->nullable();

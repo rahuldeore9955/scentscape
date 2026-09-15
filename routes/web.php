@@ -20,7 +20,7 @@ use App\Http\Controllers\CheckoutController;
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');

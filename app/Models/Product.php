@@ -13,18 +13,15 @@ class Product extends Model
     protected $fillable = [
         'name',
         'slug',
-        'brand',
         'description',
         'short_description',
         'price',
-        'original_price',
         'size',
         'category',   // women, men, unisex
         'badge',      // bestseller, new, sale
-        'status',     // active, draft, out_of_stock
+        'status',     // active, inactive
         'image',
         'images',     // JSON array of additional images
-        'sku',
         'fragrance_notes', // JSON: top, middle, base
     ];
 
@@ -32,12 +29,23 @@ class Product extends Model
         'images'         => 'array',
         'fragrance_notes' => 'array',
         'price'          => 'decimal:2',
-        'original_price' => 'decimal:2',
     ];
 
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    protected static function booted(): void
+    {
+        static::created(function (Product $product) {
+            $product->forceFill(['sku' => self::productId($product->id)])->saveQuietly();
+        });
+    }
+
+    public static function productId(int $id): string
+    {
+        return 'SC-'.str_pad((string) $id, 3, '0', STR_PAD_LEFT);
     }
 
     public function reviews()

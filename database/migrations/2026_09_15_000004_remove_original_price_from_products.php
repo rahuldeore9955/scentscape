@@ -8,23 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (! Schema::hasColumn('products', 'brand')) {
-            return;
-        }
-
         Schema::table('products', function (Blueprint $table) {
-            $table->string('brand')->nullable()->change();
+            $table->dropColumn('original_price');
         });
     }
 
     public function down(): void
     {
-        if (! Schema::hasColumn('products', 'brand')) {
-            return;
-        }
-
         Schema::table('products', function (Blueprint $table) {
-            $table->string('brand')->nullable(false)->change();
+            $table->decimal('original_price', 10, 2)->nullable()->after('price');
         });
     }
 };

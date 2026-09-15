@@ -19,8 +19,7 @@ class ProductController extends Controller
         // Search
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%'.$request->search.'%')
-                  ->orWhere('brand', 'like', '%'.$request->search.'%');
+                $q->where('name', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -31,6 +30,8 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        abort_unless($product->status === 'active', 404);
+
         return view('products.show', compact('product'));
     }
 }

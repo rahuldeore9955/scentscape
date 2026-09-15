@@ -46,8 +46,7 @@ class DashboardController extends Controller
         if ($request->filled('search')) {
             $search = $request->string('search');
             $query->where(function ($products) use ($search) {
-                $products->where('name', 'like', '%'.$search.'%')
-                    ->orWhere('brand', 'like', '%'.$search.'%');
+                $products->where('name', 'like', '%'.$search.'%');
             });
         }
 

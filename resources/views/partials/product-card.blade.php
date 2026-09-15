@@ -29,23 +29,10 @@
     </div>
 
     <div class="product-info">
-        <span class="product-brand">{{ $product->brand }}</span>
         <h3 class="product-name">{{ $product->name }}</h3>
-
-        <div class="product-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
-            <span class="rating-count">({{ $product->reviews_count ?? 0 }})</span>
-        </div>
 
         <div class="product-price">
             <span class="current-price">Rs. {{ number_format((float) $product->price, 2) }}</span>
-            @if($product->original_price)
-                <span class="old-price">Rs. {{ number_format((float) $product->original_price, 2) }}</span>
-            @endif
         </div>
 
         <div class="product-card-btns">

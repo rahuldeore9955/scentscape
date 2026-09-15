@@ -1234,6 +1234,7 @@ body {
 
 .admin-status.failed,
 .admin-status.cancelled,
+.admin-status.inactive,
 .admin-status.draft,
 .admin-status.out-of-stock {
     background: #fae6e1;
@@ -1245,11 +1246,29 @@ body {
     line-height: 1.7;
 }
 
+.admin-product-images-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.admin-product-image-field {
+    min-width: 0;
+}
+
+.admin-image-field-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+}
+
 .admin-product-image-preview {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 0 0 22px;
+    margin-top: 14px;
     color: var(--text-muted);
     font-size: 0.82rem;
 }
@@ -1269,7 +1288,7 @@ body {
 }
 
 .admin-extra-images {
-    margin: 0 0 22px;
+    margin-top: 14px;
     padding: 18px;
     border: 1px solid #e8e1da;
     border-radius: 8px;
@@ -1759,6 +1778,7 @@ body {
 
     .panel-stat-grid,
     .panel-form-grid,
+    .admin-product-images-grid,
     .address-manage-grid {
         grid-template-columns: 1fr;
     }
@@ -2762,10 +2782,6 @@ body {
     padding: 25px 20px;
 }
 
-.product-brand {
-    display: none;
-}
-
 .product-name {
     font-size: 1.1rem;
     color: var(--text-primary);
@@ -2777,25 +2793,6 @@ body {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-}
-
-/* Product Rating */
-.product-rating {
-    display: none;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 12px;
-}
-
-.product-rating i {
-    color: #ffc107;
-    font-size: 0.85rem;
-}
-
-.rating-count {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-left: 5px;
 }
 
 /* Product Price */
@@ -2812,12 +2809,6 @@ body {
     color: var(--text-primary);
     font-family: var(--font-heading);
     font-variant-numeric: tabular-nums;
-}
-
-.old-price {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    text-decoration: line-through;
 }
 
 /* Product Card Buttons */
@@ -2942,16 +2933,8 @@ body {
         min-height: 45px;
     }
     
-    .product-brand {
-        font-size: 0.8rem;
-    }
-    
     .current-price {
         font-size: 1.3rem;
-    }
-    
-    .old-price {
-        font-size: 1rem;
     }
     
     .add-to-cart-btn {
@@ -5279,7 +5262,7 @@ body {
 .product-info-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 0;
 }
 
 .product-header {
@@ -5306,6 +5289,33 @@ body {
     color: var(--text-primary);
     line-height: 1.3;
     margin: 0;
+}
+
+.product-attributes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 48px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.product-attribute {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.product-attribute span {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.product-attribute strong {
+    color: var(--text-primary);
+    font-size: 1rem;
 }
 
 .product-rating-large {
@@ -5369,7 +5379,7 @@ body {
     align-items: center;
     gap: 15px;
     flex-wrap: wrap;
-    margin-bottom: 8px;
+    margin-bottom: 0;
 }
 
 .current-price-large {
@@ -5378,12 +5388,6 @@ body {
     color: var(--text-primary);
     font-family: var(--font-heading);
     font-variant-numeric: tabular-nums;
-}
-
-.old-price-large {
-    font-size: 1.5rem;
-    color: var(--text-muted);
-    text-decoration: line-through;
 }
 
 .discount-badge {
@@ -5402,14 +5406,26 @@ body {
 
 /* Product Short Description */
 .product-short-desc {
-    padding: 25px 0;
-    border-bottom: 1px solid var(--border-color);
+    padding: 0;
 }
 
 .product-short-desc p {
     color: var(--text-secondary);
     line-height: 1.8;
     font-size: 1.05rem;
+}
+
+.product-full-description {
+    width: 100%;
+    margin-top: 56px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border-color);
+}
+
+.product-full-description div {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.9;
 }
 
 /* Product Options */
@@ -5473,6 +5489,7 @@ body {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+    padding-top: 30px;
 }
 
 .add-to-cart-large,
@@ -6223,10 +6240,6 @@ body {
     
     .current-price-large {
         font-size: 1.8rem;
-    }
-    
-    .old-price-large {
-        font-size: 1.2rem;
     }
     
     .product-actions {

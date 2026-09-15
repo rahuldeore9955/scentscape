@@ -34,30 +34,26 @@
 
                 <div class="product-info-wrapper">
                     <div class="product-header">
-                        <span class="product-brand">{{ $product->brand }}</span>
                         <h1 class="product-title-large">{{ $product->name }}</h1>
+                        @if($product->short_description)
+                            <div class="product-short-desc">
+                                <p>{{ $product->short_description }}</p>
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="product-attributes">
+                        <div class="product-attribute"><span>Category</span><strong>{{ ucfirst($product->category) }}</strong></div>
+                        @if($product->size)
+                            <div class="product-attribute"><span>Size</span><strong>{{ $product->size }}</strong></div>
+                        @endif
                     </div>
 
                     <div class="product-price-section">
                         <div class="price-row">
                             <span class="current-price-large">Rs. {{ number_format((float) $product->price, 2) }}</span>
-                            @if($product->original_price)
-                                <span class="old-price">Rs. {{ number_format((float) $product->original_price, 2) }}</span>
-                            @endif
                         </div>
-                        <p class="tax-info">Inclusive of all taxes and free delivery</p>
                     </div>
-
-                    <div class="product-short-desc">
-                        <p>{{ $product->description ?: $product->short_description }}</p>
-                    </div>
-
-                    @if($product->size)
-                        <div class="product-size-single-wrap">
-                            <span class="size-single-label">Size:</span>
-                            <span class="size-single-value">{{ $product->size }}</span>
-                        </div>
-                    @endif
 
                     <div class="product-actions">
                         <a href="#" class="btn btn-primary buy-now-btn purchase-trigger" data-product-id="{{ $product->id }}" data-product-name="{{ $product->name }}" data-product-price="Rs. {{ number_format((float) $product->price, 2) }}" data-authenticated="{{ auth()->check() ? '1' : '0' }}" style="width: 100%;">
@@ -67,6 +63,12 @@
                     </div>
                 </div>
             </div>
+
+            @if($product->description)
+                <section class="product-full-description">
+                    <div>{!! nl2br(e($product->description)) !!}</div>
+                </section>
+            @endif
         </div>
     </section>
 

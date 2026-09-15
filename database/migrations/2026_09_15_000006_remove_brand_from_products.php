@@ -13,18 +13,18 @@ return new class extends Migration
         }
 
         Schema::table('products', function (Blueprint $table) {
-            $table->string('brand')->nullable()->change();
+            $table->dropColumn('brand');
         });
     }
 
     public function down(): void
     {
-        if (! Schema::hasColumn('products', 'brand')) {
+        if (Schema::hasColumn('products', 'brand')) {
             return;
         }
 
         Schema::table('products', function (Blueprint $table) {
-            $table->string('brand')->nullable(false)->change();
+            $table->string('brand')->nullable()->after('slug');
         });
     }
 };

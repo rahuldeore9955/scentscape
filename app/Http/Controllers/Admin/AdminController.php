@@ -160,20 +160,23 @@ class AdminController extends Controller
             'short_description' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
-            'original_price' => ['nullable', 'numeric', 'min:0'],
             'category' => ['required', Rule::in(['women', 'men', 'unisex'])],
             'badge' => ['nullable', 'string', 'max:50'],
-            'status' => ['required', Rule::in(['active', 'draft', 'out_of_stock'])],
+            'size' => ['nullable', 'string', 'max:50'],
+            'status' => ['required', Rule::in(['active', 'inactive'])],
             'image' => ['nullable', 'url', 'max:2048'],
-            'image_upload' => ['nullable', 'image', 'max:4096'],
+            'image_upload' => ['nullable', 'image', 'max:10240'],
             'images_upload' => ['nullable', 'array', 'max:4'],
-            'images_upload.*' => ['image', 'max:4096'],
+            'images_upload.*' => ['image', 'max:10240'],
             'remove_images' => ['nullable', 'array'],
             'remove_images.*' => ['string', 'max:2048'],
-            'sku' => ['nullable', 'string', 'max:100', Rule::unique('products', 'sku')->ignore($product?->id)],
         ]);
 
         $data['slug'] = $this->uniqueSlug(Str::slug($data['name']) ?: 'product', $product);
+
+        if ($product) {
+            $data['category'] = $product->category;
+        }
 
         if ($request->hasFile('image_upload')) {
             $data['image'] = Storage::disk('public')->url($request->file('image_upload')->store('products', 'public'));
