@@ -20,7 +20,7 @@
 
     <section class="contact-section section">
         <div class="container">
-            <div class="contact-cards-row" style="max-width: 800px; margin: 0 auto 50px;">
+            <div class="contact-cards-row">
                 <div class="contact-info-card">
                     <div class="contact-icon">
                         <i class="fas fa-envelope"></i>

@@ -987,34 +987,12 @@ sizeButtons.forEach(button => {
     });
 });
 
-// Quantity Selector
-const qtyInput = document.querySelector('.qty-input');
-const qtyMinus = document.querySelector('.qty-btn.minus');
-const qtyPlus = document.querySelector('.qty-btn.plus');
-
-if (qtyInput && qtyMinus && qtyPlus) {
-    qtyMinus.addEventListener('click', function() {
-        let value = parseInt(qtyInput.value);
-        if (value > 1) {
-            qtyInput.value = value - 1;
-        }
-    });
-    
-    qtyPlus.addEventListener('click', function() {
-        let value = parseInt(qtyInput.value);
-        const max = parseInt(qtyInput.getAttribute('max'));
-        if (value < max) {
-            qtyInput.value = value + 1;
-        }
-    });
-}
-
 // Add to Cart (Product Details)
 const addToCartLarge = document.querySelector('.add-to-cart-large');
 
 if (addToCartLarge) {
     addToCartLarge.addEventListener('click', function() {
-        const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
+        const quantity = 1;
         const activeSize = document.querySelector('.size-btn.active');
         const size = activeSize ? activeSize.getAttribute('data-size') : '100ml';
         
@@ -2291,7 +2269,7 @@ document.addEventListener('DOMContentLoaded', function () {
         trigger.addEventListener('click', async function (event) {
             event.preventDefault();
             const productId = this.getAttribute('data-product-id');
-            const quantity = this.closest('.product-info-wrapper')?.querySelector('.qty-input')?.value || this.getAttribute('data-quantity') || '1';
+            const quantity = '1';
 
             if (this.getAttribute('data-authenticated') !== '1') {
                 if (checkoutModal && productIdInput) {

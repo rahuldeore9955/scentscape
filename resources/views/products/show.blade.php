@@ -59,21 +59,8 @@
                         </div>
                     @endif
 
-                    <div class="product-quantity">
-                        <label class="option-label">Quantity</label>
-                        <div class="quantity-selector">
-                            <button type="button" class="qty-btn minus" aria-label="Decrease quantity">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <input type="number" class="qty-input" value="1" min="1" max="10" readonly>
-                            <button type="button" class="qty-btn plus" aria-label="Increase quantity">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-
                     <div class="product-actions">
-                        <a href="#" class="btn btn-primary buy-now-btn purchase-trigger" data-product-id="{{ $product->id }}" data-product-name="{{ $product->name }}" data-product-price="Rs. {{ number_format((float) $product->price, 2) }}" data-quantity="1" data-authenticated="{{ auth()->check() ? '1' : '0' }}" style="width: 100%;">
+                        <a href="#" class="btn btn-primary buy-now-btn purchase-trigger" data-product-id="{{ $product->id }}" data-product-name="{{ $product->name }}" data-product-price="Rs. {{ number_format((float) $product->price, 2) }}" data-authenticated="{{ auth()->check() ? '1' : '0' }}" style="width: 100%;">
                             <i class="fas fa-bolt"></i>
                             Buy Now
                         </a>
