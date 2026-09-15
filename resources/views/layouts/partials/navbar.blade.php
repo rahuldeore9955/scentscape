@@ -1,5 +1,5 @@
 {{-- Navigation Header - converted from ref/index.html --}}
-<header class="header {{ !request()->is('/') ? 'scrolled' : '' }}">
+<header class="header {{ !request()->is('/') ? 'scrolled is-inner-page' : '' }}">
     <nav class="navbar">
         <div class="container">
             <div class="nav-wrapper">

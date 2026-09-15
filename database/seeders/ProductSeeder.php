@@ -18,7 +18,6 @@ class ProductSeeder extends Seeder
                 'price'             => 11250,
                 'category'          => 'women',
                 'badge'             => 'bestseller',
-                'stock'             => 45,
                 'size'              => '100ml / 3.4 FL. OZ.',
                 'sku'               => 'CHN-005-100',
             ],
@@ -29,7 +28,6 @@ class ProductSeeder extends Seeder
                 'price'             => 10000,
                 'category'          => 'men',
                 'badge'             => 'new',
-                'stock'             => 32,
                 'size'              => '100ml / 3.4 FL. OZ.',
                 'sku'               => 'DIO-SAV-100',
             ],
@@ -39,10 +37,8 @@ class ProductSeeder extends Seeder
                 'short_description' => 'The original shocking gourmand coffee fragrance.',
                 'price'             => 8650,
                 'original_price'    => 10813,
-                'discount'          => 20,
                 'category'          => 'women',
                 'badge'             => 'sale',
-                'stock'             => 8,
                 'size'              => '100ml / 3.4 FL. OZ.',
                 'sku'               => 'YSL-BOP-100',
             ],
@@ -52,7 +48,6 @@ class ProductSeeder extends Seeder
                 'short_description' => 'A rare and magical oud wood balanced with warm spices.',
                 'price'             => 24500,
                 'category'          => 'men',
-                'stock'             => 15,
                 'size'              => '100ml / 3.4 FL. OZ.',
                 'sku'               => 'TFO-OUD-100',
             ],
@@ -63,7 +58,6 @@ class ProductSeeder extends Seeder
                 'price'             => 20400,
                 'category'          => 'unisex',
                 'badge'             => 'bestseller',
-                'stock'             => 22,
                 'size'              => '100ml / 3.4 FL. OZ.',
                 'sku'               => 'LLB-S33-100',
             ],
@@ -73,7 +67,6 @@ class ProductSeeder extends Seeder
                 'short_description' => 'An opulent floral fragrance inspired by a rich garden.',
                 'price'             => 10650,
                 'category'          => 'women',
-                'stock'             => 28,
                 'size'              => '100ml / 3.4 FL. OZ.',
                 'sku'               => 'GUC-BLM-100',
             ],
@@ -84,7 +77,6 @@ class ProductSeeder extends Seeder
                 'price'             => 12500,
                 'category'          => 'men',
                 'badge'             => 'new',
-                'stock'             => 18,
                 'size'              => '100ml / 3.4 FL. OZ.',
                 'sku'               => 'CHN-BDC-100',
             ],
@@ -94,7 +86,6 @@ class ProductSeeder extends Seeder
                 'short_description' => 'A fresh pine and incense inspired by the gypsy nomad spirit.',
                 'price'             => 18300,
                 'category'          => 'unisex',
-                'stock'             => 12,
                 'size'              => '100ml / 3.4 FL. OZ.',
                 'sku'               => 'BYR-GYW-100',
             ],
@@ -103,7 +94,7 @@ class ProductSeeder extends Seeder
         foreach ($products as $data) {
             $data['slug'] = Str::slug($data['name']);
             $data['description'] = $data['short_description'];
-            $data['status'] = $data['stock'] > 0 ? 'active' : 'out_of_stock';
+            $data['status'] = 'active';
             Product::firstOrCreate(['sku' => $data['sku']], $data);
         }
     }

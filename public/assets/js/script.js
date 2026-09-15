@@ -10,13 +10,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===================================
     const header = document.querySelector('.header');
     
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    if (header && !header.classList.contains('is-inner-page')) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
     
     // ===================================
     // MOBILE MENU TOGGLE

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
 {
@@ -74,7 +75,7 @@ class AdminController extends Controller
     public function destroyProduct(Product $product)
     {
         $this->ensureAdmin();
-        app(AuditLogger::class)->record('product.deleted', $product, $product->name, ['snapshot' => $product->only(['sku', 'price', 'stock', 'status'])]);
+        app(AuditLogger::class)->record('product.deleted', $product, $product->name, ['snapshot' => $product->only(['sku', 'price', 'status'])]);
         $product->delete();
 
         return redirect()->route('admin.products.index')->with('success', 'Product removed from the catalog.');
@@ -156,32 +157,45 @@ class AdminController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'brand' => ['required', 'string', 'max:255'],
             'short_description' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
             'original_price' => ['nullable', 'numeric', 'min:0'],
-            'size' => ['nullable', 'string', 'max:100'],
             'category' => ['required', Rule::in(['women', 'men', 'unisex'])],
             'badge' => ['nullable', 'string', 'max:50'],
-            'discount' => ['nullable', 'integer', 'min:0', 'max:100'],
-            'stock' => ['required', 'integer', 'min:0'],
             'status' => ['required', Rule::in(['active', 'draft', 'out_of_stock'])],
             'image' => ['nullable', 'url', 'max:2048'],
             'image_upload' => ['nullable', 'image', 'max:4096'],
+            'images_upload' => ['nullable', 'array', 'max:4'],
+            'images_upload.*' => ['image', 'max:4096'],
+            'remove_images' => ['nullable', 'array'],
+            'remove_images.*' => ['string', 'max:2048'],
             'sku' => ['nullable', 'string', 'max:100', Rule::unique('products', 'sku')->ignore($product?->id)],
         ]);
 
         $data['slug'] = $this->uniqueSlug(Str::slug($data['name']) ?: 'product', $product);
-        $data['discount'] = $data['discount'] ?? 0;
-        $data['status'] = $data['stock'] === 0 ? 'out_of_stock' : $data['status'];
 
         if ($request->hasFile('image_upload')) {
             $data['image'] = Storage::disk('public')->url($request->file('image_upload')->store('products', 'public'));
         } elseif ($product && blank($data['image'] ?? null)) {
             unset($data['image']);
         }
-        unset($data['image_upload']);
+        $extraImages = collect($product?->images ?? [])
+            ->reject(fn (string $image) => in_array($image, $data['remove_images'] ?? [], true))
+            ->values();
+
+        foreach ($request->file('images_upload', []) as $image) {
+            $extraImages->push(Storage::disk('public')->url($image->store('products', 'public')));
+        }
+
+        if ($extraImages->count() > 4) {
+            throw ValidationException::withMessages([
+                'images_upload' => 'A product can have a maximum of 4 extra images. Remove an existing image before adding another.',
+            ]);
+        }
+
+        $data['images'] = $extraImages->isEmpty() ? null : $extraImages->all();
+        unset($data['image_upload'], $data['images_upload'], $data['remove_images']);
 
         return $data;
     }

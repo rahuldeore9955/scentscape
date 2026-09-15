@@ -103,7 +103,7 @@
             ['name' => 'Ananya Gupta', 'location' => 'Bangalore, India', 'avatar' => 5, 'text' => 'Great collection of luxury perfumes! I purchased YSL Black Opium during the sale and saved quite a bit. The fragrance is long-lasting and genuine, and shipping took only three days.'],
             ['name' => 'Arjun Mehta', 'location' => 'Pune, India', 'avatar' => 33, 'text' => 'Exceptional service from start to finish! Tom Ford Oud Wood arrived in perfect condition with elegant packaging. Their expert recommendations helped me choose the right scent.'],
             ['name' => 'Sneha Patel', 'location' => 'Ahmedabad, India', 'avatar' => 9, 'text' => 'Best online perfume store in India! ScentScape stands out with its authenticity guarantee and excellent customer service. The gift wrapping was beautiful and free.'],
-            ['name' => 'Vikram Singh', 'location' => 'Jaipur, India', 'avatar' => 14, 'text' => 'Impressed with the quality and authenticity! Le Labo Santal 33 is my favorite and ScentScape always has it in stock. Customer support answered all my questions promptly.'],
+            ['name' => 'Vikram Singh', 'location' => 'Jaipur, India', 'avatar' => 14, 'text' => 'Impressed with the quality and authenticity! Le Labo Santal 33 is my favorite and ScentScape always has it available. Customer support answered all my questions promptly.'],
         ];
 
         $videoReviews = [

@@ -2,7 +2,6 @@
     $panelType = 'user';
     $panelLinks = [
         ['label' => 'Dashboard', 'icon' => 'fas fa-gauge-high', 'url' => route('dashboard.index')],
-        ['label' => 'Products', 'icon' => 'fas fa-box-open', 'url' => route('dashboard.products')],
         ['label' => 'My Orders', 'icon' => 'fas fa-bag-shopping', 'url' => route('dashboard.orders')],
         ['label' => 'Profile', 'icon' => 'fas fa-user', 'url' => route('dashboard.profile')],
     ];

@@ -21,8 +21,6 @@ class Product extends Model
         'size',
         'category',   // women, men, unisex
         'badge',      // bestseller, new, sale
-        'discount',
-        'stock',
         'status',     // active, draft, out_of_stock
         'image',
         'images',     // JSON array of additional images
